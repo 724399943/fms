@@ -1,0 +1,112 @@
+<extend name="Public:base"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Bbs/css/style-post.css" />
+</block>
+<block name="main">
+    <div class="post-container pdb">
+        <include file="Public:header" />
+
+        <form name="postform" id="postform">
+            <div class="post-title ">
+                <input class="subject" type="text" name="article_name" size="30" placeholder="请填写标题" value="">
+            </div>
+            <div class="post-tools">
+                <div class="form">
+                    <span class="show-face c-icon c-icon-face Jface"></span>
+                    <span class="show-pic c-icon c-icon-pic"></span>
+                </div>
+                <div class="post-tools-container">
+                    <div class="board upload-pics" id="JuploadImg" style="display: none;">
+                        <div class="pics-container">
+                            <div class="add-list">
+                                <div id="pic_list" class="pic-list attach-list"></div>
+                                <!-- <form id="pic_form" action="" method="post"> -->
+                                    <span class="add-btn">
+                                        <input id="upload_pics" type="file" name="Filedata" accept="image/*">
+                                    </span>
+                                <!-- </form> -->
+                            </div>
+                        </div>
+                        <div class="tips">
+                            <p class="page">
+                                <span id="pic_count">0</span>
+                                /10
+                            </p>
+                            <!-- <p>图片可以拖动排序</p> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="post-content">
+                <textarea class="content post-content-input" name="article_content" id="reply_input" placeholder="请输入内容"></textarea>
+                <input type="hidden" name="module_id" value="{$_GET['module']}">
+            </div>
+            <div class="post-action">
+                <span id="post_submit" class="submit">发布</span>
+                <span id="post_save" class="save">保存</span>
+            </div>
+        </form>
+    </div>
+</block>
+<block name="script">
+<script src="__PUBLIC__/Bbs/js/jquery.qqFace.js"></script>
+<script src="__PUBLIC__/Common/js/ajaxfileupload.js"></script>
+<script>
+    $('.Jface').qqFace({
+        id : 'facebox', 
+        assign:'reply_input', 
+        path:'__PUBLIC__/Bbs/arclist/' //表情存放的路径
+    });
+
+    $('#post_submit').click(function() {
+        $.ajax({
+            url: "{:U('Index/article_post')}",
+            type: 'POST',
+            dataType: 'json',
+            data: $('#postform').serialize()
+        })
+        .done(function(data) {
+            console.log(data);
+            if (data['status'] == 200000) {
+                automsgbox('发布成功！');
+                window.location.href = "/Bbs/Index/module/id/{$_GET['module']}";
+            } else {
+                automsgbox(data['message']);
+            }
+        });
+    });
+
+    $(function() {
+        $('.c-icon-pic').click(function() {
+            $('#JuploadImg').toggle();
+        });
+
+        // 上传图片
+        $(document).on('change', '#upload_pics', function() {
+            $.ajaxFileUpload({
+                url: "{:U('Index/uploadPostImg')}",
+                secureuri: false,
+                fileElementId: 'upload_pics',
+                dataType: 'json',
+                success: function (data, status) {
+                    if(typeof(data.error) != 'undefined') {
+                        if(data.error != '') {
+                            alert(data.error);
+                        } else {
+                            $('#pic_list').append('<div class="pic-item"><img src="' + data.url + '"><span class="close"></span><input type="hidden" name="photos[]" value="' + data.url + '"></div>');
+                        }
+                    }
+                },
+                error: function (data, status, e) {
+                    alert(e);
+                }
+            });
+        });
+
+        // 删除上传图片
+        $(document).on('click', '.close', function() {
+            $(this).parent().remove();
+        });
+    });
+</script>
+</block>

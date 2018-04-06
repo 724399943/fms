@@ -1,0 +1,107 @@
+<extend name="Common:base" />
+
+<block name="title">用户回答详情</block>
+
+<block name="cusStyle">
+    <style type="text/css">
+        .line-dete em{width: 26px; height: 26px; background: url(__PUBLIC__/images/star.png) no-repeat center center; background-size: cover; display: block; float: left; margin-right: 5px;}
+        .line-dete em.on{background: url(__PUBLIC__/images/onstar.png) no-repeat center center;background-size: cover;}
+        .choose-image-options{border:2px solid #fb9337;}
+    </style>
+</block>
+
+<block name="menu">
+    <include file="Questionnaire/menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle"></h1>
+    </div>
+
+    <div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U('Questionnaire/problemLogDetail')}" method="POST" id="KsubmitForm">
+            <div class="line-dete">
+                <label>问卷名称</label>
+                <span class="field">
+                    <input type="text" class="smallinput" value="{$data['questionnaireData']['title']}" disabled>
+                </span>
+            </div>
+
+            <volist name="list" id="vo" key="vok">
+                <div class="line-dete">
+                    <label>{$vo['question']}</label>
+                    <span class="field">
+                        <switch name="vo['option_type']">
+                            <case value="image">
+                                <volist name="vo['options']" id="item" key="itemKey">
+                                    <!-- <div class="img-options">
+                                        <img src="{$item['text']}" width="100px" height="100px" <if condition="$data['answers'][$vok-1][0] EQ ($itemKey-1)">class="choose-image-options"</if>>
+                                        <span>{$item['description']}</span>
+                                    </div> -->
+                                    <if condition="$data['answers'][$vok-1][0] EQ ($itemKey-1)">
+                                        <div class="img-options">
+                                            <img src="{$item['text']}" width="100px" height="100px">
+                                            <span>{$item['description']}</span>
+                                        </div>
+                                    </if>
+                                </volist>
+                            </case>
+                            <case value="star">
+                                <br>
+                                <volist name="vo['options']" id="item" key="itemKey">
+                                    <em <if condition="$data['answers'][$vok-1][0] EGT ($itemKey-1)">class="on"</if>></em>
+                                </volist>
+                            </case>
+                            <case value="score_test">
+                                <br>
+                                <volist name="vo['options']" id="item" key="itemKey">
+                                    <input type="radio" <if condition="$data['answers'][$vok-1][0] EQ ($itemKey-1)">checked</if> disabled>{$item['text']}
+                                    <br>
+                                </volist>
+                            </case>
+                            <case value="jump_test">
+                                <br>
+                                <volist name="vo['options']" id="item" key="itemKey">
+                                    <input type="radio" <if condition="$data['answers'][$vok-1][0] EQ ($itemKey-1)">checked</if> disabled>{$item['text']}
+                                    <br>
+                                </volist>
+                            </case>
+                        </switch>
+                    </span>
+                </div>
+            </volist>
+    
+            <if condition="in_array($data['questionnaireData']['type'], array('score_test', 'jump_test'))">
+                <div class="line-dete">
+                    <label>问卷测试结果</label>
+                    <span class="field">
+                        <switch name="data['questionnaireData']['type']">
+                            <case value="score_test|jump_test">
+                                <i>{$data['result']['answer']}</i>
+                                <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <i>{$data['result']['description']}</i>
+                            </case>
+                        </switch>
+                    </span>
+                </div>
+            </if>
+
+            <div class="line-dete">
+                <label></label>
+                <span class="field">
+                    <a class="stdbtn" href="{$_SERVER['HTTP_REFERER']}"/>返回</a>
+                </span>
+            </div>
+        </form>
+    </div>
+</block>
+<block name="script">
+
+<script type="text/javascript">
+    $(function(){
+
+    })
+</script>
+</block>

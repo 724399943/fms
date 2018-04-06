@@ -1,0 +1,359 @@
+<extend name="Common:base" />
+
+<block name="title">编辑问题</block>
+
+<block name="cusStyle">
+    <css href="__PUBLIC__/Admin/css/plugins/ui-frame/ui.css" />
+    <style type="text/css">
+        .option-item{ margin-bottom: 10px;}
+        .Janswer{ width: 200px; margin-right: 10px; }
+        .addinput-bg{width:80px;height:70px;display: inline-block;margin-left: 10px;background: url(/Static/Public/Admin/images/upload-bg.png) no-repeat center center;background-size: 48px;border:1px dashed #d5d5d5;}
+        .addinput{width: 50px; height: 50px; opacity: 0; display: inline-block;}
+        .img-bg{position: relative;width:80px;height:70px;display: inline-block;}
+        .upload-wrap,.f-upload {width: 80px; height: 70px;background: url(/Static/Public/Admin/images/upload-bg.png) no-repeat center center;background-size: 48px;border:1px dashed #d5d5d5; }
+        .pic-wrap img {width: 80px; height: 70px;}
+        .Janswers{width: 76px;margin:  82px -82px 0px -112px;}
+    </style>
+</block>
+
+<block name="menu">
+    <include file="Questionnaire/menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle"></h1>
+    </div>
+
+    <div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U('Questionnaire/editProblem')}" method="post" id="question-form">
+            <input type="hidden" id="questionnaire_type" value="{$questionnaireData['type']}">
+            <input type="hidden" name="questionnaire_id" value="{$questionnaireData['id']}">
+            <input type="hidden" name="id" value="{$problemData['id']}">
+            <div class="line-dete">
+                <label>问题：</label>
+                <span class="field">
+                    <input type="text" class="smallinput" placeholder="问题" name="question" value="{$problemData['question']}">
+                </span>
+            </div>
+            
+            <if condition="$questionnaireData.type eq 'survey'">
+                <div class="line-dete">
+                    <label>绑定步骤：</label>
+                    <span class="field">
+                        <select name="step" id="step">
+                        </select>
+                        <span style="color:#fb9337;">*注：图片选项问题只能视为一个步骤</span>
+                    </span>
+                </div>
+                <div class="line-dete">
+                    <label>排序：</label>
+                    <span class="field">
+                        <input type="text" class="smallinput" name="sort" value="{$problemData['sort']}">
+                        <span style="color:#fb9337;">*题目顺序（按升序排序）</span>
+                    </span>
+                </div>
+            </if>
+
+            <div class="line-dete">
+                <label>选项类型：</label>
+                <span class="field">
+                    <!-- <switch name="questionnaireData['type']">
+                        <case value="score_test">
+                            <select name="option_type">
+                                <option value="">请选择</option>
+                                <option value="score_test" <if condition="$problemData['option_type'] eq 'score_test'">selected</if>>测试</option>
+                            </select>
+                        </case>
+                        <case value="jump_test">
+                            <select name="option_type">
+                                <option value="">请选择</option>
+                                <option value="jump_test" <if condition="$problemData['option_type'] eq 'jump_test'">selected</if>>测试</option>
+                            </select>
+                        </case>
+                        <case value="survey">
+                            <select name="option_type">
+                                <option value="">请选择</option>
+                                <option value="star" <if condition="$problemData['option_type'] eq 'star'">selected</if>>评分</option>
+                                <option value="image" <if condition="$problemData['option_type'] eq 'image'">selected</if>>图片</option>
+                            </select>
+                        </case>
+                    </switch> -->
+                    <div class="select">
+                        <button type="button" class="btn btn-info">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            添 加 选 项 
+                        </button>
+                    </div>
+                    <ul class="list">
+                        <switch name="questionnaireData['type']">
+                            <case value="score_test">
+                                <li><a type="score_test">测试</a></li>
+                            </case>
+                            <case value="jump_test">
+                                <li><a type="jump_test">测试</a></li>
+                            </case>
+                            <case value="survey">
+                                <li><a type="star">评 分</a></li>
+                                <li><a type="image">图 片</a></li>
+                                <li><a type="radio">单 选 项</a></li>
+                                <li><a type="checkbox">多 选 项</a></li>
+                                <li><a type="text">文本输入</a></li>
+                                <li><a type="radio_othertext">单选其他-文本</a></li>
+                                <li><a type="checkbox_othertext">多选其他-文本</a></li>
+                            </case>
+                        </switch>
+                    </ul>
+                    <input type="hidden" id="option_type" name="option_type">
+                </span>
+            </div>
+            <div class="line-dete">
+                <label>
+                    <!-- <a class="stdbtn" id="addOption">添加选项</a> -->
+                    选项：
+                </label>
+                <span class="field option-list">
+                    <switch name="problemData['option_type']">
+                        <case value="score_test">
+                            
+                        </case>
+
+                        <case value="image">
+                            <div id="photoList" class="m-photo-list">
+                        </case>
+
+                        <case value="star">
+                            <span style="color:#fb9337;">*评分数（即选项数目）</span>
+                        </case>
+                    </switch>
+                    <volist name="optionsList" id="item">
+                        <switch name="item.type">
+                            <case value="score_test">
+                                <div class="option-item score_test_option"> 
+                                    <input type="text" name="text[]" class="Janswer" placeholder="问题" value="{$item.text}"> 
+                                    <input type="text" name="score[]" class="Janswer" placeholder="分值" value="{$item.score}"> 
+                                    <a class="stdbtn option-del">删除</a> 
+                                </div>
+                            </case>
+
+                            <case value="jump_test">
+                                <div class="option-item jump_test_option"> 
+                                    <input type="text" name="text[]" class="Janswer" placeholder="问题" value="{$item.text}"> 
+                                    <select name="jump_type[]">
+                                        <option value="">选择跳转类型</option>
+                                        <option value="problem" <if condition="$item['jump_type'] eq 'problem'">selected</if>>问题</option>
+                                        <option value="result" <if condition="$item['jump_type'] eq 'result'">selected</if>>答案</option>
+                                    </select>
+                                    <select name="jump_id[]">
+                                        <if condition="$item['jump_type'] eq 'problem'">
+                                            <volist name="problem" id="data">
+                                                <option value="{$data['id']}" <if condition="$item['jump_id'] eq $data['id']">selected</if>>{$data['question']}</option>
+                                            </volist>
+                                        <else/>
+                                            <volist name="resultData" id="data">
+                                                <option value="{$key}" <if condition="$item['jump_id'] eq $data['id']">selected</if>>{$data['answer']}</option>
+                                            </volist>
+                                        </if>
+                                    </select>
+                                    <a class="stdbtn option-del">删除</a> 
+                                </div>
+                            </case>
+
+                            <case value="image">
+                                <div class="option-item image_option">
+                                    <div class="pic-wrap">
+                                        <i class="del-pic"></i>
+                                        <img src="{$item['text']}" width="80px" height="70px"  />
+                                        <input type="hidden" name="text[]" value="{$item['text']}" />
+                                    </div>
+                                    <input type="text" class="Janswers" value="{$item['description']}" placeholder="描述">
+                                </div>
+                            </case>
+
+                            <case value="star">
+                                <div class="option-item star_option"> 
+                                    <input type="text" name="text[]" class="Janswer" placeholder="选项">
+                                    <a class="stdbtn option-del">删除</a> 
+                                </div>
+                            </case>
+
+                            <case value="radio">
+                                <div class="option-item radio_option"> 
+                                    <input type="text" class="smallinput" name="text[]" placeholder="请输入选项文本" value="{$item['text']}"/> 
+                                    <a class="stdbtn option-del">删除</a> 
+                                </div>
+                            </case>
+
+                            <case value="checkbox">
+                                <div class="option-item checkbox_option"> 
+                                    <input type="text" class="smallinput" name="text[]" placeholder="请输入选项文本" value="{$item['text']}"/> 
+                                    <a class="stdbtn option-del">删除</a> 
+                                </div>
+                            </case>
+
+                            <case value="text">
+                                <div class="option-item text_option"> 
+                                    <textarea name="text[]">{$item['text']}</textarea>
+                                    <a class="stdbtn option-del">删除</a> 
+                                </div>
+                            </case>
+
+                            <case value="radio_othertext">
+                                <div class="option-item radio_othertext_option"> 
+                                    <strong style="position: absolute;line-height: 25px;">其他：</strong>
+                                    <input style="margin-left:40px;opacity:0.3;" type="text" class="smallinput" disabled /> 
+                                    <a class="stdbtn option-del">删除</a> 
+                                </div>
+                            </case>
+
+                            <case value="checkbox_othertext">
+                                <div class="option-item checkbox_othertext"> 
+                                    <strong style="position: absolute;line-height: 25px;">其他：</strong>
+                                    <input style="margin-left:40px;opacity:0.3;" type="text" class="smallinput" disabled /> 
+                                    <a class="stdbtn option-del">删除</a> 
+                                </div>
+                            </case>
+                        </switch>
+                    </volist>
+                    <if condition="$problemData['option_type'] eq 'image'">
+                        </div>
+                    </if>
+                </span>
+            </div>
+
+            <if condition="$questionnaireData.type eq 'survey'">
+                <div class="line-dete">
+                    <label>背景图</label>
+                    <span class="field">
+                        <div class="file-box">
+                            <input type="hidden" id="image" name="background" value="{$problemData['background']}">
+                            <input type="file" class="file" name="up-pic" id="up-pic">
+                            <img class="picture" src="{$problemData['background']}" alt="">
+                        </div>
+                    </span>
+                </div>
+            </if>
+
+            <div class="line-dete">
+                <label></label>
+                <span class="field">
+                    <input type="hidden" name="options" id="options">
+                    <input type="hidden" name="referer" value="{$_SERVER['HTTP_REFERER']}">
+                    <input type="button" class="stdbtn" id="Ksubmit" value="保存"/>
+                    <input type="button" class="stdbtn" onclick="window.location.href='{:U('Questionnaire/problemList', array('id'=>$_GET['questionnaire_id']))}'" value="返回"/>
+                </span>
+            </div>
+        </form>
+    </div>
+</block>
+<block name="script">
+<js href="__PUBLIC__/Admin/js/ajaxfileupload.js" />
+<js href="__PUBLIC__/Admin/js/plugins/questionnaire/optionManager.js" />
+<script type="text/javascript">
+    var step = "{$questionnaireData.step}";
+    var type = "{$questionnaireData.type}";
+    var problemStep = "{$problemData['step']}";
+    optionManager.updateAlterOption();
+    $(function(){
+        $('.select').click(function(e){
+            $('.list').toggle();
+            e.stopPropagation();
+            $('body').click(function(){
+                $('.list').hide();
+            })
+        })
+
+        if ( type == 'survey' ) {
+            for (var i = 1; i <= step; i++) {
+                var selected = '';
+                if ( parseInt(problemStep) == i ) {
+                    selected = 'selected';
+                }
+                $('#step').append("<option value='"+i+"' "+selected+">"+i+"</option>");
+            }
+        }
+
+        $(document).on('change', '#fileToUpload', function() {
+            $.ajaxFileUpload({
+                url: "{:U('Questionnaire/photoUpload')}",
+                secureuri: false,
+                fileElementId: 'fileToUpload',
+                dataType: 'json',
+                success: function (data, status) {
+                    if(typeof(data.error) != 'undefined') {
+                        if(data.error != '') {
+                            alert(data.error);
+                        } else {
+                            $("#photoList").append('<div class="option-item"><div class="pic-wrap"><i class="del-pic"></i><img src="' + data.src + '" width="80px" height="70px"  /><input type="hidden" name="text[]" value="' + data.src + '" /></div><input type="text" class="Janswers" value="" placeholder="描述"></div>');
+                        }
+                    }
+                },
+                error: function (data, status, e) {
+                    alert(e);
+                }
+            });
+        });
+
+        // 上传背景图
+        $(document).on('change', '#up-pic', function() {
+            $.ajaxFileUpload({
+                url: "{:U('Questionnaire/photoUpload')}",
+                secureuri: false,
+                fileElementId: "up-pic",
+                dataType: "json",
+                success: function (data, status) {
+                    if(data.error != '') {
+                        alert(data.error);
+                    } else {
+                        $(".picture").attr("src", data.src).show();
+                        $("#image").val(data.src);
+                    }
+                },error: function (data, status, e) {
+                    alert(e);
+                }
+            })
+        });
+
+        $(document).delegate('#question-form select[name="jump_type[]"]', 'change', function(){
+            var $this = $(this),
+                jump_type = $this.val();
+            $this.next('select').remove();
+            var optionsTemp = '<select name="jump_id[]">';
+            var after = true;
+            switch ( jump_type ) {
+                case 'problem' :
+                    if ( !!problemList[0] ) {
+                        for (var i = 0; i < problemList.length; i++) {
+                            var data = problemList[i],
+                                selected = ( i == '0' ) ? 'selected' : '';
+                            optionsTemp += '<option value="'+ data['id'] +'" '+ selected +'>'+ data['question'] +'</option>';
+                        }
+                    } else {
+                        after = false;
+                    }
+                    break;
+                case 'result' :
+                    if ( resultData.length ) {
+                        for (var i = 0; i < resultData.length; i++) {
+                            var data = resultData[i],
+                                selected = ( i == '0' ) ? 'selected' : '';
+                            optionsTemp += '<option value="'+ i +'" '+ selected +'>'+ data['answer'] +'</option>';
+                        }
+                    } else {
+                        after = false;
+                    }
+                    break;
+            }
+            optionsTemp += '</select>';
+
+            if ( after === true ) {
+                $this.after( optionsTemp );
+            }
+        });
+    })
+    <if condition="$questionnaireData.type EQ 'jump_test'">
+        var resultData = {$resultData};
+        var problemList = {$problemList};
+    </if>
+</script>
+</block>

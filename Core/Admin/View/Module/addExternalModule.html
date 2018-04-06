@@ -1,0 +1,113 @@
+<extend name="Common:base" />
+
+<block name="title">添加一级外部栏目</block>
+
+<block name="cusStyle">
+    <css href="__PUBLIC__/Admin/css/plugins/ui-frame/ui.css" />
+    <style type="text/css">
+       
+    </style>
+</block>
+
+<block name="menu">
+    <include file="Module/menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle">添加一级外部栏目</h1>
+    </div>
+
+    <div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U('Module/addExternalModule')}" method="post" >
+            <input type="hidden" name="mod_id" value="7">
+            <div class="line-dete">
+                <label>模块类型：</label>
+                <span class="field">
+                    <input type="text" class="smallinput" style="border: 0px;" placeholder="外部模型" name="mod_ids" readonly="readonly">
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>栏目名称：</label>
+                <span class="field">
+                    <input type="text" class="smallinput"  name="cat_name" >
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>目录标识：</label>
+                <span class="field">
+                    <input type="text" class="smallinput"  name="dir_name" >
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>同级排序：</label>
+                <span class="field">
+                    <input type="text" class="smallinput"  name="orders" > (数字越小，越靠前)
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>状态设置：</label>
+                <span class="field">
+                    <input name="status" type="radio" value="1" checked />正常  
+                    <input name="status" type="radio" value="2" />锁定
+                </span>
+            </div>
+
+
+            <div class="line-dete">
+                <label>栏目图片：</label>
+                <span class="field">
+                    <input type="text" name="imgs" id="imgs" class="smallinput" readonly="true"/>
+                    <input type="file" name="up-pic" id="up-pic">
+                </span>
+            </div>
+
+            
+            <div class="line-dete">
+                <label>外部链接URL：</label>
+                <span class="field">
+                    <input type="hidden" name="link_type" value="2">
+                   <input type="text" name="out_url">
+                </span>
+            </div>
+            <!-- <include file="Common:seo" /> -->
+
+            <div class="line-dete">
+                <label></label>
+                <span class="field">
+                    <input type="submit" class="stdbtn"  value="保存"/>
+                </span>
+            </div>
+        </form>
+    </div>
+</block>
+<block name="script">
+<js href="__PUBLIC__/Admin/js/ajaxfileupload.js" />
+<js href="__PUBLIC__/Admin/js/plugins/questionnaire/optionManager.js" />
+<script type="text/javascript">
+    // 上传图片
+        $(document).on('change', '#up-pic', function() {
+            $.ajaxFileUpload({
+                url: "{:U('Module/uploadPhoto')}",
+                secureuri: false,
+                fileElementId: 'up-pic',
+                dataType: 'json',
+                success: function (data, status) {
+                    if(data.error != '') {
+                        alert(data.error);
+                    } else {
+                        // $('.Jpic').attr('src', data.src).show();
+                        $('#imgs').val(data.src);
+                    }
+                },error: function (data, status, e) {
+                    alert(e);
+                }
+            });
+        });
+      
+</script>
+</block>

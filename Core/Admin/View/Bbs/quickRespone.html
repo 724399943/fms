@@ -1,0 +1,130 @@
+<extend name="Common:base" />
+
+<block name="title"></block>
+
+<block name="cusStyle">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.datetimepicker.css" type="text/css" />
+</block>
+
+<block name="menu">
+    <include file="Bbs:menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <!-- <h1 class="pagetitle"></h1> -->
+        <a class="stdbtn btn_lime Jdel" data-id="{$vo['id']}" href="javascript:;" style="float:right;margin:20px" >删除</a>
+    </div>
+    <div class="contentwrapper">
+        <table cellpadding="0" cellspacing="0" border="0" class="stdtable stdtablequick">
+            <tr>
+                <th width="">内容</th>
+                <th width="20%">操作</th>
+            </tr>
+            <empty name="quickrespone">
+                <tr>
+                    <td colspan="10">目前没有数据~！</td>
+                </tr>
+            <else />
+                <volist name="quickrespone" id="vo">
+                    <tr>
+                        <td>{$vo.content}</td>
+                        <td>
+                            <if condition="checkActionAuth('Bbs-BbsDelArticle') || checkActionAuth('Bbs-BbsEditArticle')">
+                                <if condition="checkActionAuth('Bbs-BbsEditArticle')">
+                                    <a class="stdbtn btn_lime" href="{:U('Bbs/BbsEditArticle', array('id' => $vo['id']))}">编辑</a>&nbsp;&nbsp;
+                                </if>
+                                <if condition="checkActionAuth('Bbs-BbsDelArticle')">
+                                    <a class="stdbtn btn_lime Jdel" data-id="{$vo['id']}" href="javascript:;" >删除</a>&nbsp;&nbsp;
+                                </if>
+                            <else/>
+                                无权限访问
+                            </if>
+                        </td>
+                    </tr>
+                </volist>
+                <tr>
+                    <td colspan="10">
+                        <div class="page-box">{$show}</div>
+                    </td>
+                </tr>
+            </empty>
+        </table>
+    </div>
+</block>
+<block name="script">
+
+<script type="text/javascript" src="__PUBLIC__/Admin/js/jquery.datetimepicker.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/js/moment.min.js"></script>
+<script>
+    $(function () {
+        $("[name='author']").find("[value='{$return['author']}']").attr("selected", true);
+        $("[name='module_id']").find("[value='{$return['module_id']}']").attr("selected", true);
+        $("[name='is_top']").find("[value='{$return['is_top']}']").attr("selected", true);
+        $("[name='is_recommend']").find("[value='{$return['is_recommend']}']").attr("selected", true);
+        $("#staDatartTime").val(moment.unix($("#staDatartTime").attr("date-time")).format("YYYY-MM-DD HH:mm:ss"));
+        $("#endDataTime").val(moment.unix($("#endDataTime").attr("date-time")).format("YYYY-MM-DD HH:mm:ss"));
+        $("#staDatartTime").datetimepicker({format:"Y-m-d H:i:s", onChangeDateTime:function(dp, $input) {$("#startTime").val(moment($input.val()).unix().valueOf());}});
+        $("#endDataTime").datetimepicker({format:"Y-m-d H:i:s", onChangeDateTime:function(dp, $input) {$("#endTime").val(moment($input.val()).unix().valueOf());}});
+    });
+
+    $('.JtopSwitch').click(function() {
+        var checked = $(this)[0].checked ? 1 : 0;
+        var id = $(this).data('id');
+
+        $.ajax({
+            url: "{:U('Bbs/setTop')}",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                is_top: checked,
+                id: id
+            }
+        })
+        .done(function(data) {
+            console.log(data);
+        });
+    });
+
+    $('.JrecoSwitch').click(function() {
+        var checked = $(this)[0].checked ? 1 : 0;
+        var id  = $(this).data('id');
+
+        $.ajax({
+            url: "{:U('Bbs/setReco')}",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                is_recommend: checked,
+                id: id
+            }
+        })
+        .done(function(data) {
+            console.log(data);
+        });;
+    });
+
+    $('.Jdel').click(function() {
+        if (confirm('确认删除文章？')) {
+            var id = $(this).data('id');
+
+            $.ajax({
+                url: "{:U('Bbs/deleteBbsArticle')}",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id: id
+                }
+            })
+            .done(function(data) {
+                console.log(data);
+                if (data.error == 0) {
+                    alert('删除成功！');
+                    window.location.href = window.location.href;
+                }
+            });
+        }
+    });
+</script>
+
+</block>

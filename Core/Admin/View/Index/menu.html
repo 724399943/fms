@@ -1,0 +1,24 @@
+<ul>
+	<if condition="checkControllerAuth(array('Index'))">
+		<li <if condition="in_array(CONTROLLER_NAME, array('Index'))">{:chr(32)}class="current"</if>>
+			<a class="date-tit sys-tj" href="{:getAuthUrl(array('Index-systemSetting', 'Index-statistics', 'Index-userAnalyze'))}" class="addons">控制台</a>
+			<ul class="Jcon-ctr">
+				<if condition="checkActionAuth('Index-systemSetting')">
+					<li class="<if condition="in_array(ACTION_NAME, array('systemSetting'))">on</if>">
+						<a href="{:U('Index/systemSetting')}">系统信息</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('Index-wapSetting')">
+					<li class="<if condition="in_array(ACTION_NAME, array('wapSetting'))">on</if>">
+						<a href="{:U('Index/wapSetting')}">WAP手机版设置</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('Index-userAnalyze')">
+					<li class="<if condition="in_array(ACTION_NAME, array('userAnalyze'))">on</if>">
+						<a href="{:U('Index/userAnalyze')}">用户分析</a>
+					</li>
+				</if>
+			</ul>
+		</li>
+	</if>
+</ul>

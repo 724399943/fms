@@ -1,0 +1,61 @@
+<extend name="Common:base" />
+
+<block name="title">二维码列表</block>
+
+<block name="menu">
+    <include file="Qrcode:menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle">二维码列表</h1>
+    </div>
+    <div class="contentwrapper">
+        <form class="order-list" method="GET" action="{:U('Qrcode/qrcodeList')}">
+            <p>
+                <input type="text" class="input-text" style="width:250px" placeholder="标识" name="tags" value="{$return['tags']}" >
+                <input type="submit" value="搜索"></input>
+            </p>
+        </form>
+        <table cellpadding="0" cellspacing="0" border="0" class="stdtable stdtablequick">
+            <tr>
+                <th width="">编号</th>
+                <th width="">标识</th>
+                <th width="">二维码地址</th>
+                <th width="">真实地址</th>
+                <th width="20%">操作</th>
+            </tr>
+            <empty name="list">
+                <tr>
+                    <td colspan="6">目前没有数据~！</td>
+                </tr>
+            <else />
+                <volist name="list" id="vo">
+                    <tr>
+                        <td>{$vo.id}</td>
+                        <td>{$vo.tags}</td>
+                        <td>{$vo.link}</td>
+                        <td>{$vo.url}</td>
+                        <td>
+                            <if condition="checkActionAuth('Qrcode-qrcodeAnalyze')">
+                                <a class="stdbtn btn_lime" href="{:U('Qrcode/qrcodeAnalyze', array('sign'=> $vo['sign']))}">查看详情</a>
+                            <else/>
+                                无权限访问
+                            </if>
+                        </td>
+                    </tr>
+                </volist>
+                <tr>
+                    <if condition="$counting EGT 25">
+                        <td colspan="6">
+                            <div class="page-box">{$show}</div>
+                        </td>
+                    </if>
+                </tr>
+            </empty>
+        </table>
+    </div>
+</block>
+<block name="script">
+
+</block>

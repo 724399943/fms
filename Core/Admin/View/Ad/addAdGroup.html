@@ -1,0 +1,118 @@
+<extend name="Common:base" />
+
+<block name="title">添加广告版位</block>
+
+<block name="cusStyle">
+    <css href="__PUBLIC__/Admin/css/plugins/ui-frame/ui.css" />
+    <style type="text/css">
+    .line-dete em{color: #e18383}
+
+    </style>
+</block>
+
+<block name="menu">
+    <include file="Ad/menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle">添加广告版位</h1>
+    </div>
+
+    <div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U('Ad/addAdGroup')}" method="post" id="question-form">
+
+            <div class="line-dete">
+                <label>版位名称<em>*</em></label>
+                <span class="field">
+                    <input type="text" name="group_name"  />&nbsp;&nbsp;
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>版位标识<em>*</em></label>
+                <span class="field">
+                    <input type="text" name="group_sign"  />&nbsp;&nbsp;
+                    (只能字母，数字，下横线，中横线组成)
+                </span>
+            </div>
+
+            <!-- <div class="line-dete">
+                <label>版位类型<em>*</em></label>
+                <span class="field">
+                    <select name="sort">
+                        <option value="">请选择</option>
+                        <option value="text">单行文本</option>
+                    </select>&nbsp;&nbsp;
+                </span>
+            </div> -->
+
+            <div class="line-dete">
+                <label>广告位宽</label>
+                <span class="field">
+                    <input type="text" name="width"  />&nbsp;&nbsp;像素（px）
+                </span>
+            </div>
+            
+            <div class="line-dete">
+                <label>广告位高</label>
+                <span class="field">
+                    <input type="text" name="height"  />&nbsp;&nbsp;像素（px）
+                    
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>使用状态</label>
+                <div class="field">
+                    <input type="radio" name="is_delete" value="0" checked="" />正常&nbsp;&nbsp;
+                    <input type="radio" name="is_delete" value="1" />锁定&nbsp;&nbsp;
+                </div>
+            </div>
+
+            <div class="line-dete">
+                <label></label>
+                <span class="field">
+                    <input type="hidden" name="firstCatId" value="{$firstCatId}">
+                    <input type="hidden" name="module_id" value="{$module_id}">
+                    <input type="submit" class="stdbtn" id="Ksubmit" value="保存"/>
+                   <!--  <input type="button" class="stdbtn" onclick="window.location.href='{:U('Questionnaire/problemList', array('id'=>$_GET['questionnaire_id']))}'" value="返回"/> -->
+                </span>
+            </div>
+
+            
+        </form>
+    </div>
+</block>
+<block name="script">
+<js href="__PUBLIC__/Admin/js/ajaxfileupload.js" />
+<!-- <js href="__PUBLIC__/Admin/js/plugins/questionnaire/optionManager.js" /> -->
+<script charset="utf-8" src="__PUBLIC__/Admin/js/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="__PUBLIC__/Admin/js/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+$('.Jvalid').click(function(){
+        var id = $(this).attr('data-id')
+        var yes = "__PUBLIC__/Admin/images/yes.gif"
+        var no = "__PUBLIC__/Admin/images/no.gif"
+        var field = 'is_valid'
+        id = id.split('-')
+        if (id[1] == 1) {
+            $(this).children('img').attr('src', yes)
+            $(this).attr('data-id', id[0] + '-2')
+        } else {
+           $(this).children('img').attr('src',no)
+           $(this).attr('data-id', id[0] + '-1')
+        }
+        $.ajax({
+            url: "{:U('Field/changeFieldStatus')}",
+            type: 'post',
+            dataType: 'json',
+            data: {id: id[0],status:id[1],field:field}
+        })
+        .done(function(data) {
+            console.log(data);
+        })
+
+   })
+</script>
+</block>

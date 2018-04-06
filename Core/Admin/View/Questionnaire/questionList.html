@@ -1,0 +1,223 @@
+<extend name="Common:base" />
+
+<block name="title">问卷列表</block>
+
+<block name="cusStyle">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/layui/css/layui_custom.css">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/plugins/ui-frame/ui.css" type="text/css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/plugins/fontawesome/font-awesome.min.css" type="text/css" />
+    <style type="text/css">
+        .x-activity{background-color:#eee; color:#333; width:100%; height:100%;}
+        .x-activity .x-activity-qrcode{float: left; margin: 33px;}
+        .x-activity .x-activity-qrcode img{width: 150px; height: 150px;}
+        .x-activity em{float: left; height: 150px; margin-top: 33px; border-right: 1px solid #bbb;}
+        .x-activity .x-activity-link{margin: 94px 0 0 33px; float: left; width:35%;}
+
+        .x-feedback{border:1px solid #525252; display: inline-block; opacity: 0.5; padding-left: 10px; padding-right: 10px;}
+    </style>
+</block>
+
+<block name="menu">
+    <include file="Questionnaire:menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle">问卷列表</h1>
+    </div>
+    <div class="contentwrapper">
+        <form class="order-list" method="GET" action="{:U('Questionnaire/questionList')}">
+            <p>
+                <select name="type">
+                    <option value="-1" <if condition="$return['type'] eq '-1'">selected</if>>问卷类型</option>
+                    <option value="survey" <if condition="$return['type'] eq 'survey'">selected</if>>{:getCateName('survey')}</option>
+                    <option value="score_test" <if condition="$return['type'] eq 'score_test'">selected</if>>{:getCateName('score_test')}</option>
+                    <option value="jump_test" <if condition="$return['type'] eq 'jump_test'">selected</if>>{:getCateName('jump_test')}</option>
+                </select>
+                <input type="text" class="input-text" style="width:250px" placeholder="问卷标题" name="title" value="{$return['title']}" >
+                <input type="submit" value="搜索"></input>
+            </p>
+        </form>
+        <table cellpadding="0" cellspacing="0" border="0" class="stdtable stdtablequick">
+            <tr>
+                <!-- <th width="">编号</th> -->
+                <th width="">问卷信息</th>
+                <th width="">状态</th>
+                <th width="">反馈数</th>
+                <th width="">最新反馈时间</th>
+                <th width="">添加时间</th>
+                <th width="20%">操作</th>
+            </tr>
+            <empty name="list">
+                <tr>
+                    <td colspan="6">目前没有数据~！</td>
+                </tr>
+            <else />
+                <volist name="list" id="vo">
+                    <tr>
+                        <!-- <td>{$vo.id}</td> -->
+                        <td>
+                            <switch name="vo.type">
+                                <case value="survey">
+                                    <span class="label label-danger"><i class="fa fa-tag"></i>{:getCateName('survey')}</span>
+                                </case>
+                                <case value="score_test">
+                                    <span class="label label-warning"><i class="fa fa-tag"></i>{:getCateName('score_test')}</span>
+                                </case>
+                                <case value="jump_test">
+                                    <span class="label label-success"><i class="fa fa-tag"></i>{:getCateName('jump_test')}</span>
+                                </case>
+                            </switch> 
+                            {$vo.title}
+                        </td>
+                        <td>
+                            <label><input class="mui-switch JrecoSwitch" data-id="{$vo.id}" type="checkbox" <if condition="$vo.is_open EQ 1">checked</if>></label>
+                        </td>
+                        <td>
+                            <span class="layui-badge" data-id="{$vo['id']}">{$vo['feedback_number']}</span>
+                        </td>
+                        <td>{:time_format($vo['feedback_latest_time'])}</td>
+                        <td>{:time_format($vo['add_time'])}</td>
+                        <td>
+                            <if condition="checkActionAuth('Questionnaire-editQuestion') || checkActionAuth('Questionnaire-deleteQuestion') || checkActionAuth('Questionnaire-problemList') || checkActionAuth('Questionnaire-resultSetting') || 
+                            checkActionAuth('Questionnaire-tagSetting') || 
+                            checkActionAuth('Questionnaire-questionnairePageView') || 
+                            checkActionAuth('Questionnaire-questionnaireAnalyze') || 
+                            checkActionAuth('Questionnaire-ratioProblem')">
+                                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                                    <li class="layui-nav-item">
+                                        <a href="javascript:;">操作</a>
+                                        <dl class="layui-nav-child">
+                                            <if condition="checkActionAuth('Questionnaire-editQuestion')">
+                                                <dd><a href="{:U('Questionnaire/editQuestion', array('id' => $vo['id']))}">编辑</a></dd>
+                                            </if>
+                                            <if condition="checkActionAuth('Questionnaire-problemList')">
+                                                <dd><a href="{:U('Questionnaire/problemList', array('id' => $vo['id']))}">问卷配题</a></dd>
+                                            </if>
+                                            <dd><a href="javascript:;" class="x-activity-btn" data-method="activityLink" data-qrcode="{$vo['qrcode']}" data-link="{$vo['link']}">活动链接</a></dd>
+                                            <if condition="checkActionAuth('Questionnaire-resultSetting') && ($vo['type'] EQ 'jump_test' || ($vo['type'] EQ 'score_test'))">
+                                                <dd><a href="{:U('Questionnaire/resultSetting', array('id' => $vo['id']))}">设置问卷结果</a></dd>
+                                            </if>
+                                            <if condition="checkActionAuth('Questionnaire-tagSetting')">
+                                                <dd><a href="{:U('Questionnaire/tagSetting', array('id' => $vo['id']))}">设置问卷标签</a></dd>
+                                            </if>
+                                            <if condition="checkActionAuth('Questionnaire-ratioProblem')">
+                                                <dd><a href="{:U('Questionnaire/ratioProblem', array('id' => $vo['id']))}">统计视图</a></dd>
+                                            </if>
+                                            <if condition="checkActionAuth('Questionnaire-questionnairePageView')">
+                                                <dd><a href="{:U('Questionnaire/questionnairePageView', array('id' => $vo['id']))}">单页访问量</a></dd>
+                                            </if>
+                                            <if condition="checkActionAuth('Questionnaire-questionnaireAnalyze')">
+                                                <dd><a href="{:U('Questionnaire/questionnaireAnalyze', array('sign' => $vo['sign']))}">用户分析</a></dd>
+                                            </if>
+                                            <if condition="checkActionAuth('Questionnaire-deleteQuestion')">
+                                                <dd><a href="{:U('Questionnaire/deleteQuestion', array('id' => $vo['id']))}">删除</a></dd>
+                                            </if>
+                                        </dl>
+                                    </li>
+                                </ul>
+                            <else/>
+                                无权限访问
+                            </if>
+                        </td>
+                    </tr>
+                </volist>
+                <tr>
+                    <if condition="$counting EGT 25">
+                        <td colspan="6">
+                            <div class="page-box">{$show}</div>
+                        </td>
+                    </if>
+                </tr>
+            </empty>
+        </table>
+    </div>
+    <div id="Jbtncopy" data-clipboard-text=''></div>
+</block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Admin/layui/layui.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/js/baiduTemplate.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/clipboard.min.js"></script>
+<script type="text/html" id="activityLink">
+    <div class="x-activity">
+        <div class="x-activity-qrcode"><img src="<%=qrcode%>"/></div>
+        <em></em>
+        <input class="x-activity-link" type="text" value="<%=link%>" disabled>
+        <button class="layui-btn layui-btn-radius copy" data-link="<%=link%>">复制</button>
+    </div>
+</script>
+<script>
+    var bt = baidu.template;
+    layui.use('element', function(){
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+        //监听导航点击
+        element.on('nav(demo)', function(elem){
+            layer.msg(elem.text());
+        });
+    });
+
+    layui.use('layer', function(){
+        var layer = layui.layer, content;
+        //触发事件
+        var active = {
+            activityLink: function(){
+                var that = this; 
+                //多窗口模式，层叠置顶
+                layer.open({
+                    type: 1 //此处以iframe举例
+                    ,title: '活动链接'
+                    ,area: ['540px', '260px']
+                    ,shade: 0
+                    ,content: content
+                    ,shade: [0.8, '#393D49']
+                    ,shadeClose: true
+                    ,zIndex: layer.zIndex //重点1
+                    ,success: function(layero){
+                        // layer.activityLink(layero); //重点2
+                    }
+                });
+            }
+        };
+
+        $('.contentwrapper').on('click', '.x-activity-btn', function(){
+            var othis = $(this), method = othis.data('method');
+            content = bt('activityLink', {qrcode:othis.data('qrcode'),link:othis.data('link')})
+            active[method] ? active[method].call(this, othis) : '';
+        });
+    });
+
+    $('.JrecoSwitch').click(function() {
+        var checked = $(this)[0].checked ? 1 : 0;
+        var id  = $(this).data('id');
+        $.ajax({
+            url: "{:U('Questionnaire/editQuestion')}",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                is_open: checked,
+                id: id
+            }
+        })
+        .done(function(data) {
+            console.log(data);
+        });
+    });
+
+    /* 问卷反馈 */
+    $('.layui-badge').click(function(){
+        window.location.href = "{:U('Questionnaire/problemLog')}?questionnaire_id=" + $(this).data('id');
+    });
+
+    /* 复制活动链接 */ 
+    $(document).on('click','.copy',function(){
+        var that = $(this);
+        $('#Jbtncopy').attr('data-clipboard-text', $(this).data('link'));
+        $('#Jbtncopy').trigger('click');
+    })
+    var clipboard = new Clipboard('#Jbtncopy');
+    clipboard.on('success', function(e) {
+        alert('复制成功');
+    });
+</script>
+</block>

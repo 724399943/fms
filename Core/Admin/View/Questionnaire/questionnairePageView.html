@@ -1,0 +1,116 @@
+<extend name="Common:base" />
+
+<block name="title">问卷单页访问量</block>
+
+<block name="menu">
+	<include file="Questionnaire:menu" />
+</block>
+
+<block name="main">
+	<a class="stdbtn btn_lime" href="javascript:window.history.go(-1);" style="margin: 10px 0 0 20px;">返回</a>
+	<div id="contentwrapper" class="contentwrapper">
+		<table cellpadding="0" cellspacing="0" border="0" class="stdtable overviewtable">
+            <colgroup>
+                <col class="con0" width="50%">
+                <col class="con1" width="50%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th class="head0" class="center">UV（独立访问用户数）</th>
+                    <th class="head1" class="center">PV（页面访问量）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center">{$uv}</td>
+                    <td class="center">{$pv}</td>
+                </tr>
+            </tbody>
+        </table>
+	</div>
+
+	<div id="main" style="height:400px"></div>
+</block>
+<block name="script">
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+<script type="text/javascript">
+    // 路径配置
+    require.config({
+        paths: {
+            echarts: 'http://echarts.baidu.com/build/dist'
+        }
+    });
+
+     // 使用
+    require(
+        [
+            'echarts',
+            'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+        ],
+        function (ec) {
+            // 基于准备好的dom，初始化echarts图表
+            var myChart = ec.init(document.getElementById('main')); 
+            
+            option = {
+			    title : {
+			        text: '问卷单页访问量',
+			    },
+			    tooltip : {
+			        trigger: 'axis'
+			    },
+			    legend: {
+			        data:['点击次数']
+			    },
+			    toolbox: {
+			        show : true,
+			        feature : {
+			            // mark : {show: true},
+			            dataView : {show: true, readOnly: false},
+			            // magicType : {show: true, type: ['line', 'bar']},
+			            // restore : {show: true},
+			            saveAsImage : {show: true}
+			        }
+			    },
+			    // calculable : true,
+			    xAxis : [
+			        {
+			            type : 'category',
+			            boundaryGap : false,
+			            data : {$xAxisData}
+			        }
+			    ],
+			    yAxis : [
+			        {
+			            type : 'value',
+			            axisLabel : {
+			                formatter: '{value}次'
+			            }
+			        }
+			    ],
+			    series : [
+			        {
+			            name:'点击次数',
+			            type:'line',
+			            data:{$seriesData},
+			            markPoint : {
+			                data : [
+			                    {type : 'max', name: '最大值'},
+			                    {type : 'min', name: '最小值'}
+			                ]
+			            },
+			            markLine : {
+			                data : [
+			                    {type : 'average', name: '平均值'}
+			                ]
+			            }
+			        }
+			    ]
+			};
+			                    
+    
+            // 为echarts对象加载数据 
+            myChart.setOption(option); 
+        }
+    );
+</script>
+</block>

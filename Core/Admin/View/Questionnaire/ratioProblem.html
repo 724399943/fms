@@ -1,0 +1,265 @@
+<extend name="Common:base" />
+
+<block name="title">问卷答题比率</block>
+
+<block name="cusStyle">
+    <style type="text/css">
+        .line-dete em{width: 26px; height: 26px; background: url(__PUBLIC__/images/star.png) no-repeat center center; background-size: cover; display: block; float: left; margin-right: 5px;}
+        .line-dete em.on{background: url(__PUBLIC__/images/onstar.png) no-repeat center center;background-size: cover;}
+        .choose-image-options{border:2px solid #fb9337;}
+    </style>
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+    </script>
+</block>
+
+<block name="menu">
+    <include file="Questionnaire/menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle"></h1>
+    </div>
+    
+    <div id="main" style="height: 400px"></div>
+
+    <div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U('Questionnaire/problemLogDetail')}" method="POST" id="KsubmitForm">
+            <div class="line-dete">
+                <label>问卷名称</label>
+                <span class="field">
+                    <input type="text" class="smallinput" value="{$title}" disabled>
+                </span>
+            </div>
+
+            <volist name="list" id="vo" key="vok">
+                <div class="line-dete">
+                    <label>{$vo['question']}</label>
+                    <span class="field">
+                        <div id="main_{$vok}" style="height: 400px"></div>
+                        <script type="text/javascript">
+                            // 使用
+                            require(
+                                [
+                                    'echarts',
+                                    'echarts/chart/pie',
+                                ],
+                                function (ec) {
+                                    // 基于准备好的dom，初始化echarts图表
+                                    var myChart = ec.init(document.getElementById('main_{$vok}')); 
+                                    
+                                    option = {
+                                        title : {
+                                            text: "{$vo['question']}",
+                                            x:'center'
+                                        },
+                                        tooltip : {
+                                            trigger: 'item',
+                                            formatter: "{a} <br/>{b} : {c} ({d}%)"
+                                        },
+                                        legend: {
+                                            orient : 'vertical',
+                                            x : 'left',
+                                            data:{$vo['legendData']}
+                                        },
+                                        toolbox: {
+                                            show : true,
+                                            feature : {
+                                                // dataView : {show: true, readOnly: false},
+                                                saveAsImage : {show: true}
+                                            }
+                                        },
+                                        // calculable : true,
+                                        series : [
+                                            {
+                                                name:"{$vo['question']}",
+                                                type:'pie',
+                                                radius : '55%',
+                                                center: ['50%', '60%'],
+                                                data:{$vo['seriesData']}
+                                            }
+                                        ]
+                                    };
+                                                      
+                                    // 为echarts对象加载数据 
+                                    myChart.setOption(option); 
+                                }
+                            );
+                        </script>
+                        <switch name="vo['option_type']">
+                            <case value="image">
+                                <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+                                    <colgroup>
+                                        <col class="con0">
+                                        <col class="con1">
+                                        <col class="con0">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th class="head0">选项</th>
+                                            <th class="head1">占比</th>
+                                            <th class="head0">数量</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <volist name="vo['options']" id="item" key="itemKey">
+                                            <tr>
+                                                <td>
+                                                    <img src="{$item['text']}" width="100px" height="100px">
+                                                    <span>{$item['description']}</span>
+                                                </td>
+                                                <td>{$item['ratio']}%</td>
+                                                <td>{$item['option_count']}</td>
+                                            </tr>
+                                        </volist>
+                                    </tbody>
+                                </table>
+                            </case>
+
+                            <case value="star">
+                                <br>
+                                <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+                                    <colgroup>
+                                        <col class="con0">
+                                        <col class="con1">
+                                        <col class="con0">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th class="head0">选项</th>
+                                            <th class="head1">占比</th>
+                                            <th class="head0">数量</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <volist name="vo['options']" id="item" key="itemKey">
+                                            <tr>
+                                                <td>
+                                                    <em class="<if condition="$itemKey GT 0">on</if>"></em>
+                                                    <em class="<if condition="$itemKey GT 1">on</if>"></em>
+                                                    <em class="<if condition="$itemKey GT 2">on</if>"></em>
+                                                    <em class="<if condition="$itemKey GT 3">on</if>"></em>
+                                                    <em class="<if condition="$itemKey GT 4">on</if>"></em>
+                                                </td>
+                                                <td>{$item['ratio']}%</td>
+                                                <td>{$item['option_count']}</td>
+                                            </tr>
+                                        </volist>
+                                    </tbody>
+                                </table>
+                            </case>
+
+                            <case value="score_test|jump_test">
+                                <br>
+                                <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+                                    <colgroup>
+                                        <col class="con0">
+                                        <col class="con1">
+                                        <col class="con0">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th class="head0">选项</th>
+                                            <th class="head1">占比</th>
+                                            <th class="head0">数量</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <volist name="vo['options']" id="item" key="itemKey">
+                                            <tr>
+                                                <td>
+                                                    <span>{$item['text']}</span>
+                                                </td>
+                                                <td>{$item['ratio']}%</td>
+                                                <td>{$item['option_count']}</td>
+                                            </tr>
+                                        </volist>
+                                    </tbody>
+                                </table>
+                            </case>
+                        </switch>
+                    </span>
+                </div>
+            </volist>
+
+            <div class="line-dete">
+                <label></label>
+                <span class="field">
+                    <a class="stdbtn" href="{$_SERVER['HTTP_REFERER']}"/>返回</a>
+                </span>
+            </div>
+        </form>
+    </div>
+</block>
+<block name="script">
+<script type="text/javascript">
+    // 使用
+    require(
+        [
+            'echarts',
+            'echarts/chart/line',
+            'echarts/chart/bar',
+        ],
+        function (ec) {
+            // 基于准备好的dom，初始化echarts图表
+            var myChart1 = ec.init(document.getElementById('main')); 
+            
+            option = {
+                title : {
+                    text: "近30天概况"
+                },
+                tooltip : {
+                    trigger: 'axis'
+                },
+                toolbox: {
+                    show : true,
+                    feature : {
+                        dataView : {show: true, readOnly: false},
+                        saveAsImage : {show: true}
+                    }
+                },
+                legend: {
+                    data:['浏览量','反馈数']
+                },
+                xAxis : [
+                    {
+                        type : 'category',
+                        data : {$xAxisData}
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value',
+                        name : '数量',
+                        axisLabel : {
+                            formatter: '{value}'
+                        }
+                    }
+                ],
+                series : [
+                    {
+                        name:'浏览量',
+                        type:'bar',
+                        data:{$uvData}
+                    },
+                    {
+                        name:'反馈数',
+                        type:'line',
+                        data:{$feedbackData}
+                    }
+                ]
+            };
+    
+            // 为echarts对象加载数据 
+            myChart1.setOption(option); 
+        }
+    );
+</script>
+</block>

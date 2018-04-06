@@ -1,0 +1,144 @@
+<extend name="Common:base" />
+
+<block name="title">栏目设置</block>
+<block name="menu">
+    <include file="Module:menu" />
+</block>
+<block name="cusStyle">
+    <style type="text/css">
+        tbody  tr td {padding: 0px 10px;  color: #666; }
+    </style>
+</block>
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle">栏目设置</h1>
+            
+        <span class="pagedesc"></span>
+    </div>
+
+    <div class="contentwrapper">
+        <form class="order-list" method="GET" action="{:U('Qrcode/qrcodeList')}">
+           <!--  <p>
+                <input type="text" class="input-text" style="width:250px" placeholder="标识" name="tags" value="{$return['tags']}" >
+                <input type="submit" value="搜索"></input>
+            </p> -->
+            <a href="{:U('Module/addExternalModule')}" class="btn btn_link" style="float: right;margin-right: 10px;">
+                <span style="font-size:14px">添加一级外部栏目</span>
+            </a>
+            <a href="{:U('Module/addSingleModule')}" class="btn btn_link" style="float: right;margin-right: 10px;">
+                <span style="font-size:14px">添加一级单页栏目</span>
+            </a>
+            <a href="{:U('Module/addListColumn')}" class="btn btn_link" style="float: right;margin-right: 10px;">
+                <span style="font-size:14px">添加一级列表栏目</span>
+            </a>
+        </form>
+        <br>
+        <br>
+
+        <table cellpadding="0" cellspacing="0" border="0" class="stdtable stdtablequick" >
+            <tr>
+                <th width="">ID</th>
+                <th width="">排序</th>
+                <th width="">模型</th>
+                <th width="">栏目标识</th>
+                <th width="">栏目名称</th>
+                <th width="">状态</th>
+                <th width="23%">操作</th>
+            </tr>
+            <empty name="list">
+                <tr>
+                    <td colspan="7">目前没有数据~！</td>
+                </tr>
+            <else />
+                <php>
+                    function showTree($data) {
+                        foreach ($data as $key => $val){
+                            echo '<tr>';
+                            echo '<td>'.$val['id'].'</td>';
+                            echo '<td>'.$val['orders'].'</td>';
+                            echo '<td style="color: '.$val['color'].'">'.$val['mod_name'].'</td>';
+                            echo '<td>'.$val['dir_name'].'</td>';
+                            if ($val['depth'] >= 1) {
+                               echo  '<td>'.str_repeat('│ ',$val['depth'] - 1).'├ '.$val['cat_name'].'</td>';
+                            } else {
+                               echo '<td><b style="color: #222">'.$val['cat_name'].'</b></td>';
+                            }
+                            if (!in_array($val['module_id'],['7','6'])) {
+                                    $add = '<a class="stdbtn btn_del" href="/Admin/Module/addCategory?pid='.$val['id'].'&mod_id='.$val['module_id'].'">添加'.($val['depth'] + 2).'级栏目</a>';
+                            } else {
+                               if ($val['tree_id'] == 0 AND $val['module_id'] != 7) {
+                                    $add = '<a class="stdbtn btn_del" href="/Admin/Module/addCategory?pid='.$val['id'].'&mod_id='.$val['module_id'].'">添加'.($val['depth'] + 2).'级栏目</a>';
+                                } else {
+                                    $add = '';
+                                }
+                            }
+                           if ($val['status'] == 1) {
+                               echo '<td align="center" class="Jstatus" data-id="'.$val['id'].'-2"><img src="__PUBLIC__/Admin/images/yes.gif" alt=""></td>';
+                            } else {
+                               echo '<td align="center" class="Jstatus" data-id="'.$val['id'].'-1"><img src="__PUBLIC__/Admin/images/no.gif" alt=""></td>';
+                            }
+                            if ($val['tree_id'] == 0) {
+                                $edit = '<a href="/Admin/Module/editModule?id='.$val['id'].'" class="stdbtn btn_del">设置</a>';
+                            } else {
+                                $edit = '<a href="/Admin/Module/editModule?id='.$val['id'].'" class="stdbtn btn_del">修改</a>';
+                            }
+                            echo '<td align="center" >
+                                    '.$add.'
+                                    '.$edit.'
+                                    <a href="/Admin/Module/delCategory?id='.$val['id'].'" class="stdbtn btn_del">删除</a>
+                                  </td>';
+                            echo '</tr>';
+                             if (!empty($val['childCategory'])) {
+                                showTree($val['childCategory']);
+                            }
+                        }
+                    }
+                    showTree($list);
+                </php>
+                <tr>
+                    <if condition="$counting EGT 25">
+                        <td colspan="6">
+                            <div class="page-box">{$show}</div>
+                        </td>
+                    </if>
+                </tr>
+            </empty>
+        </table>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+</block>
+<block name="script">
+       <script type="text/javascript">
+           $('.Jstatus').click(function(){
+                var id = $(this).attr('data-id')
+                var yes = "__PUBLIC__/Admin/images/yes.gif"
+                var no = "__PUBLIC__/Admin/images/no.gif"
+                id = id.split('-')
+                if (id[1] == 1) {
+                    $(this).children('img').attr('src', yes)
+                    $(this).attr('data-id', id[0] + '-2')
+                } else {
+                   $(this).children('img').attr('src',no)
+                   $(this).attr('data-id', id[0] + '-1')
+                }
+
+                $.ajax({
+                    url: "{:U('Module/changeModuleStatus')}",
+                    type: 'post',
+                    dataType: 'json',
+                    data: {id: id[0],status:id[1]}
+                })
+                .done(function(data) {
+                    if (data.success == 1) {
+                       
+                    } else {
+                        
+                    }
+                })
+
+           })
+       </script>
+</block>

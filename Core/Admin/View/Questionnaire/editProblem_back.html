@@ -1,0 +1,273 @@
+<extend name="Common:base" />
+
+<block name="title">编辑问题</block>
+
+<block name="cusStyle">
+<style type="text/css">
+.Joption_div{ margin-bottom: 10px;}
+.Janswer{ width: 200px; margin-right: 10px; }
+.addinput-bg{width:80px;height:70px;display: inline-block;margin-left: 10px;background: url(/Static/Public/Admin/images/upload-bg.png) no-repeat center center;background-size: 48px;border:1px dashed #d5d5d5;}
+.addinput{width: 50px; height: 50px; opacity: 0; display: inline-block;}
+.img-bg{position: relative;width:80px;height:70px;display: inline-block;}
+.upload-wrap,.f-upload {width: 80px; height: 70px;background: url(/Static/Public/Admin/images/upload-bg.png) no-repeat center center;background-size: 48px;border:1px dashed #d5d5d5; }
+.pic-wrap img {width: 80px; height: 70px;}
+.Janswers{width: 76px;margin:  82px -82px 0px -112px;}
+</style>
+</block>
+
+<block name="menu">
+    <include file="Questionnaire/menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle"></h1>
+    </div>
+
+    <div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U('Questionnaire/addProblem')}" method="post" id="Kform">
+            <input type="hidden" name="edit_id" value="{$_GET['id']}">
+            <div class="line-dete">
+                <label>问题标题：</label>
+                <span class="field">
+                    <input type="text" class="smallinput" placeholder="问题" name="question" value="{$pro['question']}">
+                </span>
+            </div>
+            
+            <if condition="$questionnaireData.type eq 'survey'">
+                <div class="line-dete">
+                    <label>绑定步骤：</label>
+                    <span class="field">
+                        <select name="sort" id="Jsort">
+                        </select>
+                    </span>
+                </div>
+            </if>
+
+            <div class="line-dete">
+                <label>选项类型：</label>
+                <span class="field">
+                    <select name="option_type" id="Jtype">
+                        <volist name="problemList" id="list">
+                            <option value="{$list.id}" <if condition="$pro['option_type'] eq $list['id']">selected</if>>{$list.cate_name}</option>
+                        </volist>
+                    </select>
+                </span>
+            </div>
+            <div class="line-dete">
+                <label>
+                    <!-- <a class="stdbtn" id="JaddOptions" data-id="0">添加选项</a> -->选项：
+                </label>
+                <span class="field" style="display: block;" id="Jtext">
+                    <if condition="$pro['options'] eq '' ">
+                        <div class="Joption_div">
+                            <input type="text" name="options" class="Janswer" value="" placeholder="选项">
+                        </div>
+                    <else />
+                        <volist name="pro['options']" id="options">
+                            <div class="Joption_div">
+                                <if condition="$pro['option_type'] eq 2 ">
+                                    <input type="text" name="options[]" class="Janswer" value="{$options}" placeholder="">*星星评分个数
+                                    <!-- <a class="stdbtn Jdel">删除</a> -->
+                                </if>
+                            </div>
+                        </volist>
+                    </if>
+                </span>
+        
+                <div class="field Jcover" id="JgoodsListWrap" style="display: none;">
+                    <div id="photoList" class="m-photo-list">
+                        <volist name="pro['options']" id="img" >
+                            <div class="pic-wrap">
+                                <i class="del-pic" data-id="{$img['id']}"></i>
+                                <img src="{$img}" width="80px" height="70px"  />
+                                <input type="text" name="subject[]" class="Janswers" value="{$pro['subject'][$key]}" placeholder="题目">
+                                <input type="hidden" name="photo[]" value="{$img}">
+                            </div>
+                        </volist>
+                    </div>
+                    <div class="upload-wrap">
+                        <input type="file" id="fileToUpload" name="fileToUpload" class="f-upload" />
+                    </div>
+                    <!-- <input type="text" name="subject" class="Janswer" value="{$subject}" placeholder="题目"> -->
+                    <!-- <div class="line-dete">
+                        <div class="file-box">
+                            <input type="hidden" id="images" name="photo" value="{$pro['background']}">
+                            <input type="file" class="file" name="up-pics" id="up-pics" value="{$pro['background']}">
+                            <img class="Jpics" src="{$pro['background']}" alt="" <if condition="$pro['background'] eq '' ">style="display:none"</if>>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="line-dete">
+                <label>背景图</label>
+                <span class="field">
+                    <div class="file-box">
+                        <input type="hidden" id="image" name="background" value="{$pro['background']}">
+                        <input type="file" class="file" name="up-pic" id="up-pic" value="{$pro['background']}">
+                        <img class="Jpic" src="{$pro['background']}" alt="" <if condition="$pro['background'] eq '' ">style="display:none"</if>>
+                    </div>
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label></label>
+                <span class="field">
+                    <input type="button" class="stdbtn" value="保存" id="KformSubmit" />
+                    <input type="button" class="stdbtn" onclick="window.location.href='{:U('Questionnaire/problemList', array('id'=>$_GET['questionnaire_id']))}'" value="返回"/>
+                </span>
+            </div>
+        </form>
+    </div>
+</block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Admin/js/ajaxfileupload.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var option_type = '0'; // 选项类型
+        var step = "{$questionnaireData.step}";
+        var type = "{$questionnaireData.type}";
+        if ( type == 'survey' ) {
+            for (var i = 1; i <= step; i++) {
+                $('#Jsort').append("<option value='"+i+"'>"+i+"</option>");
+            }
+        }
+
+        $('#JaddOptions').click(function() {
+           var id =  $(this).attr('data-id');
+            switch ( id ) {
+                case '0' :
+                    var i = $('.Joptions').length;
+                    var htmlStr = '<div class="Joption_div"><input type="text"  name="options[]" class="Janswer"><a class="stdbtn Jdel">删除</a></div>';
+                    $('#Jtext').append(htmlStr);
+                    break;
+                case '1' :
+                    var  htmlStr =  '<div class="addinput-bg Jcover"><input type="hidden" id="image" name="image" value=""><input type="file" class="addinput up-pic" name="up-pic" id="up-pic" value="" style=" width: 80px;height: 70px;"><img class="Jpic" src="" alt="" style="display:none"></div>';
+                    $('#Jimag').append(htmlStr);
+                    break;
+                case '2' :
+
+                    break;
+            }
+        });
+        
+        $(document).on('change', '#sort', function () {
+            var id = $('#sort option:selected').attr('data-id');
+            $('#Jsort option').remove();
+            for (var i = 1; i <= id; i++) {
+                $('#Jsort').append("<option value='"+i+"'>"+i+"</option>");
+            }
+        })
+
+        $(document).on('click', '.Jdel', function() {
+            $(this).parent().remove();
+        });
+
+        $(document).on('change', '#fileToUpload', function() {
+            $.ajaxFileUpload({
+                url: "{:U('System/photoSave')}",
+                secureuri: false,
+                fileElementId: 'fileToUpload',
+                dataType: 'json',
+                success: function (data, status) {
+                    if(typeof(data.error) != 'undefined') {
+                        if(data.error != '') {
+                            alert(data.error);
+                        } else {
+                            $("#photoList").append('<div class="pic-wrap"><i class="del-pic"></i><img src="' + data.src + '" width="80px" height="70px"  /><input type="hidden" name="photo[]" value="' + data.src + '" /></div><input type="text" name="subject[]" class="Janswers" value="" placeholder="题目">');
+
+                            if (firstUpload) {
+                                firstUpload = false;
+                                $('#JcoverPid').val(data.src);
+                                $("#photoList").find('img').addClass('s-cover');
+                                // $('#photoList').find("input[name='photo[]']").attr('name','change');
+                            }
+                        $('.upload-wrap').remove();
+                        }
+                        // $('#JgoodsListWrap').append('<div class="upload-wrap"> <input type="file" id="fileToUpload" name="fileToUpload" class="f-upload" /> </div>');
+                    }
+                },
+                error: function (data, status, e) {
+                    // alert(e);
+                }
+            });
+        });
+        $(document).on('change', '#up-pic', function() {
+            $.ajaxFileUpload({
+                url: "{:U('System/photoSave')}",
+                secureuri: false,
+                fileElementId: "up-pic",
+                dataType: "json",
+                success: function (data, status) {
+                    if(data.error != '') {
+                        alert(data.error);
+                    } else {
+                        $(".Jpic").attr("src", data.src).show();
+                        $("#image").val(data.src);
+                    }
+            },error: function (data, status, e) {
+                var html='<div class="title">提示</div><div class="pop-false">' + e + '</div>';
+                    //popbox(html);
+                }
+            })
+        });
+        $(document).on('change', '#up-pics', function() {
+            $.ajaxFileUpload({
+                url: "{:U('System/photoSave')}",
+                secureuri: false,
+                fileElementId: "up-pics",
+                dataType: "json",
+                success: function (data, status) {
+                    if(data.error != '') {
+                        alert(data.error);
+                    } else {
+                        $(".Jpics").attr("src", data.src).show();
+                        $("#images").val(data.src);
+                    }
+            },error: function (data, status, e) {
+                var html='<div class="title">提示</div><div class="pop-false">' + e + '</div>';
+                    //popbox(html);
+                }
+            })
+        });
+
+        $('#photoList').on('click', '.del-pic', function() {
+            $(this).parent().remove();
+        });
+
+        var is_edit = "{$pro['option_type']}";
+        if (is_edit !== '') {
+            if (is_edit == 1) {
+                $('.Jcover').show();
+                $('#Jtext').hide();
+                $('#JaddOptions').hide();
+                $('#JaddOptions').attr('data-id','1');
+            } else {
+                $('#JaddOptions').attr('data-id','0');
+                $('.Jcover').hide();
+                $('#Jtext').show();
+                $('#JaddOptions').show();
+            }
+        }
+
+        $('#Jtype').change(function() {
+            if($(this).val() == 1 ) {
+                $('.Jcover').show();
+                $('#Jtext').hide();
+                $('#JaddOptions').hide();
+                $('#JaddOptions').attr('data-id','1');
+            } else {
+                $('#JaddOptions').attr('data-id','0');
+                $('.Jcover').hide();
+                $('#Jtext').show();
+                $('#JaddOptions').show();
+
+            }
+        });
+
+        $('#KformSubmit').click(function(){
+            $('#Kform').submit();
+        });
+    })
+</script>
+</block>

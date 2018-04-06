@@ -1,0 +1,108 @@
+<extend name="Common:base" />
+
+<block name="title"></block>
+
+<block name="cusStyle">
+    
+</block>
+
+<block name="menu">
+    <include file="Bbs:menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle"></h1>
+    </div>
+
+    <div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U('BbsArticle/editBbsArticle')}" method="POST" id="JgoodsForm">
+            <input type="hidden" name="id" value="{$vo.id}">
+            <div class="line-dete">
+                <label>帖子标题：</label>
+                <span class="field">
+                    <input type="text" class="smallinput" placeholder="帖子标题" name="article_name" value="{$articleData['article_name']}">
+                </span>
+            </div>
+            <div class="contenttitle2">
+            <h3>留言内容</h3>
+        </div>
+        
+        <table>
+            <th>序号</th><th>内容</th><th>发布者</th><th>发布者头像</th><th>发布时间</th>
+            <volist name="commentData" id="vo">
+                <tr>
+                    <td class="center">{$vo['id']}</td>
+                    <td class="center">{$vo['content']}</td>
+                    <td class="center">{$vo['nickname']}</td>
+                    <td class="center"><img src="{$vo['headimgurl']}" /></td>
+                    <td class="center">{$vo['add_time']|time_format}</td>
+                </tr>
+            </volist>
+        </table>
+
+           <!--  <div class="line-dete">
+                <label></label>
+                <span class="field">
+                    <input type="submit" class="stdbtn"/>
+                </span>
+            </div> -->
+        </form>
+    </div>
+</block>
+<block name="script">
+<script charset="utf-8" type="text/javascript" src="__PUBLIC__/Admin/js/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/js/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+    var editor;
+    KindEditor.ready(function(K) {
+        editor = K.create('#article_content', {
+            height: "600px",
+            allowFileManager: true,
+            uploadJson: '{:U("Bbs/photoSave")}',
+            items : ['source','fontname','fontsize','forecolor','preview','selectall','justifyleft','justifycenter','justifyright','link','unlink','image'],
+            afterCreate : function() {
+                this.loadPlugin('autoheight');
+            }
+        });
+    });
+
+    $(function(){
+        $('.JtopSwitch').click(function() {
+            var checked = $(this)[0].checked ? 1 : 0;
+            var id = $(this).data('id');
+
+            $.ajax({
+                url: "{:U('Bbs/setTop')}",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    is_top: checked,
+                    id: id
+                }
+            })
+            .done(function(data) {
+                console.log(data);
+            });
+        });
+
+        $('.JrecoSwitch').click(function() {
+            var checked = $(this)[0].checked ? 1 : 0;
+            var id  = $(this).data('id');
+
+            $.ajax({
+                url: "{:U('Bbs/setReco')}",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    is_recommend: checked,
+                    id: id
+                }
+            })
+            .done(function(data) {
+                console.log(data);
+            });;
+        });
+    })
+</script>
+</block>

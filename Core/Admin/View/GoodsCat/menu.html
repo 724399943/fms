@@ -1,0 +1,26 @@
+<ul>	
+	<if condition="checkControllerAuth(array('GoodsCat'))">
+		<li <if condition="in_array(CONTROLLER_NAME, array('GoodsCat'))">{:chr(32)}class="current"</if>>
+			<a class="date-tit sys-tj" href="{:getAuthUrl(array('GoodsCat-goodsCatList'))}" class="addons">商品分类管理</a>
+			<ul class="Jcon-ctr">
+				<if condition="checkActionAuth('GoodsCat-goodsCatList')">
+					<li <if condition="in_array(ACTION_NAME, array('goodsCatList', 'editGoodsCat','addGoodsCat'))">{:chr(32)}class="on"</if>>
+						<a href="{:U('GoodsCat/goodsCatList')}">分类列表</a>
+					</li>
+				</if>				
+
+				<if condition="checkActionAuth('Goods-goodsList')">
+					<li <if condition="in_array(ACTION_NAME, array('addGoodsList'))">{:chr(32)}class="on"</if>>
+						<a href="{:U('Goods/goodsList')}">商品列表</a>
+					</li>
+				</if>
+
+				<if condition="checkActionAuth('Article-catsList')">
+					<li <if condition="in_array(ACTION_NAME, array('catsList'))">{:chr(32)}class="on"</if>>
+						<a href="{:U('Article/catsList')}">装修攻略分类</a>
+					</li>
+				</if>				
+			</ul>
+		</li>
+	</if>	
+</ul>

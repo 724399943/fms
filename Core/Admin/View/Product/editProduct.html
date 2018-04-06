@@ -1,0 +1,582 @@
+<extend name="Common:base" />
+
+<block name="title">编辑内容</block>
+
+<block name="cusStyle">
+    <css href="__PUBLIC__/Admin/css/plugins/ui-frame/ui.css" />
+    <style type="text/css">
+    form input{width: 40%}
+    .maskWrap{width:100%;height:100%;background-color:rgba(0,0,0,.5);position:fixed;top:0;left:0;display: none;}
+    .maskMain{width:800px;height:450px;position:fixed;top:50%;left:50%;margin-top:-225px;margin-left:-400px;background-color:#ffffff;overflow:hidden;}
+    .mtitle{line-height:35px;padding:0 15px;background-color:#f4f4f4;overflow:hidden;}
+    .mtitle .close{float:right;cursor:pointer;}
+    .mcont{margin:5px;padding:10px;border:1px solid #ddd;overflow-y:scroll;}
+    .mcont .ht{line-height:35px;padding:0 10px;margin-bottom:15px;background-color:#e2eff9;}
+    .mcont table,.mcont table tbody{width:100%;text-align:center;}
+    .mcont .tit{background-color:#f4f4f4;}
+    .mcont table .tlf{text-align:left;}
+    .mcont table tbody>tr{width:100%;}
+    .mcont table tbody>tr:hover{background-color:#f4f4f4;}
+    </style>
+</block>
+
+<block name="menu">
+    <include file="Module/menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle">编辑内容</h1>
+    </div>
+
+    <div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U('Product/editProduct')}" method="post" id="question-form">
+        <div class="contenttitle2">
+            <h3>基本信息</h3>
+        </div>
+            <div class="line-dete">
+                <label>所属子分类</label>
+                <span class="field">
+                    <select name="cat_id">
+                        <option value="">所有分类</option>
+                            <php>
+                            $selected = '';
+                            function showTree ($data,$pid) {
+                                foreach ($data as $key => $val){
+                                    $selected = ( $val['id'] == $pid) ? 'selected' : '';
+                                    if ($val['depth'] >= 1) {
+                                       $string = str_repeat('│ ',$val['depth'] - 1);
+                                        echo '<option value="'.$val['id'].'" '.$selected.'>'.$string .'├ ' .$val['cat_name'].'</option>';
+                                    } else {
+                                        echo '<option value="'.$val['id'].'" '.$selected.' >' .$val['cat_name'].$val['depth'].'</option>';
+                                    }
+                                    if (!empty($val['childCategory'])) {
+                                        showTree($val['childCategory'],$pid);
+                                    }
+                                }
+                            }
+                            showTree($categoryList,$articleData['cat_id']);
+                               
+                            </php>
+                    </select>
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>编号</label>
+                <span class="field">
+                    <input type="text" name="" value="{$articleData['product_sn']}"  />
+                </span>
+            </div>
+            
+            <div class="line-dete">
+                <label>名称</label>
+                <span class="field">
+                    <input type="text" name="product_name" value="{$articleData['product_name']}"  />
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>公开价格</label>
+                <span class="field">
+                    <input type="text" name="oprice" value="{$articleData['oprice']}"  />
+                </span>
+            </div>
+            
+            <div class="line-dete">
+                <label>购买价格</label>
+                <span class="field">
+                    <input type="text" name="bprice" value="{$articleData['bprice']}"  />
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>图片</label>
+                <div class="field">
+                    <div id="photoList" class="m-photo-list">
+                    <volist name="articleData['images']" id="v">
+                        <img src="{$v['goods_image']}">
+                        <input  type="hidden" name="upload_files[]" value="{$v['goods_image']}" />
+                    </volist>
+                    </div>
+                    <div class="upload-wrap">
+                        <input type="file" id="fileToUpload" name="fileToUpload" class="f-upload" />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="line-dete">
+                <label>简介</label>
+                <span class="field">
+                    <textarea name="summary" >{$articleData['summary']}</textarea>
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>内容描述</label>
+                <span class="field">
+                    <textarea name="content" style="width:800px;height:500px;">{$articleData['content']}</textarea>
+                </span>
+            </div>
+            
+            <div class="contenttitle2">
+                <h3>扩展字段</h3>
+            </div>
+            <div class="tab">
+                <div class="tab-content">
+                    <div class="tab-content-item on left">
+                        <div class="user-list">
+                            <div class="line-dete dete-style2" id="JCombOper">
+                                <div class="top-search">
+                                    <input placeholder="请输入属性名称或属性值" type="text" id="JSearchOne" >
+                                    <a class="ser" href="javascript:;" id="JSeachGoods" onclick="onsubmits()"></a>
+                                </div>
+                                <div class="itm Jadd-date-one coupons-left">
+
+                                    <ul class="search-date" id="JSelGoods" style="height:285px;">
+                                        <li class="one">
+                                            <span
+                                                style="width: 40%;display: inline-block;text-align: center">属性名
+                                            </span>
+                                            <span style="width: 40%;display: inline-block;text-align: center">属性值
+                                            </span>
+                                        </li>
+                                    <volist name="attrValueData" id="attrData">
+                                        <li class="one">
+                                            <input type="hidden" value="{$attrData['id']}" />
+                                            <span style="width: 40%;display: inline-block;text-align: center">{$attrData['attr_name']}
+                                            </span>
+                                            <span style="width: 40%;display: inline-block;text-align: center">{$attrData['attr_value']}
+                                            </span>
+                                        </li> 
+                                    </volist>
+                                    </ul>
+                                </div>
+                                <div class="combination-operation select-coupons">
+                                    <div class="input-li"><a href="javascript:;" class="comb-operation-btn"
+                                                             id="JAddComb">全部添加>></a></div>
+                                    <div class="input-li"><a href="javascript:;" class="comb-operation-btn"
+                                                             id="JAddCombs">&nbsp;&nbsp;&nbsp;添加>>&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+                                    <div class="input-li"><a href="javascript:;" class="comb-operation-btn"
+                                                             id="JDelComb">&nbsp;&nbsp;&nbsp;<<删除&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </a></div>
+                                    <div class="input-li"><a href="javascript:;" class="comb-operation-btn"
+                                                             id="JDelCombs"><<全部删除</a></div>
+                                </div>
+                                <div class="itm Jadd-date-one coupons-right" id="JSelComb">
+                                    <ul class="search-date" id="JAddCombination" style="height:285px;">
+                                        <li class="two">
+                                            <span style="width: 40%;display: inline-block;text-align: center">属性名称
+                                            </span>
+                                            <span style="width: 40%;display: inline-block;text-align: center">属性值
+                                            </span>
+                                        </li>
+                                        <volist name="articleData['attr_value']" id="attrData">
+                                            <li class="one">
+                                                <input type="hidden" name="attr_value_ids[]" value="{$attrData['id']}" />
+                                                <span style="width: 40%;display: inline-block;text-align: center">{$attrData['attr_name']}
+                                                </span>
+                                                <span style="width: 40%;display: inline-block;text-align: center">{$attrData['attr_value']}
+                                                </span>
+                                            </li> 
+                                        </volist>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+            <!-- <volist name="extendFieldList" id="vo" >
+                <input type="hidden" name="module_attr_id[]" value="{$vo['id']}" />
+                <input type="hidden" name="attr_id[]" value="{$vo['attr_id']}" />
+                <div class="line-dete">
+                <label>{$vo['type_name']}<if condition="$vo['is_valid'] eq 1"><em>*</em></if></label>
+                    <span class="field">
+                        <switch name="vo['input_type']">
+                            <case value="text">
+                                <input type="text" name="field[attr_{$vo['id']}]" value="{$vo['ext_value']}" />
+                            </case>
+                            <case value="textarea">
+                                <textarea name="field[attr_{$vo['id']}]">{$vo['ext_value']}</textarea>
+                            </case>
+                            <case value="checkbox">
+                                <volist name="vo['attr_value']" id="item">
+                                <input type="checkbox" name="field[attr_{$vo['id']}][]" value="{$item}"
+                                 
+                                 <if condition="in_array($item,$vo['ext_value'])">checked</if> />{$item}&nbsp;&nbsp;
+                                </volist>
+                            </case>
+                            <case value="radio">
+                                <volist name="vo['attr_value']" id="item" key="k">
+                                <input type="radio" name="field[attr_{$vo['id']}]" value="{$item}" <if condition="$vo['ext_value'] eq $item">checked</if> />{$item}&nbsp;&nbsp;
+                                </volist>
+                            </case>
+                            <case value="select">
+                                <select name="field[attr_{$vo['id']}]">
+                                    <volist name="vo['attr_value']" id="item">
+                                    <option value="{$item}" <if condition="$vo['ext_value'] eq $item">selected</if>>{$item}</option>
+                                    </volist>
+                                </select>
+                            </case>
+                            <case value="img">
+                                <input type="text" name="field[attr_{$vo['id']}]" id="imgs2" class="smallinput" readonly="true" value="{$vo['ext_value']}" />
+                                <input type="file" name="up-pic" id="up-pic2">
+                            </case>
+                            <case value="attachment">
+                                <input type="text" name="field[attr_{$vo['id']}]" id="imgs3" class="smallinput" readonly="true" value="{$vo['ext_value']}" />
+                                <input type="file" name="up-pic" id="up-pic3">
+                            </case>
+                        </switch>
+                    </span>
+                </div>
+            </volist> -->
+            
+            <div class="contenttitle2">
+                <h3>SEO优化相关设置</h3>
+            </div>
+            <div class="line-dete">
+                <label>TAG标签：</label>
+                <span class="field">
+                    <input type="text" class="smallinput" placeholder="{$tags}" value="{$articleData['tags']}" name="tags">
+                     &nbsp;&nbsp;(多个标签请用","隔开，会自动关联链接)
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>Meta关键字：</label>
+                <span class="field">
+                    <textarea name="meta_keyword" id="" cols="30" rows="10" style="margin: 0px; height: 62px; width: 629px;">{$articleData['meta_keyword']}</textarea>
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>Meta描述：</label>
+                <span class="field">
+                    <textarea name="meta_description" id="" cols="30" rows="10" style="margin: 0px; height: 68px; width: 678px;">{$articleData['meta_description']}</textarea>
+                </span>
+            </div>
+
+
+            <div class="contenttitle2">
+                <h3>其他附加设置</h3>
+            </div>
+            <div class="line-dete">
+                <label>设置</label>
+                <span class="field">
+                <input type="radio" name="is_top" value="1" <if condition="$articleData['is_top'] eq 1">checked</if>/>置顶
+                <input type="radio" name="is_top" value="0" <if condition="$articleData['is_top'] eq 0">checked</if>/>非置顶
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>状态</label>
+                <span class="field">
+                <input type="radio" name="flag" value="1" <if condition="$articleData['flag'] eq 1">checked</if>  />正常
+                    <input type="radio" name="flag" value="0"  <if condition="$articleData['flag'] eq 0">checked</if> />锁定
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>指定模板文件</label>
+                <span class="field">
+                    <input type="text" name="tplname" />.tpl
+                    &nbsp;&nbsp;&nbsp;
+                     <a href="javascript:;" class="tpl" data-id="tplname" style="color: #0072c1">选择模板</a>
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label></label>
+                <span class="field">
+                    <input type="hidden" name="id" value="{$articleData['id']}">
+                    <!-- <input type="hidden" name="referer" value="{$_SERVER['HTTP_REFERER']}"> -->
+                    <input type="submit" class="stdbtn" id="Ksubmit" value="保存"/>
+                   <!--  <input type="button" class="stdbtn" onclick="window.location.href='{:U('Questionnaire/problemList', array('id'=>$_GET['questionnaire_id']))}'" value="返回"/> -->
+                </span>
+            </div>
+
+            <div class="maskWrap">
+            <div class="maskMain">
+                <div class="mtitle">选择模板文件<span class="close">关闭</span></div>
+                <div class="mcont">
+                    <p class="ht">正在使用的主题[默认模板] 模板目录：{$dir[0]}</p>
+                    <table>
+                        <tbody>
+                            <tr class="tit">
+                                <th>序号</th>
+                                <th>模板文件名</th>
+                                <th>大小</th>
+                                <th>最后修改时间</th>
+                                <th>选择</th>
+                            </tr>
+                            <volist name="dir" id="vo" offset="1">
+                                <tr>
+                                    <td>1</td>
+                                    <td class="tlf">{:basename($vo)}</td>
+                                    <td>{:getFileSize($vo)}</td>
+                                    <td><php>echo date('Y-m-d H:i:s', filemtime($vo))</php></td>
+                                    <td style="color: #0072c1;cursor:pointer" class="JtplName" data="{:basename($vo)}">选择</td>
+                                </tr>
+                            </volist>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+</block>
+<block name="script">
+<js href="__PUBLIC__/Admin/js/ajaxfileupload.js" />
+<!-- <js href="__PUBLIC__/Admin/js/plugins/questionnaire/optionManager.js" /> -->
+<script charset="utf-8" src="__PUBLIC__/Admin/js/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="__PUBLIC__/Admin/js/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+/**********属性设置**************/
+//提示选择用户不能为空
+    function checkUser(is_show){
+        if(is_show == 0)
+            $("#is_show").val('0');
+        else
+            $("#is_show").val('1');
+        if( $('.type').is(":checked") ){
+             var rightstr = $("#JAddCombination .two").siblings().length;
+             if(rightstr == 0){
+                alert('选择的指定用户不能为空'); 
+                return false; 
+             }
+        }
+
+    }
+        
+    //点击选中
+    var rightObj = $('.coupons-right tbody tr td .coupons-scroll-list');
+    $(rightObj).on('click', 'li', function(){
+        $(this).prevAll().removeClass('on');
+        $(this).nextAll().removeClass('on');
+        $(this).addClass('on');
+    });
+
+
+    //根据手机号码或用户名搜索用户
+    function onsubmits()
+    {
+        var searchInfo = $('#JSearchOne').val();
+        var firstCatId = {$firstCatId};
+        if(searchInfo == '')
+        {
+            alert("搜索不能为空");
+            return false;
+        }
+        $.ajax({
+            url:"{:U('Product/searchAttr')}",
+            type:'post',
+            dataType:'json',
+            data:{searchInfo:searchInfo,firstCatId:firstCatId},
+            success:function(data){
+                console.log(data);
+                if(data.status == 200000)
+                {   
+                    $("#JSelGoods li:gt(0)").remove();
+                    var str = '';
+                    // console.log(data.data);
+                    var obj = data.data.attrValueData;
+                    for(var i in obj){
+
+                        str += '<li class="one">';
+                        str += '<input type="hidden" name="attr_value_ids" value="'+obj[i].id+'" />';
+                        str += '<span style="width: 40%;display: inline-block;text-align: center">';
+                        str += obj[i].attr_name;
+                        str += '</span>';
+                        str += '<span style="width: 40%;display: inline-block;text-align: center">';
+                        str += obj[i].attr_value;
+                        str += '</span></li>';
+                    }
+                    $("#JSelGoods").append(str);
+                }else if(data.status == 400000){
+                    alert(data.info);
+                    return false;
+                }
+            }
+        });
+    }
+
+    //全部添加
+    $("#JAddComb").click(function(){
+        var rightstr = $("#JAddCombination .two").nextAll();
+        var leftstr = $("#JSelGoods .one").nextAll("li");
+        if(leftstr == 0)
+        {
+           alert("添加的用户不能为空");
+           return false;
+        }
+        var str = '';
+        if(rightstr != 0)
+        {
+            for(var i=0;i<leftstr.length;i++)
+            {
+
+                if(rightstr.find('input[value="' + $(leftstr[i]).find('input').val() + '"]').size() == 0)
+                {
+                    str += '<li><input type="hidden" name="attr_value_ids[]" value="'+$(leftstr[i]).find('input').val()+'"/>' ;
+                    str += '<span style="width: 40%;display: inline-block;text-align: center">'+$(leftstr[i]).find('span').eq(0).html()+'</span>';
+                    str += '<span style="width: 40%;display: inline-block;text-align: center">'+$(leftstr[i]).find('span').eq(1).html()+'</span>';
+                    str += '</li>';
+                }
+            }
+        }else{
+            for(var i=0;i<leftstr.length;i++)
+            {
+                str += '<li><input type="hidden" name="attr_value_ids[]" value="'+$(leftstr[i]).find('input').val()+'"/>' ;
+                str += '<span style="width: 40%;display: inline-block;text-align: center">'+$(leftstr[i]).find('span').eq(0).html()+'</span>';
+                str += '<span style="width: 40%;display: inline-block;text-align: center">'+$(leftstr[i]).find('span').eq(1).html()+'</span>';
+                str += '</li>';
+            }
+        }
+        $("#JAddCombination .two").after(str);
+    });
+
+    //单个添加
+    $("#JAddCombs").click(function(){
+        // alert(0);
+        var leftstr = $("#JSelGoods .one").nextAll();
+        var rightstr =$("#JAddCombination .two").nextAll();
+        var str = '';
+        for(var i=0;i<$(leftstr).length;i++)
+        {
+            if($(leftstr).eq(i).hasClass("list_on"))
+            {
+               if($(rightstr).find("input[value='"+$(leftstr[i]).find("input").val() + "']").size() == 0)
+               {
+                   str += '<li><input type="hidden" name="attr_value_ids[]" value="'+$(leftstr[i]).find('input').val()+'"/>' ;
+                   str += '<span style="width: 40%;display: inline-block;text-align: center">'+$(leftstr[i]).find('span').eq(0).html()+'</span>';
+                   str += '<span style="width: 40%;display: inline-block;text-align: center">'+$(leftstr[i]).find('span').eq(1).html()+'</span>';
+                   str += '</li>';
+               }
+            }
+        }
+        $("#JAddCombination .two").after(str);
+    });
+
+    //点击选中
+    var rightli = $("#JAddCombination");
+    var leftli = $("#JSelGoods");
+    rightli.on('click', 'li', function(){
+        $(this).parent().find('li').removeClass('list_on');
+        $(this).addClass("list_on");
+    });
+    leftli.on('click', 'li', function(){
+        $(this).parent().find('li').removeClass('list_on');
+        $(this).addClass("list_on");
+    });
+
+    //删除单个
+    $("#JDelComb").click(function(){
+        var rightstr = $("#JAddCombination .two").nextAll();
+        for(var i=0;i<$(rightstr).length;i++)
+        {
+            if($(rightstr).eq(i).hasClass("list_on"))
+            {
+                $(rightstr).eq(i).remove();
+            }
+        }
+    });
+    //全部删除
+    $("#JDelCombs").click(function(){
+        $("#JAddCombination li:gt(0)").remove();
+        searchCoupon();
+    });
+/**********属性设置**************/
+   $(function(){
+        var editor;
+        KindEditor.ready(function(K) {
+            editor = K.create('textarea[name="content"]', {
+                resizeType : 1,
+                allowPreviewEmoticons : false,
+                allowImageUpload : true,
+                uploadJson : '{:U('Product/photoUpload')}',
+                allowFileManager : false,
+                filterMode: false,
+                items : [
+                    'source', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+            });
+        });
+
+    });
+   // 上传封面图
+        $(document).on('change', '#fileToUpload', function() {
+            $.ajaxFileUpload({
+                url: "{:U('Product/photoUpload')}",
+                secureuri: false,
+                fileElementId: 'fileToUpload',
+                dataType: 'json',
+                success: function (data, status) {
+                    if(typeof(data.error) != 'undefined') {
+                        if(data.error != '') {
+                            alert(data.error);
+                        } else {
+                            // console.log(data);
+                            var html = '<div class="pic-wrap"><img src="' + data.url + '" /><input type="hidden" name="upload_files[]" value="' + data.url + '" /></div>';
+                            $("#photoList").append(html);
+                        }
+                    }
+                },
+                error: function (data, status, e) {
+                    alert(e);
+                }
+            });
+        });
+    //扩展字段图片附件
+    $(document).on('change', '#up-pic2', function() {
+            $.ajaxFileUpload({
+                url: "{:U('Article/photoUpload')}",
+                secureuri: false,
+                fileElementId: 'up-pic2',
+                dataType: 'json',
+                success: function (data, status) {
+                    if(data.error != '') {
+                        alert(data.error);
+                    } else {
+                        // $('.Jpic').attr('src', data.src).show();
+                        $('#imgs2').val(data.src);
+                    }
+                },error: function (data, status, e) {
+                    alert(e);
+                }
+            });
+        });
+    //扩展字段文件附件
+    $(document).on('change', '#up-pic3', function() {
+            $.ajaxFileUpload({
+                url: "{:U('Article/photoUpload')}",
+                secureuri: false,
+                fileElementId: 'up-pic3',
+                dataType: 'json',
+                success: function (data, status) {
+                    if(data.error != '') {
+                        alert(data.error);
+                    } else {
+                        // $('.Jpic').attr('src', data.src).show();
+                        $('#imgs3').val(data.src);
+                    }
+                },error: function (data, status, e) {
+                    alert(e);
+                }
+            });
+        });
+   
+    var isTplName = '';
+    $('.tpl').click(function(){
+        $('.maskWrap').show()
+        isTplName = $(this).data('id')
+    })
+    
+    $('.JtplName').click(function(){
+        var name = $(this).attr('data');
+        $("input[name="+isTplName+"]").val(name)
+        $('.maskWrap').hide()
+    })
+</script>
+</block>

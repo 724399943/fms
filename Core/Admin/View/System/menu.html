@@ -1,0 +1,19 @@
+<ul>
+	<if condition="checkActionAuth('System-setting')">
+		<li <if condition="checkActionAuth(array('System-setting', 'System-createQrCode'))">{:chr(32)}class="current"</if>>
+			<a class="date-tit sys-tj" href="{:getAuthUrl(array('System-setting', 'System-createQrCode'))}" class="addons">系统设置</a>
+			<ul class="Jcon-ctr">
+				<if condition="checkActionAuth('System-setting')">
+					<li class="<if condition="in_array(ACTION_NAME, array('setting'))">on</if>">
+						<a href="{:U('System/setting')}">站点设置</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('System-seoSetting')">
+					<li class="<if condition="in_array(ACTION_NAME, array('seoSetting','editSeo'))">on</if>">
+						<a href="{:U('System/seoSetting')}">seo设置</a>
+					</li>
+				</if>
+			</ul>
+		</li>
+	</if>
+</ul>

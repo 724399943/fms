@@ -1,0 +1,151 @@
+<extend name="Common:base" />
+
+<block name="title">添加问卷</block>
+
+<block name="cusStyle">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.datetimepicker.css" type="text/css" />
+    <style type="text/css">
+        .givepop-box{ width: 400px; min-height: 180px; background: #fff; overflow: hidden; }
+        .givepop-box .g-line{ line-height: 32px; margin-top: 10px; padding-left: 40px; }
+        .g-line input[type="text"]{ width: 200px; }
+        .g-line input[type="file"]{ position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0;}
+        .g-btn{ overflow: hidden; margin-top: 20px; padding-left: 90px;}
+        input.fall{ margin-left: 20px; }
+        .givepop-box .stdbtn{ margin-left: 50px; margin-top: 20px; position: relative; }
+        .givepop-box .up-commit{ width: 120px; padding: 0; text-align: center;  }
+        .caiji-box{ max-height: 500px; overflow: auto; }
+        .ke-edit{ background: #f6e98e }
+        .JaodioBox i {float: right;line-height: 37px;margin-right: 10px; font-style: normal; font-weight: normal;}
+    </style>
+</block>
+
+<block name="menu">
+    <include file="Questionnaire/menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle"></h1>
+    </div>
+
+    <div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U('Questionnaire/addQuestion')}" method="POST" id="JsubmitForm">
+            <div class="line-dete">
+                <label>问卷标题：</label>
+                <span class="field">
+                    <input type="text" class="smallinput" placeholder="问卷标题" name="title" value="">
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>问卷类型：</label>
+                <span class="field">
+                    <select name="type" id="KselectType">
+                        <option value="survey">{:getCateName('survey')}</option>
+                        <option value="score_test">{:getCateName('score_test')}</option>
+                        <option value="jump_test">{:getCateName('jump_test')}</option>
+                    </select>
+                </span>
+            </div>
+
+            <div class="line-dete" id="KstepBox">
+                <label>问卷步骤数：</label>
+                <span class="field">
+                    <input type="text" class="smallinput" placeholder="问卷步骤数" name="step" value="1">
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>LOGO：</label>
+                <span class="field">
+                    <div class="file-box">
+                        <input type="hidden" id="logo" name="logo">
+                        <input type="file" class="file" name="up-pic" id="up-pic">
+                        <img class="Jpic" src="" alt="" style="display:none">
+                    </div>
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>背景图片：</label>
+                <span class="field">
+                    <div class="file-box">
+                        <input type="hidden" id="background_image" name="background_image">
+                        <input type="file" class="file" name="up-pic" id="up-pic2">
+                        <img class="Jpic2" src="" alt="" style="display:none">
+                    </div>
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label></label>
+                <span class="field">
+                    <input type="submit" class="stdbtn"/>
+                </span>
+            </div>
+        </form>
+    </div>
+</block>
+<block name="script">
+
+<script type="text/javascript" src="__PUBLIC__/Admin/js/ajaxfileupload.js"></script>
+<script charset="utf-8" src="__PUBLIC__/Admin/js/kindeditor/kindeditor.js"></script>
+<script charset="utf-8" src="__PUBLIC__/Admin/js/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $(document).on('change', '#up-pic', function() {
+            $.ajaxFileUpload({
+                url: "{:U('Questionnaire/photoUpload')}",
+                secureuri: false,
+                fileElementId: "up-pic",
+                dataType: "json",
+                success: function (data, status) {
+                    if(data.error != '') {
+                        alert(data.error);
+                    } else {
+                        $(".Jpic").attr("src", data.src).show();
+                        $("#logo").val(data.src);
+                    }
+                },error: function (data, status, e) {
+                    var html='<div class="title">提示</div><div class="pop-false">' + e + '</div>';
+                    //popbox(html);
+                }
+            })
+        });
+        $(document).on('change', '#up-pic2', function() {
+            $.ajaxFileUpload({
+                url: "{:U('Questionnaire/photoUpload')}",
+                secureuri: false,
+                fileElementId: "up-pic2",
+                dataType: "json",
+                success: function (data, status) {
+                    if(data.error != '') {
+                        alert(data.error);
+                    } else {
+                        $(".Jpic2").attr("src", data.src).show();
+                        $("#background_image").val(data.src);
+                    }
+                },error: function (data, status, e) {
+                    var html='<div class="title">提示</div><div class="pop-false">' + e + '</div>';
+                    //popbox(html);
+                }
+            })
+        });
+        
+        $('#KselectType').on('change', function(){
+            var type = $(this).val();
+            switch( type ){
+                case "survey" :
+                    $('#KstepBox').show();
+                    break;
+                case "score_test" :
+                    $('#KstepBox').hide();
+                    break;
+                case "jump_test" :
+                    $('#KstepBox').hide();
+                    break;
+            }
+        });
+    })
+</script>
+</block>

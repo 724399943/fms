@@ -1,0 +1,155 @@
+<extend name="Common:base" />
+
+<block name="title"></block>
+
+<block name="cusStyle">
+    
+</block>
+
+<block name="menu">
+    <include file="Bbs:menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle"></h1>
+    </div>
+    <div class="contentwrapper">
+        <form class="order-list" method="GET" action="{:U('Bbs/BbsModuleList')}">
+            <p class="select-style1">
+            <div class="filter-cell">        <label>模块名称：</label>
+                <input type="text" class="input-text" style="width:250px" placeholder="模块名称" name="module_name" value="{$return['module_name']}" >    </div>
+            <div class="filter-cell">
+                <label>是否锁定：</label>
+                            <select name="is_lock" class="select">
+                                <option value="-1">不指定</option>
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+            </div>
+            <div class="filter-cell">
+                <label>是否推荐：</label>
+                            <select name="is_recommend" class="select">
+                                <option value="-1">不指定</option>
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+            </div>
+                <input type="submit" value="搜索"></input>
+            </p>
+        </form>
+        
+        <table cellpadding="0" cellspacing="0" border="0" class="stdtable stdtablequick">
+            <tr>
+                <th width="">模块名称</th>
+                <th width="">板块图标</th>
+                <th width="">是否锁定</th>
+                <th width="">是否推荐</th>
+                <th width="">是否允许用户发帖</th>
+                <th width="20%">操作</th>
+            </tr>
+            <empty name="list">
+                <tr>
+                    <td colspan="5">目前没有数据~！</td>
+                </tr>
+            <else />
+                <volist name="list" id="vo">
+                    <tr>
+                        <td>{$vo.module_name}</td>
+                        <td><img width="100px" height="100px" src="{$vo.icon}" alt="板块图标"></td>
+                        <td>
+                            <label><input class="mui-switch Jlock" data-id="{$vo.id}" type="checkbox" <if condition="$vo.is_lock eq 1">checked</if>></label>
+                        </td>
+                        <td>
+                            <label><input class="mui-switch Jreco" data-id="{$vo.id}" type="checkbox" <if condition="$vo.is_recommend eq 1">checked</if>></label>
+                        </td>
+                        <td>
+                            <label><input class="mui-switch Jpost" data-id="{$vo.id}" type="checkbox" <if condition="$vo.is_post eq 1">checked</if>></label>
+                        </td>
+                        <td>
+                            <if condition="checkActionAuth('Bbs-editBbsModule') || checkActionAuth('Bbs-delBbsModule')">
+                                <if condition="checkActionAuth('Bbs-editBbsModule')">
+                                    <a class="stdbtn btn_lime" href="{:U('Bbs/editBbsModule', array('id' => $vo['id']))}">编辑</a>&nbsp;&nbsp;
+                                </if>
+                                <if condition="checkActionAuth('Bbs-delBbsModule')">
+                                    <a class="stdbtn btn_lime" href="{:U('Bbs/delBbsModule', array('id' => $vo['id']))}">删除</a>&nbsp;&nbsp;
+                                </if>
+                            <else/>
+                                无权限访问
+                            </if>
+                        </td>
+                    </tr>
+                </volist>
+                <tr>
+                    <td colspan="6">
+                        <div class="page-box">{$show}</div>
+                    </td>
+                </tr>
+            </empty>
+        </table>
+    </div>
+</block>
+<block name="script">
+
+<script>
+    $(function () {
+        $("[name='is_lock']").find("[value='{$return['is_lock']}']").attr("selected", true);
+        $("[name='is_recommend']").find("[value='{$return['is_recommend']}']").attr("selected", true);
+
+        $('.Jlock').click(function() {
+            var checked = $(this)[0].checked ? 1 : 0;
+            var id  = $(this).data('id');
+
+            $.ajax({
+                url: "{:U('Bbs/setModuleLock')}",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    is_lock: checked,
+                    id: id
+                }
+            })
+            .done(function(data) {
+                console.log("success");
+            });
+        });
+
+        $('.Jreco').click(function() {
+            var checked = $(this)[0].checked ? 1 : 0;
+            var id  = $(this).data('id');
+
+            $.ajax({
+                url: "{:U('Bbs/setModuleReco')}",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    is_recommend: checked,
+                    id: id
+                }
+            })
+            .done(function(data) {
+                console.log("success");
+            });
+        });
+
+        $('.Jpost').click(function() {
+            var checked = $(this)[0].checked ? 1 : 0;
+            var id  = $(this).data('id');
+
+            $.ajax({
+                url: "{:U('Bbs/setModulePost')}",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    is_post: checked,
+                    id: id
+                }
+            })
+            .done(function(data) {
+                console.log("success");
+            });
+        });
+    })
+</script>
+
+</block>

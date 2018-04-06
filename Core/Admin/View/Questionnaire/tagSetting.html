@@ -1,0 +1,151 @@
+<extend name="Common:base" />
+
+<block name="title">设置问卷标签</block>
+
+<block name="cusStyle">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/plugins/ui-frame/ui.css" type="text/css" />    
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/plugins/fontawesome/font-awesome.min.css" type="text/css" />   
+    <style type="text/css">
+        .option-item{ margin-bottom: 10px;}
+        .Janswer{ width: 200px; margin-right: 10px; }
+    </style> 
+</block>
+
+<block name="menu">
+    <include file="Questionnaire:menu" />
+</block>
+
+<block name="main">
+    <div class="questionnaire-info">
+        <div class="questionnaire-title">
+            <switch name="questionnaireData.type">
+                <case value="survey">
+                    <span class="label label-danger"><i class="fa fa-tag"></i>{:getCateName('survey')}</span>
+                </case>
+                <case value="score_test">
+                    <span class="label label-warning"><i class="fa fa-tag"></i>{:getCateName('score_test')}</span>
+                </case>
+                <case value="jump_test">
+                    <span class="label label-success"><i class="fa fa-tag"></i>{:getCateName('jump_test')}</span>
+                </case>
+            </switch>
+            <h2>{$questionnaireData.title}</h2>
+        </div>
+        <p>{$questionnaireData.description}</p>
+    </div>
+    <div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U('Questionnaire/tagSetting')}" method="post" id="tags-form">
+            <input type="hidden" name="id" value="{$tagsData['id']}">
+            <input type="hidden" name="questionnaire_id" value="{$questionnaireData['id']}">
+            <div class="line-dete">
+                <label>
+                    <a class="stdbtn" id="addOption">添加选项</a>选项：
+                </label>
+                <span class="field option-list">
+                    <empty name="tagsData">
+                        <div class="option-item"> 
+                            <input type="text" name="text[]" class="Janswer" placeholder="标签"> 
+                            <textarea name="description[]" class="Janswer" placeholder="描述"></textarea>
+                            <a class="stdbtn option-del">删除</a> 
+                        </div>    
+                    <else/>
+                        <volist name="tagsData['tags']" id="item">
+                            <div class="option-item"> 
+                                <input type="text" name="text[]" class="Janswer" placeholder="标签" value="{$item['tags']}"> 
+                                <textarea name="description[]" class="Janswer" placeholder="描述">{$item['description']}</textarea>
+                                <a class="stdbtn option-del">删除</a> 
+                            </div>
+                        </volist>
+                    </empty>
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label></label>
+                <span class="field">
+                    <input type="hidden" name="tags" id="tags">
+                    <input type="hidden" name="referer" value="{$_SERVER['HTTP_REFERER']}">
+                    <input type="button" class="stdbtn" id="Ksubmit" value="保存"/>
+                    <input type="button" class="stdbtn" onclick="window.location.href='{:U('Questionnaire/questionList')}'" value="返回"/>
+                </span>
+            </div>
+        </form>
+    </div>
+</block>
+<block name="script">
+
+<script>
+    $(function () {
+        function validateOptions() 
+        {
+            var state = true;
+            var $optionItem = $('#tags-form .option-list .option-item');
+
+            $optionItem.each(function(i){
+                $this = $(this);
+                if ( !$this.find("input[name='text[]']").val() ) {
+                    alert('请填写标签');
+                    state = state && false;
+                    return false;
+                }
+                if ( !$this.find("textarea[name='description[]']").val() ) {
+                    alert('请填写描述');
+                    state = state && false;
+                    return false;
+                }
+            });
+
+            if ( $optionItem.length <= 0 ) {
+                alert('请添加选项');
+                state = state && false;
+            }
+
+            return state;
+        }
+
+        function collectOptions() 
+        {
+            if( !validateOptions() ) //验证是否输入好选项文本
+                return false;
+
+            var tags = [];
+            /* 循环选项，收集选项信息 */
+            $('#tags-form .option-list .option-item').each(function(i){
+                $this = $(this);
+                var text = $this.find("input[name='text[]']").val(),
+                    description = $this.find("textarea[name='description[]']").val();
+                tags[i] = {"tags":text,"description":description};
+            });
+
+            //序列化选项信息，写入到隐藏域#tags中
+            var tagsVal = JSON.stringify(tags);
+            $('#tags').val( tagsVal );
+
+            return true;
+        }
+
+        /* 添加选项 */
+        $(document).delegate('#addOption', 'click', function(){
+            var options = '<div class="option-item"> <input type="text" name="text[]" class="Janswer" placeholder="标签"> <textarea name="description[]" class="Janswer" placeholder="描述"></textarea> <a class="stdbtn option-del">删除</a> </div>';
+
+            $('.option-list').append( options );
+        });
+
+        /* 提交结果 */
+        $(document).delegate('#Ksubmit', 'click', function(){
+            var state1 = true;
+            state1 = collectOptions();
+            //选项收集成功则提交表单
+            if(state1) {
+                $('#tags-form').submit();
+            }
+        });
+
+        /* 删除选项 */
+        $(document).delegate('.option-del', 'click', function(){
+            $(this).parents('.option-item').remove(); //删除选项
+        });
+    })
+</script>
+
+</block>

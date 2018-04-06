@@ -1,0 +1,127 @@
+<extend name="Common:base" />
+
+<block name="title"></block>
+
+<block name="cusStyle">
+    
+</block>
+
+<block name="menu">
+    <include file="Bbs/menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle"></h1>
+    </div>
+
+    <div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U('BbsArticle/addBbsArticle')}" method="POST" id="JgoodsForm">
+            <div class="line-dete">
+                <label>帖子标题：</label>
+                <span class="field">
+                    <input type="text" class="smallinput" placeholder="帖子标题" name="article_name" value="">
+                </span>
+            </div>
+            <div class="line-dete">
+                <label>文章封面图：</label>
+                <span class="field">
+                    <div class="file-box">
+                        <input type="hidden" id="image" name="icon" value="">
+                        <input type="file" class="file" name="up-pic" id="up-pic" value="">
+                        <img class="Jpic" src="" alt="" style="display:none">
+                    </div>
+                </span>
+            </div>
+            <div class="line-dete">
+                <label>帖子内容：</label>
+                <span class="field">
+                    <textarea name="article_content" id="article_content"></textarea>
+                    <!-- <input type="text" class="smallinput" placeholder="帖子内容" name="article_content" value=""> -->
+                </span>
+            </div>
+            <div class="line-dete">
+                <label>作者：</label>
+                <span class="field">
+                    <input type="text" class="smallinput" placeholder="作者" name="author" value="">
+                </span>
+            </div>
+            <div class="line-dete">
+                <label>板块：</label>
+                <span class="field">
+                    <select name="module_id" id="module_id">
+                        <volist name="module" id="item">
+                            <option value="{$item['id']}">{$item['module_name']}</option>
+                        </volist>
+                    </select>
+                    <!-- <input type="text" class="smallinput" placeholder="板块id" name="module_id" value=""> -->
+                </span>
+            </div>
+            <div class="line-dete">
+                <label>是否置顶：</label>
+                <span class="field">
+                    <input style="width:52px" class="mui-switch" name="is_top" type="checkbox">
+                    <!-- <input type="text" class="smallinput" placeholder="是否置顶" name="is_top" value=""> -->
+                </span>
+            </div>
+            <div class="line-dete">
+                <label>是否推荐：</label>
+                <span class="field">
+                    <input style="width:52px" class="mui-switch" name="is_recommend" type="checkbox">
+                    <!-- <input type="text" class="smallinput" placeholder="是否推荐" name="is_recommend" value=""> -->
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label></label>
+                <span class="field">
+                    <input type="submit" class="stdbtn"/>
+                </span>
+            </div>
+        </form>
+    </div>
+</block>
+<block name="script">
+<script charset="utf-8" type="text/javascript" src="__PUBLIC__/Admin/js/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/js/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/js/ajaxfileupload.js"></script>
+<script type="text/javascript">
+    var editor;
+    KindEditor.ready(function(K) {
+        editor = K.create('#article_content', {
+            height: "600px",
+            allowFileManager: true,
+            uploadJson: '{:U("Bbs/photoSave")}',
+            items : ['source','fontname','fontsize','forecolor','preview','selectall','justifyleft','justifycenter','justifyright','link','unlink','image'],
+            afterCreate : function() {
+                this.loadPlugin('autoheight');
+            }
+        });
+    });
+
+    $(function() {
+        $(document).on('change', '#up-pic', function() {
+            $.ajaxFileUpload({
+                url: "{:U('Bbs/photoSave')}",
+                secureuri: false,
+                fileElementId: "up-pic",
+                dataType: "json",
+                success: function (data, status) {
+                    if(data.error != '') {
+                        alert(data.error);
+                    } else {
+                        console.log(data);
+                        $(".Jpic").attr("src", data.url).show();
+                        $("#image").val(data.url);
+                    }
+            },error: function (data, status, e) {
+                alert(e);
+                console.log(data);
+                // var html='<div class="title">提示</div><div class="pop-false">' + e + '</div>';
+                //     popbox(html);
+                }
+            })
+        });
+    })
+</script>
+</block>

@@ -1,0 +1,32 @@
+<extend name="Common:base" />
+
+<block name="title">微信号授权</block>
+
+<block name="menu">
+	<include file="Index:menu" />
+</block>
+
+<block name="main">
+<div class="pageheader">
+	<h1 class="pagetitle">微信号授权</h1>
+	<span class="pagedesc"></span>
+</div>
+
+<div id="contentwrapper" class="contentwrapper">
+    <form class="stdform stdform2" action="{:U('Index/authorize')}" method="POST">
+        <div class="line-dete">
+            <label>AppID(应用ID)</label>
+            <span class="field">
+                <input type="text" class="smallinput" placeholder="AppID(应用ID)" name="authorizer_appid" value="{$authorizerData['authorizer_appid']}">
+            </span>
+        </div>
+
+        <div class="line-dete">
+            <label></label>
+            <span class="field">
+            <input type="submit" class="stdbtn" value="授权"/>
+            </span>
+        </div>
+    </form>
+</div>
+</block>

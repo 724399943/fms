@@ -1,0 +1,131 @@
+<ul>
+	<if condition="checkActionAuth('Module-setModule')">
+		<li <if condition="checkActionAuth(array('Module-setModule'))">{:chr(32)}class="current"</if>>
+			<a class="date-tit sys-tj" href="{:getAuthUrl(array('Module-setModule'))}" class="addons">模块管理</a>
+			<ul class="Jcon-ctr">
+				<if condition="checkActionAuth('Module-setModule')">
+					<li class="<if condition="in_array(ACTION_NAME, array('setModule','addCategory','addSingleModule','editModule','addListColumn'))">on</if>">
+						<a href="{:U('Module/setModule')}">栏目设置</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('Module-setModuleType')">
+					<li class="<if condition="in_array(ACTION_NAME, array('setModuleType'))">on</if>">
+						<a href="{:U('Module/setModuleType')}">栏目类型</a>
+					</li>
+				</if>
+			</ul>
+		</li>
+	</if>
+</ul>
+<volist name="firstCat" id="vo">
+<ul>
+<if condition="$vo['module_id'] neq '7'">
+	<li>
+		<a class="date-tit sys-tj">{$vo['cat_name']}</a>
+		<ul class="Jcon-ctr">
+			<!-- 文章模型 -->
+			<if condition="$vo['module_id'] eq 1">
+				<if condition="checkActionAuth('Field-fieldList')">
+					<li class="<if condition="(in_array(ACTION_NAME, array('fieldList','delField','editField'))) AND ($vo['id'] eq $firstCatId)">on</if>">
+						<a href="{:U('Field/fieldList',array('firstCatId'=>$vo['id']))}">模块字段</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('Article-articleList')">
+					<li class="<if condition="( in_array(ACTION_NAME, array('addField')) ) AND ($vo['id'] eq $firstCatId)">on</if>">
+						<a href="{:U('Field/addField',array('firstCatId'=>$vo['id']))}">添加字段</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('Article-articleList')">
+					<li class="<if condition="( in_array(ACTION_NAME, array('articleList','delArticle','editArticle'))) AND ($vo['id'] eq $firstCatId)">on</if>">
+						<a href="{:U('Article/articleList',array('firstCatId'=>$vo['id']))}">内容列表</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('Article-addArticle')">
+					<li class="<if condition="( in_array(ACTION_NAME, array('addArticle')) ) AND ($vo['id'] eq $firstCatId)">on</if>">
+						<a href="{:U('Article/addArticle',array('firstCatId'=>$vo['id']))}">添加内容</a>
+					</li>
+				</if>
+			</if>
+			<!-- 产品模型 -->
+			<if condition="$vo['module_id'] eq 2">
+				<if condition="checkActionAuth('Field-fieldList')">
+					<li class="<if condition="(in_array(ACTION_NAME, array('fieldList','delField','editField'))) AND ($vo['id'] eq $firstCatId)">on</if>">
+						<a href="{:U('Field/fieldList',array('firstCatId'=>$vo['id']))}">模块字段</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('Article-articleList')">
+					<li class="<if condition="( in_array(ACTION_NAME, array('addField')) ) AND ($vo['id'] eq $firstCatId)">on</if>">
+						<a href="{:U('Field/addField',array('firstCatId'=>$vo['id']))}">添加字段</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('Attribute-attrList')">
+					<li class="<if condition="( in_array(ACTION_NAME, array('addAttr')) ) AND ($vo['id'] eq $firstCatId)">on</if>">
+						<a href="{:U('Attribute/attrList',array('firstCatId'=>$vo['id']))}">字段值列表</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('Product-productList')">
+					<li class="<if condition="in_array(ACTION_NAME, array('productList','delProduct','editProduct'))">on</if>">
+						<a href="{:U('Product/productList',array('firstCatId'=>$vo['id']))}">内容列表</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('Product-addProduct')">
+					<li class="<if condition="in_array(ACTION_NAME, array('addProduct'))">on</if>">
+						<a href="{:U('Product/addProduct',array('firstCatId'=>$vo['id']))}">添加内容</a>
+					</li>
+				</if>
+			</if>
+			<!-- 图库模型 -->
+			<if condition="$vo['module_id'] eq 3">
+				<!-- <if condition="checkActionAuth('Article-articleList')">
+					<li class="<if condition="in_array(ACTION_NAME, array('articleList','delArticle','editArticle'))">on</if>">
+						<a href="{:U('Article/articleList',array('id'=>$vo['id']))}">内容列表</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('Article-addArticle')">
+					<li class="<if condition="in_array(ACTION_NAME, array('addArticle'))">on</if>">
+						<a href="{:U('Article/addArticle',array('id'=>$vo['id']))}">添加内容</a>
+					</li>
+				</if> -->
+			</if>
+			<!-- 下载模型 -->
+			<if condition="$vo['module_id'] eq 4">
+				<!-- <if condition="checkActionAuth('Article-articleList')">
+					<li class="<if condition="in_array(ACTION_NAME, array('articleList','delArticle','editArticle'))">on</if>">
+						<a href="{:U('Article/articleList',array('id'=>$vo['id']))}">内容列表</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('Article-addArticle')">
+					<li class="<if condition="in_array(ACTION_NAME, array('addArticle'))">on</if>">
+						<a href="{:U('Article/addArticle',array('id'=>$vo['id']))}">添加内容</a>
+					</li>
+				</if> -->
+			</if>
+			<!-- 招聘模型 -->
+			<if condition="$vo['module_id'] eq 5">
+				<!-- <if condition="checkActionAuth('Article-articleList')">
+					<li class="<if condition="in_array(ACTION_NAME, array('articleList','delArticle','editArticle'))">on</if>">
+						<a href="{:U('Article/articleList',array('id'=>$vo['id']))}">内容列表</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('Article-addArticle')">
+					<li class="<if condition="in_array(ACTION_NAME, array('addArticle'))">on</if>">
+						<a href="{:U('Article/addArticle',array('id'=>$vo['id']))}">添加内容</a>
+					</li>
+				</if> -->
+			</if>
+			<!-- 单页模型 -->
+			<if condition="$vo['module_id'] eq 6">
+				<!-- <if condition="checkActionAuth('SinglePage-editSingle')"> -->
+					<!-- <php>$result = getSingles();dump($result);</php> -->
+				<volist name=":getSingles($vo['id'],$vo['module_id'])" id="data">
+					<li class="<if condition="in_array(ACTION_NAME, array('editSingle'))">on</if>">
+						<a href="{:U('SinglePage/editSingle',array('id'=>$data['id']))}">{$data['cat_name']}</a>
+					</li>
+				</volist>
+				<!-- </if> -->
+			</if>
+		</ul>
+	</li>
+</if>
+</ul>
+</volist>

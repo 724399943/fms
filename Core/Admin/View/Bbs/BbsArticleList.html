@@ -1,0 +1,212 @@
+<extend name="Common:base" />
+
+<block name="title"></block>
+
+<block name="cusStyle">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.datetimepicker.css" type="text/css" />
+    <style type="text/css">
+        .givepop-box{ width: 400px; background: #fff; overflow: hidden; }
+        .givepop-box .g-line{ line-height: 32px; margin-top: 10px; padding-left: 40px; }
+        /*.g-line input{ width: 200px; }*/
+        .givepop-box .stdbtn{ margin-left: 100px; }
+    </style>
+</block>
+
+<block name="menu">
+    <include file="Bbs:menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle"></h1>
+    </div>
+    <div class="contentwrapper">
+        <form class="order-list" method="GET" action="{:U('Bbs/BbsArticleList')}">
+            <p class="select-style1">
+                <div class="filter-cell">
+                    <label>帖子标题：</label>
+                    <input type="text" class="input-text" style="width:250px" placeholder="帖子标题" name="article_name" value="{$return['article_name']}" >
+                </div>
+                <div class="filter-cell">
+                    <label>作者：</label>
+                    <select name="author" class="select">
+                        <option value="-1">请选择</option>
+                        <volist name="user" id="user_item">
+                            <option value="{$user_item['id']}">{$user_item['nickname']}</option>
+                        </volist>
+                    </select>
+                </div>
+                <div class="filter-cell">
+                    <label>板块：</label>
+                    <select name="module_id" class="select">
+                        <option value="-1">请选择</option>
+                        <volist name="module" id="item">
+                            <option value="{$item['id']}">{$item['module_name']}</option>
+                        </volist>
+                    </select>
+                </div>
+                <div class="filter-cell">
+                    <label>是否置顶：</label>
+                    <select name="is_top" class="select">
+                        <option value="-1">请选择</option>
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </div>
+                <div class="filter-cell">
+                    <label>是否推荐：</label>
+                    <select name="is_recommend" class="select">
+                        <option value="-1">请选择</option>
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </div>
+                <div class="filter-cell">
+                    <label>开始时间：</label>
+                    <input type="text" id="staDatartTime" date-time="{$return['startTime']}" style="margin-right: 0px">
+                    <input type="hidden" name="startTime" id="startTime" value="{$return['startTime']}" >-
+                    <input type="text" id="endDataTime" date-time="{$return['endTime']}">
+                    <input type="hidden" name="endTime" id="endTime" value="{$return['endTime']}">
+                </div>
+                                
+                <input type="submit" value="搜索"/>
+            </p>
+        </form>
+        
+        <table cellpadding="0" cellspacing="0" border="0" class="stdtable stdtablequick">
+            <tr>
+                <th width="">帖子标题</th>
+                <th width="">作者</th>
+                <th width="">板块id</th>
+                <th width="">点赞数量</th>
+                <th width="">评论数量</th>
+                <th width="">浏览次数</th>
+                <th width="">是否置顶</th>
+                <th width="">是否推荐</th>
+                <th width="">添加时间</th>
+                <th width="20%">操作</th>
+            </tr>
+            <empty name="list">
+                <tr>
+                    <td colspan="10">目前没有数据~！</td>
+                </tr>
+            <else />
+                <volist name="list" id="vo">
+                    <tr>
+                        <td>{$vo.article_name}</td>
+                        <td>{$vo.author}</td>
+                        <td>{$vo.module_id}</td>
+                        <td>{$vo.like_number}</td>
+                        <td>{$vo.comment_number}</td>
+                        <td>{$vo.view_number}</td>
+                        <td>
+                            <label><input class="mui-switch JtopSwitch" data-id="{$vo.id}" type="checkbox" <if condition="$vo.is_top eq 1">checked</if>></label>
+                        </td>
+                        <td>
+                            <label><input class="mui-switch JrecoSwitch" data-id="{$vo.id}" type="checkbox" <if condition="$vo.is_recommend eq 1">checked</if>></label>
+                        </td>
+                        <td>{$vo.add_time|date="Y-m-d H:i:s",###}</td>
+                        <td>
+                            <if condition="checkActionAuth('Bbs-BbsDelArticle') || checkActionAuth('Bbs-BbsEditArticle')">
+                                <if condition="checkActionAuth('Bbs-BbsEditArticle')">
+                                    <a class="stdbtn btn_lime" href="{:U('Bbs/BbsEditArticle', array('id' => $vo['id']))}">编辑</a>&nbsp;&nbsp;
+                                </if>
+                                <if condition="checkActionAuth('Bbs-BbsDelArticle')">
+                                    <a class="stdbtn btn_lime Jdel" data-id="{$vo['id']}" href="javascript:;" >删除</a>&nbsp;&nbsp;
+                                </if>
+                                <if condition="checkActionAuth('Bbs-BbsArticleDetail')">
+                                    <a class="stdbtn btn_lime" data-id="{$vo['id']}" href="{:U('Bbs/BbsArticleDetail',array('id'=>$vo['id']))}" >查看</a>&nbsp;&nbsp;
+                                </if>
+                            <else/>
+                                无权限访问
+                            </if>
+                        </td>
+                    </tr>
+                </volist>
+                <tr>
+                    <td colspan="10">
+                        <div class="page-box">{$show}</div>
+                    </td>
+                </tr>
+            </empty>
+        </table>
+    </div>
+</block>
+<block name="script">
+
+<script type="text/javascript" src="__PUBLIC__/Admin/js/jquery.datetimepicker.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/js/moment.min.js"></script>
+<script>
+    $(function () {
+        $("[name='author']").find("[value='{$return['author']}']").attr("selected", true);
+        $("[name='module_id']").find("[value='{$return['module_id']}']").attr("selected", true);
+        $("[name='is_top']").find("[value='{$return['is_top']}']").attr("selected", true);
+        $("[name='is_recommend']").find("[value='{$return['is_recommend']}']").attr("selected", true);
+
+        $("#staDatartTime").val(moment.unix($("#staDatartTime").attr("date-time")).format("YYYY-MM-DD HH:mm:ss"));
+        $("#endDataTime").val(moment.unix($("#endDataTime").attr("date-time")).format("YYYY-MM-DD HH:mm:ss"));
+        $("#staDatartTime").datetimepicker({format:"Y-m-d H:i:s", onChangeDateTime:function(dp, $input) {$("#startTime").val(moment($input.val()).unix().valueOf());}});
+        $("#endDataTime").datetimepicker({format:"Y-m-d H:i:s", onChangeDateTime:function(dp, $input) {$("#endTime").val(moment($input.val()).unix().valueOf());}});
+        console.log( $("#staDatartTime").attr("date-time") );
+    });
+
+    $('.JtopSwitch').click(function() {
+        var checked = $(this)[0].checked ? 1 : 0;
+        var id = $(this).data('id');
+
+        $.ajax({
+            url: "{:U('Bbs/setTop')}",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                is_top: checked,
+                id: id
+            }
+        })
+        .done(function(data) {
+            console.log(data);
+        });
+    });
+
+    $('.JrecoSwitch').click(function() {
+        var checked = $(this)[0].checked ? 1 : 0;
+        var id  = $(this).data('id');
+
+        $.ajax({
+            url: "{:U('Bbs/setReco')}",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                is_recommend: checked,
+                id: id
+            }
+        })
+        .done(function(data) {
+            console.log(data);
+        });
+    });
+
+    $('.Jdel').click(function() {
+        if (confirm('确认删除文章？')) {
+            var id = $(this).data('id');
+
+            $.ajax({
+                url: "{:U('Bbs/deleteBbsArticle')}",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id: id
+                }
+            })
+            .done(function(data) {
+                console.log(data);
+                if (data.error == 0) {
+                    alert('删除成功！');
+                    window.location.href = window.location.href;
+                }
+            });
+        }
+    });
+</script>
+
+</block>

@@ -1,0 +1,171 @@
+<extend name="Common:base" />
+
+<block name="title">添加广告</block>
+
+<block name="cusStyle">
+    <css href="__PUBLIC__/Admin/css/plugins/ui-frame/ui.css" />
+    <style type="text/css">
+    .line-dete em{color: #e18383}
+
+    </style>
+</block>
+
+<block name="menu">
+    <include file="Ad/menu" />
+</block>
+
+<block name="main">
+     <div class="pageheader">
+        <h1 class="pagetitle">
+            添加广告
+        </h1>
+        <span class="pagedesc"></span>
+    </div>
+    <div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U('Ad/addAd')}" method="post">
+            <div class="line-dete">
+                <label>选择广告版位<em>*</em></label>
+                <span class="field">
+                    <select name="group_id">
+                        <volist name="adGroupList" id="vo">
+                        <option value="{$vo['id']}">{$vo['group_name']}</option>
+                        </volist>
+                    </select>
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>广告名称<em>*</em></label>
+                <span class="field">
+                    <input type="text" name="ad_name" class="smallinput">
+                </span>
+            </div>
+            <div class="line-dete">
+                <label>上传广告图片<em>*</em></label>
+                <span class="field">
+                    <div class="file-box">
+                        <input type="hidden" id="image" name="image" value="">
+                        <input type="file" class="file" name="up-pic" id="up-pic" value="">      
+                        <img class="Jpic" src="" alt="">
+                    </div>
+                    <!-- <span class="font-color">建议300*300</span> -->
+                </span>
+            </div>
+            
+            <div class="line-dete">
+                <label>链接打开方式</label>
+                <span class="field">
+                    <select name="target">
+                        <option value="0">本页面</option>
+                        <option value="1">新页面</option>
+                    </select>
+                </span>
+            </div>
+            
+            <div class="line-dete">
+                <label>广告排序</label>
+                <span class="field">
+                    <input type="text" name="sort" class="smallinput">
+                    同一个版位有效，数字越小越靠前
+                </span>
+            </div>
+            
+            <div class="line-dete">
+                <label>广告状态</label>
+                <span class="field">
+                    <input type="radio" name="is_delete" checked>正常&nbsp;&nbsp;
+                    <input type="radio" name="is_delete" >锁定
+                    
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>跳转地址</label>
+                <span class="field">
+                    <input type="text" name="url" class="smallinput" value="#">
+                    地址必须带有http://
+                </span>
+            </div>
+            
+            <div class="line-dete"  > 
+                <label>内容描述</label>
+                <span class="field">
+                    <textarea class="text" name="content" id="content"></textarea>
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label></label>
+                <span class="field">
+                    <input type="submit" class="stdbtn" value="提交">
+                    <input type="button" class="stdbtn" value="返回上一页" onclick="window.history.go(-1)">
+                </span>
+            </div>
+        </form>
+    </div>
+</block>
+<block name="script">
+<js href="__PUBLIC__/Admin/js/ajaxfileupload.js" />
+<!-- <js href="__PUBLIC__/Admin/js/plugins/questionnaire/optionManager.js" /> -->
+<script charset="utf-8" src="__PUBLIC__/Admin/js/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="__PUBLIC__/Admin/js/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+// $('.Jvalid').click(function(){
+//         var id = $(this).attr('data-id')
+//         var yes = "__PUBLIC__/Admin/images/yes.gif"
+//         var no = "__PUBLIC__/Admin/images/no.gif"
+//         var field = 'is_valid'
+//         id = id.split('-')
+//         if (id[1] == 1) {
+//             $(this).children('img').attr('src', yes)
+//             $(this).attr('data-id', id[0] + '-2')
+//         } else {
+//            $(this).children('img').attr('src',no)
+//            $(this).attr('data-id', id[0] + '-1')
+//         }
+//         $.ajax({
+//             url: "{:U('Field/changeFieldStatus')}",
+//             type: 'post',
+//             dataType: 'json',
+//             data: {id: id[0],status:id[1],field:field}
+//         })
+//         .done(function(data) {
+//             console.log(data);
+//         })
+
+//    })
+    //编辑器
+   var editor;
+    KindEditor.ready(function(K) {
+        editor = K.create('#content', {
+            height: "600px",
+            allowFileManager: true,
+            uploadJson: '{:U("Ad/photoUpload")}',
+            items : ['source','fontname','fontsize','forecolor','preview','selectall','justifyleft','justifycenter','justifyright','link','unlink','image'],
+            afterCreate : function() {
+                this.loadPlugin('autoheight');
+            }
+        });
+    });
+// 上传图片
+    $(document).on('change', '#up-pic', function() {
+        $.ajaxFileUpload({
+            url: "{:U('Ad/photoUpload')}",
+            secureuri: false,
+            fileElementId: 'up-pic',
+            dataType: 'json',
+            success: function (data, status) {
+                if(data.error != '') {
+                    alert(data.error);
+                } else {
+                    console.log(data);
+                    $('.Jpic').attr('src', data.src).show();
+                    $('#image').val(data.src);
+                }
+            },error: function (data, status, e) {
+                alert(e);
+            }
+        });
+    });
+</script>
+</block>

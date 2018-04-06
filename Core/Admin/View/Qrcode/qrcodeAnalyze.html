@@ -1,0 +1,312 @@
+<extend name="Common:base" />
+
+<block name="title">二维码用户分析</block>
+
+<block name="menu">
+	<include file="Qrcode:menu" />
+</block>
+
+<block name="main">
+	<a class="stdbtn btn_lime" href="javascript:window.history.go(-1);" style="margin: 10px 0 10px 20px;">返回</a>
+	<div id="main0" style="height:400px"></div>
+	
+	<div id="main1" style="height:400px"></div>
+
+	<div id="main2" style="height:400px"></div>
+</block>
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Admin/layui/layui.js"></script>
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+<script type="text/javascript">
+    // 路径配置
+    require.config({
+        paths: {
+            echarts: 'http://echarts.baidu.com/build/dist'
+        }
+    });
+
+     // 使用
+    require(
+        [
+            'echarts',
+            'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+        ],
+        function (ec) {
+            // 语言分布
+            var myChart = ec.init(document.getElementById('main0')); 
+            
+            option = {
+            	title : {
+			        text: '语言分布',
+			    },
+			    tooltip : {
+			        trigger: 'axis',
+			        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+			            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			        }
+			    },
+			    legend: {
+			        data:['简体中文','繁体中文','English']
+			    },
+			    toolbox: {
+			        show : true,
+			        feature : {
+			            dataView : {show: true, readOnly: false},
+			            saveAsImage : {show: true}
+			        }
+			    },
+			    calculable : true,
+			    xAxis : [
+			        {
+			            type : 'value'
+			        }
+			    ],
+			    yAxis : [
+			        {
+			            type : 'category',
+			            data : {$yAxisData}
+			        }
+			    ],
+			    series : [
+			        {
+			            name:'简体中文',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$langSeriesData[0]}
+			        },
+			        {
+			            name:'繁体中文',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$langSeriesData[1]}
+			        },
+			        {
+			            name:'English',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$langSeriesData[2]}
+			        }
+			    ]
+			};
+			                    
+    
+            // 为echarts对象加载数据 
+            myChart.setOption(option); 
+
+            // 终端分布
+            var myChart = ec.init(document.getElementById('main1')); 
+            
+            option = {
+            	title : {
+			        text: '终端分布',
+			    },
+			    tooltip : {
+			        trigger: 'axis',
+			        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+			            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			        }
+			    },
+			    legend: {
+			        data:['Android', 'iPhone', 'iPad', 'Windows', 'MAC', 'Linux', 'Unix', 'BSD', 'Other']
+			    },
+			    toolbox: {
+			        show : true,
+			        feature : {
+			            dataView : {show: true, readOnly: false},
+			            saveAsImage : {show: true}
+			        }
+			    },
+			    calculable : true,
+			    xAxis : [
+			        {
+			            type : 'value'
+			        }
+			    ],
+			    yAxis : [
+			        {
+			            type : 'category',
+			            data : {$yAxisData}
+			        }
+			    ],
+			    series : [
+			        {
+			            name:'Android',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$osSeriesData[0]}
+			        },
+			        {
+			            name:'iPhone',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$osSeriesData[1]}
+			        },
+			        {
+			            name:'iPad',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$osSeriesData[2]}
+			        },
+			        {
+			            name:'Windows',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$osSeriesData[3]}
+			        },
+			        {
+			            name:'MAC',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$osSeriesData[4]}
+			        },
+			        {
+			            name:'Linux',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$osSeriesData[5]}
+			        },
+			        {
+			            name:'Unix',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$osSeriesData[6]}
+			        },
+			        {
+			            name:'BSD',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$osSeriesData[7]}
+			        },
+			        {
+			            name:'Other',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$osSeriesData[8]}
+			        }
+			    ]
+			};
+			                    
+    
+            // 为echarts对象加载数据 
+            myChart.setOption(option); 
+
+            // 浏览器分布
+            var myChart = ec.init(document.getElementById('main2')); 
+            
+            option = {
+            	title : {
+			        text: '浏览器分布',
+			    },
+			    tooltip : {
+			        trigger: 'axis',
+			        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+			            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			        }
+			    },
+			    legend: {
+			        data:['MicroMessenger', 'MQQBrowser', 'UCBrowser', 'Internet Explorer', 'Opera', 'Firefox', 'Chrome', 'Safari', 'Other']
+			    },
+			    toolbox: {
+			        show : true,
+			        feature : {
+			            dataView : {show: true, readOnly: false},
+			            saveAsImage : {show: true}
+			        }
+			    },
+			    xAxis : [
+			        {
+			            type : 'value'
+			        }
+			    ],
+			    yAxis : [
+			        {
+			            type : 'category',
+			            data : {$yAxisData}
+			        }
+			    ],
+			    series : [
+			        {
+			            name:'MicroMessenger',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$browserSeriesData[0]}
+			        },
+			        {
+			            name:'MQQBrowser',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$browserSeriesData[1]}
+			        },
+			        {
+			            name:'UCBrowser',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$browserSeriesData[2]}
+			        },
+			        {
+			            name:'Internet Explorer',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$browserSeriesData[3]}
+			        },
+			        {
+			            name:'Opera',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$browserSeriesData[4]}
+			        },
+			        {
+			            name:'Firefox',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$browserSeriesData[5]}
+			        },
+			        {
+			            name:'Chrome',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$browserSeriesData[6]}
+			        },
+			        {
+			            name:'Safari',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$browserSeriesData[7]}
+			        },
+			        {
+			            name:'Other',
+			            type:'bar',
+			            stack: '总量',
+			            itemStyle : { normal: {label : {show: true, position: 'insideRight'}}},
+			            data:{$browserSeriesData[8]}
+			        }
+			    ]
+			};
+			                    
+    
+            // 为echarts对象加载数据 
+            myChart.setOption(option); 
+        }
+    );
+</script>
+</block>

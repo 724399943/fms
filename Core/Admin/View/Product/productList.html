@@ -1,0 +1,127 @@
+<extend name="Common:base" />
+
+<block name="title">{$return['cat_name']}</block>
+
+<block name="menu">
+    <include file="Module:menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle">{$return['cat_name']}</h1>
+    </div>
+    <div class="contentwrapper">
+        <form class="order-list" method="GET" action="{:U('Product/productList')}">
+            <p>
+                <input type="button" value="删除" class="Kdelete" />
+                &nbsp;&nbsp;&nbsp;
+                分类：
+                <select name="cat_id">
+                <option value="-1" <if condition="$return['cat_id'] eq '-1'">selected</if>>所有分类</option>
+                    <php>
+                        $selected = '';
+                        function showTree ($data,$pid) {
+                            foreach ($data as $key => $val){
+                                $selected = ( $val['id'] == $pid) ? 'selected' : '';
+                                if ($val['depth'] >= 1) {
+                                   $string = str_repeat('│ ',$val['depth'] - 1);
+                                    echo '<option value="'.$val['id'].'" '.$selected.'>'.$string .'├ ' .$val['cat_name'].'</option>';
+                                } else {
+                                    echo '<option value="'.$val['id'].'" '.$selected.' >' .$val['cat_name'].$val['depth'].'</option>';
+                                }
+                                if (!empty($val['childCategory'])) {
+                                    showTree($val['childCategory'],$pid);
+                                }
+                            }
+                        }
+                        showTree($categoryList,$return['cat_id']);
+                    </php>
+                </select>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                名称：
+                <input type="text" class="input-text" style="width:250px" placeholder="" name="product_name" value="{$return['product_name']}" >
+                <input type="hidden" name="firstCatId" value="{$firstCatId}" />
+                <input type="submit" value="搜索" />
+            </p>
+        </form>    
+            <table cellpadding="0" cellspacing="0" border="0" class="stdtable stdtablequick">
+                <tr>
+                    <th width="">选择</th>
+                    <th width="">分类</th>
+                    <th width="">名称</th>
+                    <th width="">浏览</th>
+                    <th width="">图片</th>
+                    <th width="">状态</th>
+                    <th width="">发布时间</th>
+                    <th width="20%">操作</th>
+                </tr>
+                <empty name="list">
+                    <tr>
+                        <td colspan="8">目前没有数据~！</td>
+                    </tr>
+                <else />
+                <!-- <php>dump($list)</php> -->
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td><input type="checkbox" class="ids" value="{$vo['id']}" /></td>
+                            <td>{$vo.cat_name}</td>
+                            <td>{$vo['product_name']}</td>
+                            <td>{$vo['hits']}</td>
+                            <td><empty name="vo['upload_files']">无
+                                <else />
+                                <img src="{$vo['upload_files']}" width="50" height="50">
+                                </empty>
+                            </td>
+                            <td><if condition="$vo['flag'] eq 1">启用<else />禁用</if></td>
+                            <td>{$vo['add_time']|time_format}</td>
+                          
+                            <td>
+                                <if condition="checkActionAuth('Product-editProduct')">
+                                    <a class="stdbtn btn_lime" href="{:U('Product/editProduct', array('id'=>$vo['id']))}">编辑</a>
+                                <else/>
+                                    无权限访问
+                                </if>
+                                <if condition="checkActionAuth('Product-delProduct')">
+                                    <a class="stdbtn btn_lime" href="{:U('Product/delProduct', array('ids'=>$vo['id']))}">删除</a>
+                                <else/>
+                                    无权限访问
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                    <tr>
+                        <if condition="$counting EGT 25">
+                            <td colspan="8">
+                                <div class="page-box">{$show}</div>
+                            </td>
+                        </if>
+                            <!-- <input type="text" class="input-text" style="width:250px" placeholder="标识" name="tags" value="{$return['tags']}" > -->
+                    </tr>
+                </empty>
+            </table>
+    </div>
+</block>
+<block name="script">
+<script type="text/javascript">
+//选择删除
+ $(".Kdelete").click(function () {
+
+        var objs = $('.ids');
+        var ids = '';
+        for(var j=0;j<objs.length;j++)
+        {   
+            if ($(objs[j]).is(':checked'))
+            {
+                ids += $(objs[j]).val()+',';
+            }
+        }
+        if ( !ids )  {
+            alert('请选择要删除的数据');
+            return;
+        }
+        var jumpUrl = "{:U('Product/delProduct')}?ids=" + ids;
+        window.location.href = jumpUrl;
+    });
+
+</script>
+</block>

@@ -1,0 +1,21 @@
+<ul>
+
+	<if condition="checkControllerAuth(array('Questionnaire'))">
+		<li <if condition="in_array(CONTROLLER_NAME, array('Questionnaire'))">{:chr(32)}class="current"</if>>
+			<a class="date-tit sys-tj" href="{:getAuthUrl(array('Questionnaire-questionList', 'Questionnaire-addQuestion', 'Questionnaire-editQuestion', 'Questionnaire-deleteQuestion'))}" class="addons">问卷管理</a>
+			<ul class="Jcon-ctr">
+
+				<if condition="checkActionAuth('Questionnaire-questionList')">
+					<li class="<if condition="in_array(ACTION_NAME, array('questionList', 'editQuestion', 'ratioProblem', 'problemList', 'addProblem', 'editProblem', 'resultSetting', 'tagSetting', 'questionnairePageView', 'questionnaireAnalyze', 'problemLog'))">on</if>">
+						<a href="{:U('Questionnaire/questionList')}">问卷列表</a>
+					</li>
+					<li class="<if condition="in_array(ACTION_NAME, array('addQuestion'))">on</if>">
+						<a href="{:U('Questionnaire/addQuestion')}">添加问卷</a>
+					</li>
+				</if>
+
+			</ul>
+		</li>
+	</if>
+
+</ul>

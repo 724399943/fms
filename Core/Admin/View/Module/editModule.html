@@ -1,0 +1,232 @@
+<extend name="Common:base" />
+
+<block name="title">添加列表子栏目</block>
+
+<block name="cusStyle">
+    <css href="__PUBLIC__/Admin/css/plugins/ui-frame/ui.css" />
+    <style type="text/css">
+        .maskWrap{width:100%;height:100%;background-color:rgba(0,0,0,.5);position:fixed;top:0;left:0;display: none;}
+        .maskMain{width:800px;height:450px;position:fixed;top:50%;left:50%;margin-top:-225px;margin-left:-400px;background-color:#ffffff;overflow:hidden;}
+        .mtitle{line-height:35px;padding:0 15px;background-color:#f4f4f4;overflow:hidden;}
+        .mtitle .close{float:right;cursor:pointer;}
+        .mcont{margin:5px;padding:10px;border:1px solid #ddd;overflow-y:scroll;}
+        .mcont .ht{line-height:35px;padding:0 10px;margin-bottom:15px;background-color:#e2eff9;}
+        .mcont table,.mcont table tbody{width:100%;text-align:center;}
+        .mcont .tit{background-color:#f4f4f4;}
+        .mcont table .tlf{text-align:left;}
+        .mcont table tbody>tr{width:100%;}
+        .mcont table tbody>tr:hover{background-color:#f4f4f4;}
+    </style>
+</block>
+
+<block name="menu">
+    <include file="Module/menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <if condition="$cateInfo['root_id'] eq 0">
+            <h1 class="pagetitle">编辑一级列表栏目</h1>
+        <else />
+            <h1 class="pagetitle">修改列表子栏目</h1>
+        </if>
+    </div>
+
+    <div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U('Module/editModule')}" method="post" >
+            <input type="hidden" name="id" value="{$cateInfo['id']}">
+            <div class="line-dete">
+                <label>模块类型：</label>
+                <span class="field">
+                    <input type="text" class="smallinput" placeholder="{$mod_name}" readonly="readonly">
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>栏目名称：</label>
+                <span class="field">
+                    <input type="text" class="smallinput"  name="cat_name" value="{$cateInfo['cat_name']}">
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>目录标识：</label>
+                <span class="field">
+                    <input type="text" class="smallinput"  name="dir_name" value="{$cateInfo['dir_name']}" readonly="readonly">（不可更改）
+                </span>
+            </div>
+
+
+            <div class="line-dete">
+                <label>同级排序：</label>
+                <span class="field">
+                    <input type="text" class="smallinput"  name="orders" value="{$cateInfo['orders']}"> (数字越小，越靠前)
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>状态设置：</label>
+                <span class="field">
+                    <input name="status" type="radio" value="1"  <if condition="$cateInfo['status'] eq 1">checked</if> />正常  
+                    <input name="status" type="radio" value="2" <if condition="$cateInfo['status'] eq 2">checked</if>  />锁定
+                </span>
+            </div>
+            
+            <div class="line-dete">
+                <label>栏目图片：</label>
+                <span class="field">
+                    <div class="file-box">
+                        <input type="hidden" id="imgs" name="images" value="">
+                        <input type="file" name="up-pic" class="file" id="up-pic" value="">
+                        <img class="Jpic" src="{$cateInfo['images']}" alt="">
+                    </div>
+                    <span class="font-color"></span>
+                </span>
+            </div>
+
+<!--             <div class="line-dete">
+                <label>栏目图片：</label>
+                <span class="field">
+                    <input type="text" name="images" id="imgs" class="smallinput" value="{$cateInfo['images']}" readonly="true"/>
+                    <input type="file" name="up-pic" id="up-pic">
+                </span>
+            </div> -->
+
+            <if condition="$cateInfo['module_id'] neq 6 AND $cateInfo['module_id'] neq 7">
+                <include file="Common:seo" />
+            <else />
+                <div class="line-dete">
+                    <label>链接类型：</label>
+                    <span class="field">
+                       <input type="radio" name="link_type" value="1" <if condition="$cateInfo['link_type'] eq 1">checked</if> >内部链接 ，
+                       <input type="radio" name="link_type" value="2" <if condition="$cateInfo['link_type'] eq 2">checked</if>>外部链接 ，
+                       外部链接URL：<input type="text" name="out_url" value="{$cateInfo['out_url']}">
+                    </span>
+                </div>
+            </if>
+            <if condition="$cateInfo['module_id'] neq 6 AND $cateInfo['module_id'] neq 7">
+                <div class="line-dete">
+                    <label>栏目首页模板：</label>
+                    <span class="field">
+                        <input type="text" name="tpl_index" class="smallinput" value="{$cateInfo['tpl_index']}" readonly="true"/>
+                        <a href="javascript:;" class="tpl" data-id="tpl_index" style="color: #0072c1">选择模板</a>
+                        （不需要填写风格路径和模板后缀，不填写则启用模块类型的默认模板）
+                    </span>
+                </div>
+                <div class="line-dete">
+                    <label>栏目列表模板：</label>
+                    <span class="field">
+                        <input type="text" name="tpl_list" class="smallinput" value="{$cateInfo['tpl_list']}" readonly="true"/>
+                        <a href="javascript:;" class="tpl" data-id="tpl_list" style="color: #0072c1">选择模板</a>
+                        （不需要填写风格路径和模板后缀，不填写则启用模块类型的默认模板）
+                    </span>
+                </div>
+            </if>
+            <if condition="$cateInfo['module_id'] neq 7">
+                <div class="line-dete">
+                    <label>栏目内容模板：</label>
+                    <span class="field">
+                        <input type="text" name="tpl_detail" class="smallinput" value="{$cateInfo['tpl_detail']}" readonly="true"/>
+                        <a href="javascript:;" class="tpl" data-id="tpl_detail" style="color: #0072c1">选择模板</a>
+                        （不需要填写风格路径和模板后缀，不填写则启用模块类型的默认模板）
+                    </span>
+                </div> 
+            </if>
+            <if condition="$cateInfo['module_id'] neq 6 AND $cateInfo['module_id'] neq 7">
+                <div class="line-dete">
+                    <label>每页显示数量：</label>
+                    <span class="field">
+                        <input type="text" name="limit" class="smallinput" value="{$cateInfo['limit']}" />
+                        （不填写或者0，表示使用默认。）
+                    </span>
+                </div>
+
+
+                <div class="line-dete">
+                    <label>列表排序方式：</label>
+                    <span class="field">
+                        <input type="radio" name="sort" value="1" <if condition="$cateInfo['sort'] eq 1">checked</if> >默认，
+                        <input type="radio" name="sort" value="2" <if condition="$cateInfo['sort'] eq 2">checked</if> >更新时间，
+                        <input type="radio" name="sort" value="3" <if condition="$cateInfo['sort'] eq 3">checked</if> >发布时间，
+                        <input type="radio" name="sort" value="4" <if condition="$cateInfo['sort'] eq 4">checked</if> >点击次数，
+                        <input type="radio" name="sort" value="5" <if condition="$cateInfo['sort'] eq 5">checked</if> >ID倒序，
+                        <input type="radio" name="sort" value="6" <if condition="$cateInfo['sort'] eq 6">checked</if> >ID顺序，
+                       
+                    </span>
+                </div>
+            </if>
+            <div class="line-dete">
+                <label></label>
+                <span class="field">
+                    <input type="submit" class="stdbtn"  value="保存"/>
+                </span>
+            </div>
+        </form>
+        <body>
+
+        <div class="maskWrap">
+        <div class="maskMain">
+            <div class="mtitle">选择模板文件<span class="close">关闭</span></div>
+            <div class="mcont">
+                <p class="ht">正在使用的主题[默认模板] 模板目录：{$dir[0]}</p>
+                <table>
+                    <tbody>
+                        <tr class="tit">
+                            <th>序号</th>
+                            <th>模板文件名</th>
+                            <th>大小</th>
+                            <th>最后修改时间</th>
+                            <th>选择</th>
+                        </tr>
+                        <volist name="dir" id="vo" offset="1">
+                            <tr>
+                                <td>1</td>
+                                <td class="tlf">{:basename($vo)}</td>
+                                <td>{:getFileSize($vo)}</td>
+                                <td><php>echo date('Y-m-d H:i:s', filemtime($vo))</php></td>
+                                <td style="color: #0072c1;cursor:pointer" class="JtplName" data="{:basename($vo)}">选择</td>
+                            </tr>
+                        </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+</block>
+<block name="script">
+<js href="__PUBLIC__/Admin/js/ajaxfileupload.js" />
+<js href="__PUBLIC__/Admin/js/plugins/questionnaire/optionManager.js" />
+<script type="text/javascript">
+    // 上传图片
+        $(document).on('change', '#up-pic', function() {
+            $.ajaxFileUpload({
+                url: "{:U('Module/uploadPhoto')}",
+                secureuri: false,
+                fileElementId: 'up-pic',
+                dataType: 'json',
+                success: function (data, status) {
+                    if(data.error != '') {
+                        alert(data.error);
+                    } else {
+                        $('.Jpic').attr('src', data.src).show();
+                        $('#imgs').val(data.src);
+                    }
+                },error: function (data, status, e) {
+                    alert(e);
+                }
+            });
+        });
+        var isTplName = '';
+        $('.tpl').click(function(){
+            $('.maskWrap').show()
+            isTplName = $(this).data('id')
+        })
+       
+        $('.JtplName').click(function(){
+            var name = $(this).attr('data');
+            $("input[name="+isTplName+"]").val(name)
+            $('.maskWrap').hide()
+        })
+</script>
+</block>

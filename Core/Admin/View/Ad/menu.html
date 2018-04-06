@@ -1,0 +1,29 @@
+<ul>
+	<if condition="checkControllerAuth(array('Ad'))">
+		<li <if condition="in_array(CONTROLLER_NAME, array('Ad'))">{:chr(32)}class="current"</if>>
+			<a class="date-tit sys-tj" href="{:getAuthUrl(array('Ad-adGroupList', 'Ad-addAdGroup', 'Ad-editAdGroup'))}" class="addons">广告管理</a>
+			<ul class="Jcon-ctr">
+				<if condition="checkActionAuth('Ad-adGroupList')">
+					<li class="<if condition="in_array(ACTION_NAME, array('adGroupList','editAdGroup'))">on</if>">
+						<a href="{:U('Ad/adGroupList')}">广告版位</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('Ad-addAdGroup')">
+					<li class="<if condition="in_array(ACTION_NAME, array('addAdGroup'))">on</if>">
+						<a href="{:U('Ad/addAdGroup')}">添加广告版位</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('Ad-adList')">
+					<li class="<if condition="in_array(ACTION_NAME, array('adList','editAd'))">on</if>">
+						<a href="{:U('Ad/adList')}">广告列表</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('Ad-addAd')">
+					<li class="<if condition="in_array(ACTION_NAME, array('addAd'))">on</if>">
+						<a href="{:U('Ad/addAd')}">添加广告</a>
+					</li>
+				</if>
+			</ul>
+		</li>
+	</if>
+</ul>

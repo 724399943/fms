@@ -1,0 +1,206 @@
+<extend name="Common:base" />
+
+<block name="title">添加列表子栏目</block>
+
+<block name="cusStyle">
+    <css href="__PUBLIC__/Admin/css/plugins/ui-frame/ui.css" />
+    <style type="text/css">
+        .maskWrap{width:100%;height:100%;background-color:rgba(0,0,0,.5);position:fixed;top:0;left:0;display: none;}
+        .maskMain{width:800px;height:450px;position:fixed;top:50%;left:50%;margin-top:-225px;margin-left:-400px;background-color:#ffffff;overflow:hidden;}
+        .mtitle{line-height:35px;padding:0 15px;background-color:#f4f4f4;overflow:hidden;}
+        .mtitle .close{float:right;cursor:pointer;}
+        .mcont{margin:5px;padding:10px;border:1px solid #ddd;overflow-y:scroll;}
+        .mcont .ht{line-height:35px;padding:0 10px;margin-bottom:15px;background-color:#e2eff9;}
+        .mcont table,.mcont table tbody{width:100%;text-align:center;}
+        .mcont .tit{background-color:#f4f4f4;}
+        .mcont table .tlf{text-align:left;}
+        .mcont table tbody>tr{width:100%;}
+        .mcont table tbody>tr:hover{background-color:#f4f4f4;}
+    </style>
+</block>
+
+<block name="menu">
+    <include file="Module/menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle">添加列表子栏目</h1>
+    </div>
+
+    <div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U('Module/addListColumn')}" method="post" >
+            <div class="line-dete">
+                <label>模块类型：</label>
+                <span class="field"> 
+                    <select name="mod_id">
+                        <volist name="moduleList" id="list">
+                            <option value="{$list['id']}">{$list['mod_name']}</option>
+                        </volist>
+                    </select>
+                </span>   
+            </div>
+            <div class="line-dete">
+                <label>栏目名称：</label>
+                <span class="field">
+                    <input type="text" class="smallinput"  name="cat_name" >
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>目录标识：</label>
+                <span class="field">
+                    <input type="text" class="smallinput"  name="dir_name" >
+                </span>
+            </div>
+            
+            <div class="line-dete">
+                <label>同级排序：</label>
+                <span class="field">
+                    <input type="text" class="smallinput"  name="orders" > (数字越小，越靠前)
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>状态设置：</label>
+                <span class="field">
+                    <input name="status" type="radio" value="1" checked />正常  
+                    <input name="status" type="radio" value="2" />锁定
+                </span>
+            </div>
+
+
+            <div class="line-dete">
+                <label>栏目图片：</label>
+                <span class="field">
+                    <input type="text" name="imgs" id="imgs" class="smallinput" readonly="true"/>
+                    <input type="file" name="up-pic" id="up-pic">
+                </span>
+            </div>
+
+
+            <include file="Common:seo" />
+        
+
+            <div class="line-dete">
+                <label>栏目首页模板：</label>
+                <span class="field">
+                    <input type="text" name="tpl_index" class="smallinput"  readonly="true"/>
+                    <a href="javascript:;" class="tpl" data-id="tpl_index" style="color: #0072c1">选择模板</a>
+                    （不需要填写风格路径和模板后缀，不填写则启用模块类型的默认模板）
+                </span>
+            </div>
+            <div class="line-dete">
+                <label>栏目列表模板：</label>
+                <span class="field">
+                    <input type="text" name="tpl_list" class="smallinput" readonly="true"/>
+                    <a href="javascript:;" class="tpl" data-id="tpl_list" style="color: #0072c1">选择模板</a>
+                    （不需要填写风格路径和模板后缀，不填写则启用模块类型的默认模板）
+                </span>
+            </div>
+            <div class="line-dete">
+                <label>栏目内容模板：</label>
+                <span class="field">
+                    <input type="text" name="tpl_detail" class="smallinput" readonly="true"/>
+                    <a href="javascript:;" class="tpl" data-id="tpl_detail" style="color: #0072c1">选择模板</a>
+                    （不需要填写风格路径和模板后缀，不填写则启用模块类型的默认模板）
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>每页显示数量：</label>
+                <span class="field">
+                    <input type="text" name="limit" class="smallinput" value="{$cateInfo['limit']}" />
+                    （不填写或者0，表示使用默认。）
+                </span>
+            </div>
+
+
+            <div class="line-dete">
+                <label>列表排序方式：</label>
+                <span class="field">
+                    <input type="radio" name="sort" value="1" checked >默认，
+                    <input type="radio" name="sort" value="2" >更新时间，
+                    <input type="radio" name="sort" value="3" >发布时间，
+                    <input type="radio" name="sort" value="4" >点击次数，
+                    <input type="radio" name="sort" value="5" >ID倒序，
+                    <input type="radio" name="sort" value="6" >ID顺序，
+                   
+                </span>
+            </div>
+            
+
+            <div class="line-dete">
+                <label></label>
+                <span class="field">
+                    <input type="submit" class="stdbtn"  value="保存"/>
+                </span>
+            </div>
+        </form>
+    </div>
+    <div class="maskWrap">
+        <div class="maskMain">
+            <div class="mtitle">选择模板文件<span class="close">关闭</span></div>
+            <div class="mcont">
+                <p class="ht">正在使用的主题[默认模板] 模板目录：{$dir[0]}</p>
+                <table>
+                    <tbody>
+                        <tr class="tit">
+                            <th>序号</th>
+                            <th>模板文件名</th>
+                            <th>大小</th>
+                            <th>最后修改时间</th>
+                            <th>选择</th>
+                        </tr>
+                        <volist name="dir" id="vo" offset="1">
+                            <tr>
+                                <td>1</td>
+                                <td class="tlf">{:basename($vo)}</td>
+                                <td>{:getFileSize($vo)}</td>
+                                <td><php>echo date('Y-m-d H:i:s', filemtime($vo))</php></td>
+                                <td style="color: #0072c1;cursor:pointer" class="JtplName" data="{:basename($vo)}">选择</td>
+                            </tr>
+                        </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+<js href="__PUBLIC__/Admin/js/ajaxfileupload.js" />
+<js href="__PUBLIC__/Admin/js/plugins/questionnaire/optionManager.js" />
+<script type="text/javascript">
+    // 上传图片
+        $(document).on('change', '#up-pic', function() {
+            $.ajaxFileUpload({
+                url: "{:U('Module/uploadPhoto')}",
+                secureuri: false,
+                fileElementId: 'up-pic',
+                dataType: 'json',
+                success: function (data, status) {
+                    if(data.error != '') {
+                        alert(data.error);
+                    } else {
+                        // $('.Jpic').attr('src', data.src).show();
+                        $('#imgs').val(data.src);
+                    }
+                },error: function (data, status, e) {
+                    alert(e);
+                }
+            });
+        });
+
+        var isTplName = '';
+        $('.tpl').click(function(){
+            $('.maskWrap').show()
+            isTplName = $(this).data('id')
+        })
+       
+        $('.JtplName').click(function(){
+            var name = $(this).attr('data');
+            $("input[name="+isTplName+"]").val(name)
+            $('.maskWrap').hide()
+        })
+</script>
+</block>

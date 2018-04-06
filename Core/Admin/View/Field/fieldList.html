@@ -1,0 +1,193 @@
+<extend name="Common:base" />
+
+<block name="title">模块字段</block>
+
+<block name="menu">
+    <include file="Module:menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle">模块字段</h1>
+    </div>
+    <div class="contentwrapper">
+        <form class="order-list" method="GET" action="{:U('Field/fieldList')}">
+            <p>
+                <input type="button" value="删除" class="Jdelete" />
+                &nbsp;&nbsp;&nbsp;
+                所属栏目：
+                <select name="tree_id">
+                    <option value="-1">所有栏目</option>
+                    <volist name="categoryList" id="vo">
+                    <option value="{$vo['id']}" <if condition="$return['tree_id'] eq $vo['id']">selected</if>>{$vo['cat_name']}</option>
+                    </volist>
+                </select>
+                <a href="{:U('Field/addField',array('firstCatId'=>$firstCatId))}" class="btn btn_link" style="float: right;margin-right: 10px;">
+                    <span style="font-size:14px">添加模块字段</span>
+                </a>
+                <input type="hidden" name="firstCatId" value="{$firstCatId}" />
+                <input type="submit" value="搜索" />
+            </p>
+        </form>    
+            <table cellpadding="0" cellspacing="0" border="0" class="stdtable stdtablequick">
+                <tr>
+                    <th width="">选择</th>
+                    <th width="">排序</th>
+                    <th width="">字段简述</th>
+                    <th width="">字段名称</th>
+                    <th width="">字段类型</th>
+                    <th width="">所属栏目</th>
+                    <th width="">必填</th>
+                    <th width="">状态</th>
+                    <th width="23%">操作</th>
+                </tr>
+                <empty name="list">
+                    <tr>
+                        <td colspan="9">目前没有数据~！</td>
+                    </tr>
+                <else />
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td><input type="checkbox" class="ids" value="{$vo['id']}" /></td>
+                            <td>{$vo.orders}</td>
+                            <td>{$vo['type_name']}</td>
+                            <td>{$vo['attr_name']}</td>
+                            <td>{$vo['input_type']}</td>
+                            <td>{$vo['tree_name']}</td>
+                            <if condition="$vo['is_valid'] eq '1'">
+                                <td class="Jvalid" data-id="{$vo['id']}-2">
+                                    <img src="__PUBLIC__/Admin/images/yes.gif" alt="">
+                                </td>
+                                <else/>
+                                <td class="Jvalid" data-id="{$vo['id']}-1">
+                                    <img src="__PUBLIC__/Admin/images/no.gif" alt="">  
+                                </td>
+                            </if>
+
+                            <if condition="$vo['flag'] eq '1'">
+                                  <td class="Jstatus" data-id="{$vo['id']}-2">
+                                      <img src="__PUBLIC__/Admin/images/yes.gif" alt="">
+                                  </td>
+                                  <else/>
+                                  <td class="Jstatus" data-id="{$vo['id']}-1">
+                                      <img src="__PUBLIC__/Admin/images/no.gif" alt="">  
+                                  </td>
+                            </if>
+
+                            <td>
+                                <if condition="checkActionAuth('Field-editField')">
+                                    <a class="stdbtn btn_lime" href="{:U('Field/editField', array('id'=>$vo['id']))}">编辑</a>
+                                <else/>
+                                    无权限访问
+                                </if>
+                                <if condition="checkActionAuth('Field-delField')">
+                                    <a class="stdbtn btn_lime" href="{:U('Field/delField', array('ids'=>$vo['id']))}">删除</a>
+                                <else/>
+                                    无权限访问
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                    <tr>
+                        <if condition="$counting EGT 25">
+                            <td colspan="8">
+                                <div class="page-box">{$show}</div>
+                            </td>
+                        </if>
+                            <!-- <input type="text" class="input-text" style="width:250px" placeholder="标识" name="tags" value="{$return['tags']}" > -->
+                    </tr>
+                </empty>
+            </table>
+    </div>
+</block>
+<block name="script">
+<script type="text/javascript">
+//选择删除
+ $(".Kdelete").click(function () {
+
+        var objs = $('.ids');
+        var ids = '';
+        for(var j=0;j<objs.length;j++)
+        {   
+            if ($(objs[j]).is(':checked'))
+            {
+                ids += $(objs[j]).val()+',';
+            }
+        }
+        if ( !ids )  {
+            alert('请选择要删除的数据');
+            return;
+        }
+        var jumpUrl = "{:U('Article/delArticle')}?ids=" + ids;
+        window.location.href = jumpUrl;
+    });
+//选择必填
+$('.Jvalid').click(function(){
+        var id = $(this).attr('data-id')
+        var yes = "__PUBLIC__/Admin/images/yes.gif"
+        var no = "__PUBLIC__/Admin/images/no.gif"
+        var field = 'is_valid'
+        id = id.split('-')
+        if (id[1] == 1) {
+            $(this).children('img').attr('src', yes)
+            $(this).attr('data-id', id[0] + '-2')
+        } else {
+           $(this).children('img').attr('src',no)
+           $(this).attr('data-id', id[0] + '-1')
+        }
+        $.ajax({
+            url: "{:U('Field/changeFieldStatus')}",
+            type: 'post',
+            dataType: 'json',
+            data: {id: id[0],status:id[1],field:field}
+        })
+        .done(function(data) {
+            console.log(data);
+        })
+
+   })
+//选择状态
+$('.Jstatus').click(function(){
+        var id = $(this).attr('data-id')
+        var yes = "__PUBLIC__/Admin/images/yes.gif"
+        var no = "__PUBLIC__/Admin/images/no.gif"
+        var field = 'flag';
+        id = id.split('-')
+        if (id[1] == 1) {
+            $(this).children('img').attr('src', yes)
+            $(this).attr('data-id', id[0] + '-2')
+        } else {
+           $(this).children('img').attr('src',no)
+           $(this).attr('data-id', id[0] + '-1')
+        }
+        $.ajax({
+            url: "{:U('Field/changeFieldStatus')}",
+            type: 'post',
+            dataType: 'json',
+            data: {id: id[0],status:id[1],field:field}
+        })
+        .done(function(data) {
+           
+        })
+
+   })
+//删除字段
+$('.Jdelete').click(function(){
+    var objs = $('.ids');
+    var ids = '';
+    for(var j=0;j<objs.length;j++)
+    {   
+        if ($(objs[j]).is(':checked'))
+        {
+            ids += $(objs[j]).val()+',';
+        }
+    }
+    if ( !ids )  {
+        alert('请选择要删除的数据');
+        return;
+    }
+    var jumpUrl = "{:U('Field/delField')}?ids=" + ids;
+    window.location.href = jumpUrl;
+})
+</script>
+</block>

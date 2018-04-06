@@ -1,0 +1,121 @@
+<extend name="Common:base" />
+
+<block name="title">商品分类</block>
+
+<block name="menu">
+	<include file="GoodsCat:menu" />
+</block>
+
+<block name="main">
+	<div class="pageheader">
+	    <h1 class="pagetitle">
+	    	商品分类列表
+	    </h1>	    
+	</div>
+	<div id="contentwrapper" class="contentwrapper">
+	<div class="pageheader">		
+	</div>
+		<form method="get" id="searchForm">				    
+            <p>
+            	<if condition="checkActionAuth('GoodsCat-addGoodsCat')">&nbsp;&nbsp;&nbsp;
+                <a href="{:U('GoodsCat/addGoodsCat')}" class="btn btn_link"><span style="font-size:14px">+ 添加</span></a>
+                </if>
+                &nbsp;&nbsp; 
+            	<input type="button" id="ids"  value="全选">
+			    &nbsp;&nbsp; 
+			    <!-- <input type="button" id="setDel"  value="删除"> -->
+                &nbsp;&nbsp;             
+            </p>
+            <table cellpadding="0" cellspacing="0" border="0" class="stdtable stdtablequick">
+				<tr>
+					<th>选择</th>					
+					<th>编号</th>					
+					<th>栏目名称</th>
+					<th>调用别名</th>
+					<th>添加时间</th>					
+					<th>排序</th>
+					<th>操作</th>
+				</tr>
+
+				<if condition="empty($categoryList)">
+					<tr>
+						<td colspan="11">暂无相关数据</td>
+					</tr>
+				<else />
+
+					<volist name="categoryList" id="vo" key="k">
+						<tr>						
+                            <td><input type="checkbox" name="checkbox" class="ids" value="{$vo['id']}"/></td>
+                            <td>{$vo['id']}</td>
+                            
+							<td>
+							<if condition="$vo['pid'] == 0">
+								{$vo['category_name']}
+								<else/>
+								<php>echo (str_repeat('├ ',$vo['level']-1));</php>{$vo['category_name']}							
+							</if>
+							
+							</td>
+							<td>{$vo['alias']}</td>
+							<td>{$vo['add_time']|time_format=###}</td>				
+							<td><input type="text" value="{$vo['sort']}"></td>
+							<td class="center">
+
+								<if condition=" ( checkActionAuth('GoodsCat-goodsModel') ) AND ($vo['level'] eq '2')">
+										<a class="stdbtn btn_lime" href="{:U('GoodsCat/goodsModel', array('id'=>$vo['id']))}">商品模型</a>&nbsp;&nbsp;
+								</if>
+								<if condition="checkActionAuth('GoodsCat-addGoodsCat')">
+										<a class="stdbtn btn_lime" href="{:U('GoodsCat/addGoodsCat', array('id'=>$vo['id']))}">添加子类</a>&nbsp;&nbsp;
+								</if>
+								<if condition="checkActionAuth('GoodsCat-editGoodsCat')">
+									<a class="stdbtn btn_lime" href="{:U('GoodsCat/editGoodsCat', array('id'=>$vo['id']))}">编辑</a>&nbsp;&nbsp;
+								</if>
+								<if condition="checkActionAuth('GoodsCat-delGoodsCat')">
+									<a class="stdbtn btn_lime" href="{:U('GoodsCat/delGoodsCat', array('id'=>$vo['id']))}">删除</a>&nbsp;&nbsp;
+								</if>
+							</td>
+						</tr>
+					</volist>
+					<tr>
+						<td colspan="7">
+							<div class="page-box">{$show}</div>
+						</td>
+					</tr>
+				</if>
+			</table>
+		</form>
+	</div>
+</block>
+
+<block name="script">
+<script type="text/javascript">
+	$(function(){
+    	//全选
+        $('#ids').click(function(){
+            if($('.ids').is(":checked"))
+            {
+                $('.ids').prop('checked',false);
+            }else{
+                $('.ids').prop('checked',true);
+            }
+        }); 
+
+	
+		//选择删除
+        $("#setDel").click(function () {
+        var objs = $('.ids');
+        var ids = '';
+        for(var j=0;j<objs.length;j++)
+        {   
+            if ($(objs[j]).is(':checked'))
+            {
+                ids += $(objs[j]).val()+',';
+            }
+        }
+        var jumpUrl = "{:U('GoodsCat/delGoodsCat')}?ids=" + ids;
+        window.location.href = jumpUrl;
+    });
+		
+	});
+</script>
+</block>

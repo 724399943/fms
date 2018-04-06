@@ -1,0 +1,128 @@
+<extend name="Common:base" />
+
+<block name="title">编辑字段</block>
+
+<block name="cusStyle">
+    <css href="__PUBLIC__/Admin/css/plugins/ui-frame/ui.css" />
+    <style type="text/css">
+    .line-dete em{color: #e18383}
+    </style>
+</block>
+
+<block name="menu">
+    <include file="Module/menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+    <h1 class="pagetitle">编辑字段</h1>
+    </div>
+    <div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U('Field/editField')}" method="post" id="question-form">
+            <div class="line-dete">
+                <label>所属栏目<em>*</em></label>
+                <span class="field">
+                    <select name="tree_id">
+                        <option value="0">所有栏目</option>
+                        <volist name="categoryList" id="vo">
+                        <option value="{$vo['id']}" <if condition="$vo['id'] eq $fieldData['tree_id']">selected</if>>{$vo['cat_name']}</option>
+                        </volist>
+                    </select>
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>简述文字<em>*</em></label>
+                <span class="field">
+                    <input type="text" name="type_name" value="{$fieldData['type_name']}" />&nbsp;&nbsp;
+                    (发布内容时显示的字段提示，请输入长度不能大于50的任意字符段)
+                </span>
+            </div>
+            
+            <div class="line-dete">
+                <label>字段类型<em>*</em></label>
+                <span class="field">
+                    <select disabled>
+                        <option value="">请选择</option>
+                        <option value="text" <if condition="$fieldData['input_type'] eq 'text'">selected</if> >单行文本</option>
+                        <option value="textarea" <if condition="$fieldData['input_type'] eq 'textarea'">selected</if>>多行文本</option>
+                        <option value="checkbox" <if condition="$fieldData['input_type'] eq 'checkbox'">selected</if>>多选框</option>
+                        <option value="radio" <if condition="$fieldData['input_type'] eq 'radio'">selected</if>>单选框</option>
+                        <option value="select" <if condition="$fieldData['input_type'] eq 'select'">selected</if>>下拉框</option>
+                        <option value="img" <if condition="$fieldData['input_type'] eq 'img'">selected</if>>图片附件</option>
+                        <option value="attachment" <if condition="$fieldData['input_type'] eq 'attachment'">selected</if>>文件附件</option>
+                    </select>&nbsp;&nbsp;
+                    （不能修改）
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>字段名称<em>*</em></label>
+                <span class="field">
+                    <input type="text"  value="{$fieldData['attr_name']}" readonly style="background-color: #ccc"  />&nbsp;&nbsp;(不能修改）
+                </span>
+            </div>
+            
+            <div class="line-dete">
+                <label>提示文字</label>
+                <span class="field">
+                    <input type="text" value="{$fieldData['type_remark']}" name="type_remark" />&nbsp;&nbsp;
+                    （发布内容时显示的备注内容，请输入长度不能大于200的任意字符段）
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>默认值</label>
+                <div class="field">
+                    <textarea name="attr_value" style="width: 50%;height: 80px;overflow: auto;">{$fieldData['attr_value']}</textarea><br/>
+                    （如果字段为下拉、复合选项关联输入框、单选或多选，每个默认值回车输入）
+                </div>
+            </div>
+
+            <div class="line-dete">
+                <label>字段排序<em>*</em></label>
+                <span class="field">
+                    <input type="text" name="orders" value="{$fieldData['orders']}" />&nbsp;&nbsp;(数字越小越靠前)
+                </span>
+            </div>
+            
+
+            <div class="line-dete">
+                <label>必填字段</label>
+                <span class="field">
+                <input type="radio" name="is_valid" value="1" <if condition="$fieldData['is_valid'] eq '1'">checked</if> />启用
+                    <input type="radio" name="is_valid" value="0" <if condition="$fieldData['is_valid'] eq '0'">checked</if> />关闭
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>显示状态</label>
+                <span class="field">
+                    <input type="radio" name="flag" value="1" <if condition="$fieldData['flag'] eq '1'">checked</if>  />启用
+                    <input type="radio" name="flag" value="0"  <if condition="$fieldData['flag'] eq '0'">checked</if> />关闭
+                </span>
+            </div>
+            
+            <div class="line-dete">
+                <label></label>
+                <span class="field">
+                    <input type="hidden" name="firstCatId" value="{$firstCatId}" />
+                    <input type="hidden" name="module_id" value="{$fieldData['module_id']}" />
+                    <input type="hidden" name="id" value="{$fieldData['id']}" />
+                    <input type="submit" class="stdbtn" id="Ksubmit" value="保存"/>
+                   <!--  <input type="button" class="stdbtn" onclick="window.location.href='{:U('Questionnaire/problemList', array('id'=>$_GET['questionnaire_id']))}'" value="返回"/> -->
+                </span>
+            </div>
+
+            
+        </form>
+    </div>
+</block>
+<block name="script">
+<js href="__PUBLIC__/Admin/js/ajaxfileupload.js" />
+<!-- <js href="__PUBLIC__/Admin/js/plugins/questionnaire/optionManager.js" /> -->
+<script charset="utf-8" src="__PUBLIC__/Admin/js/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="__PUBLIC__/Admin/js/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+</script>
+</block>

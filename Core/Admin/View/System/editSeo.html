@@ -1,0 +1,123 @@
+<extend name="Common:base" />
+
+<block name="title">编辑文章内容</block>
+
+<block name="cusStyle">
+    <css href="__PUBLIC__/Admin/css/plugins/ui-frame/ui.css" />
+    <style type="text/css">
+    form input{width: 40%}
+    .line-dete em {color: #e18383;}
+    </style>
+</block>
+
+<block name="menu">
+    <include file="System/menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle">编辑SEO设置</h1>
+    </div>
+    <div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U('System/editSeo')}" method="post" id="question-form">
+
+            <div class="line-dete">
+                <label>标识</label>
+                <span class="field">
+                    <input type="text" name="title" value="{$seoData['id_mark']}" readonly="" style="background: #CCC"  />
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>频道名称<em>*</em></label>
+                <span class="field">
+                    <input type="text" name="title" value="{$seoData['chname']}"  />
+                </span>
+            </div>
+            
+            <div class="line-dete">
+                <label>Meta标题：</label>
+                <span class="field">
+                    <input type="text" class="smallinput" placeholder="{$tags}" value="{$seoData['tags']}" name="tags">
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>Meta关键字：</label>
+                <span class="field">
+                    <textarea name="meta_keyword" id="" cols="30" rows="10" style="margin: 0px; height: 62px; width: 629px;">{$seoData['meta_keyword']}</textarea>
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>Meta描述：</label>
+                <span class="field">
+                    <textarea name="meta_description" id="" cols="30" rows="10" style="margin: 0px; height: 68px; width: 678px;">{$seoData['meta_description']}</textarea>
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>描述</label>
+                <span class="field">
+                    <textarea name="">{$seoData['intro']}</textarea>
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label></label>
+                <span class="field">
+                    <input type="hidden" name="id" value="{$seoData['id']}">
+                    <input type="submit" class="stdbtn" id="Ksubmit" value="保存"/>
+                    <input type="button" class="stdbtn" onclick="window.location.href='{:U('System/seoSetting')}'" value="返回"/>
+                </span>
+            </div>
+        </form>
+    </div>
+</block>
+<block name="script">
+<js href="__PUBLIC__/Admin/js/ajaxfileupload.js" />
+<!-- <js href="__PUBLIC__/Admin/js/plugins/questionnaire/optionManager.js" /> -->
+<script charset="utf-8" src="__PUBLIC__/Admin/js/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="__PUBLIC__/Admin/js/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+   // 上传封面图
+        $(document).on('change', '#fileToUpload', function() {
+            $.ajaxFileUpload({
+                url: "{:U('Article/photoUpload')}",
+                secureuri: false,
+                fileElementId: 'fileToUpload',
+                dataType: 'json',
+                success: function (data, status) {
+                    if(typeof(data.error) != 'undefined') {
+                        if(data.error != '') {
+                            alert(data.error);
+                        } else {
+                            $("#photoList").html('<div class="pic-wrap"><img src="' + data.src + '" /><input type="hidden" name="image" value="' + data.src + '" /></div>');
+                        }
+                    }
+                },
+                error: function (data, status, e) {
+                    alert(e);
+                }
+            });
+        });
+    //编辑器
+    $(function(){
+        var editor;
+        KindEditor.ready(function(K) {
+            editor = K.create('textarea[name="content"]', {
+                resizeType : 1,
+                allowPreviewEmoticons : false,
+                allowImageUpload : true,
+                uploadJson : '{:U('Article/photoUpload')}',
+                allowFileManager : false,
+                filterMode: false,
+                items : [
+                    'source', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+            });
+        });
+    })
+</script>
+</block>

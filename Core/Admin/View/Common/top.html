@@ -1,0 +1,90 @@
+<ul class="headermenu">
+	<if condition="checkControllerAuth('Index')">
+		<li class="<if condition="in_array(CONTROLLER_NAME, array('Index'))">current</if>">
+			<a href="{:getAuthUrl(array('Index-systemSetting'))}">
+				<span class="icon icon-console"></span>
+				<span class="tet">控制台</span>
+			</a>
+			<em></em>
+		</li>
+	</if>
+	
+	<if condition="checkControllerAuth(array('Module'))">
+		<li class="<if condition="in_array(CONTROLLER_NAME, array('Module','Article','Field'))">current</if>">
+			<a href="{:getAuthUrl(array('Module-setModule'))}">
+				<span class="icon icon-class"></span>
+				<span class="tet">模块管理</span>
+			</a>
+			<em></em>
+		</li>
+	</if>
+	
+	<if condition="checkControllerAuth(array('GoodsCat'))">
+		<li class="<if condition="in_array(CONTROLLER_NAME, array('Goods','GoodsCat'))">current</if>">
+			<a href="{:getAuthUrl(array('GoodsCat-goodsCatList'))}">
+				<span class="icon icon-message"></span>
+				<span class="tet">商品管理</span>
+			</a>
+			<em></em>
+		</li>
+	</if>
+
+	<if condition="checkControllerAuth('Auth', 'Admin')">
+		<li class="<if condition="in_array(CONTROLLER_NAME, array('Auth', 'Admin'))">current</if>">
+			<a href="{:getAuthUrl(array('Admin-adminList', 'Admin-addAdmin', 'Auth-roleList', 'Auth-addRole'))}">
+				<span class="icon icon-admin"></span>
+				<span class="tet">管理员中心</span>
+			</a>
+			<em></em>
+		</li>
+	</if>
+
+	<if condition="checkControllerAuth('Ad')">
+		<li class="<if condition="in_array(CONTROLLER_NAME, array('Ad'))">current</if>">
+			<a href="{:getAuthUrl(array('Ad-adGroupList', 'Ad-createQrCode'))}">
+				<span class="icon icon-content"></span>
+				<span class="tet">广告管理</span>
+			</a>
+			<em></em>
+		</li>
+	</if>
+	
+	<if condition="checkControllerAuth('Message')">
+		<li class="<if condition="in_array(CONTROLLER_NAME, array('Message'))">current</if>">
+			<a href="{:getAuthUrl(array('Message-messageList', 'Message-addMessage','Message-replyMessage'))}">
+				<span class="icon icon-shop"></span>
+				<span class="tet">插件应用</span>
+			</a>
+			<em></em>
+		</li>
+	</if>
+	
+	<if condition="checkControllerAuth(array('Bbs'))">
+		<li class="<if condition="in_array(CONTROLLER_NAME, array('Bbs'))">current</if>">
+			<a href="{:getAuthUrl(array('Bbs-BbsArticleList'))}">
+				<span class="icon icon-forum"></span>
+				<span class="tet">论坛管理</span>
+			</a>
+			<em></em>
+		</li>
+	</if>
+
+	
+	<if condition="checkControllerAuth('System')">
+		<li class="<if condition="in_array(CONTROLLER_NAME, array('System'))">current</if>">
+			<a href="{:getAuthUrl(array('System-setting'))}">
+				<span class="icon icon-system"></span>
+				<span class="tet">系统设置</span>
+			</a>
+			<em></em>
+		</li>
+	</if>
+
+	<li>
+		<a href="{:U('Login/logout')}">
+			<span class="icon icon-exit"></span>
+			<span class="tet">退出登录</span>
+		</a>
+		<em></em>
+	</li>
+</ul>

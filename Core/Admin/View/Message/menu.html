@@ -1,0 +1,25 @@
+<ul>
+	<if condition="checkControllerAuth(array('Message','Log'))">
+		<li <if condition="in_array(CONTROLLER_NAME, array('Message'))">{:chr(32)}class="current"</if>>
+			<a class="date-tit sys-tj" href="{:getAuthUrl(array('Message-messageList', 'Message-addMessage'))}" class="addons">扩展应用</a>
+			<ul class="Jcon-ctr">
+				<if condition="checkActionAuth('Message-messageList')">
+					<li class="<if condition="in_array(ACTION_NAME, array('messageList', 'addMessage'))">on</if>">
+						<a href="{:U('Message/messageList')}">留言管理</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('Log-logList')">
+					<li class="<if condition="in_array(ACTION_NAME, array('logList'))">on</if>">
+						<a href="{:U('Log/logList')}">日志管理</a>
+					</li>
+				</if>
+				<!-- <if condition="checkActionAuth('Admin-addAdmin')">
+					<li class="<if condition="in_array(ACTION_NAME, array('addAdmin'))">on</if>">
+						<a href="{:U('Admin/addAdmin')}">添加管理员</a>
+					</li>
+				</if> -->
+			</ul>
+		</li>
+	</if>
+
+</ul>

@@ -1,0 +1,247 @@
+<extend name="Public:base"/>
+<block name="title"></block>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Bbs/css/style-fl.css" />
+</block>
+<block name="main">
+    <div class="lists-container pdb">
+        <include file="Public:header" />
+        <div class="control-banner c-card Jloading" id="JmoduleDetail"></div>
+        <div class="subject c-card">
+            <div class="subject-menu">
+                <ul id="subject_menu_types" class="types">
+                    <!-- <li class="default active" data-type="top">
+                        <a href="javascript:;">默认</a>
+                    </li> -->
+                    <li class="lastpost active" data-type="new">
+                        <a href="javascript:;">最新</a>
+                    </li>
+                    <li class="heat" data-type="hot">
+                        <a href="javascript:;">热门</a>
+                    </li>
+                    <li class="digest" data-type="reco">
+                        <a href="javascript:;">精华</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="subject-tops">
+                <!-- <div class="recommendPanel" id="Jtop" data-page="1" data-load="1"></div> -->
+                <div class="recommendPanel" id="Jnew" data-page="1" data-load="0"></div>
+                <div class="recommendPanel" style="display: none" id="Jhot" data-page="0" data-load="0"></div>
+                <div class="recommendPanel" style="display: none" id="Jreco" data-page="0" data-load="0"></div>
+            </div>
+            <div id="more_subject_tops" class="c-area-more">
+                <p>
+                    <a>查看更多</a>
+                </p>
+            </div>
+        </div>
+        <div id="JpostList" class="notice-list c-card Jloading" data-page="1" data-load="0">
+           
+        </div>
+    </div>
+</block>
+
+<block name="script">
+<script id="moduleDetail_tpl" type="text/html">
+    <div class="pic">
+        <img id="forum_icon" src="<%=moduleDetail['icon']%>" width="45px"></div>
+    <div class="text">
+        <a href="javascript:;" style="display:inline-block;">
+            <p class="hot-sub-title"><%=moduleDetail['module_name']%></p>
+            <p class="hot-sub-desc"><%=moduleDetail['introduction']%></p>
+        </a>
+    </div>
+    <div class="btns">
+        <a href="javascript:;" id="JmoduleCollect" class="c-btn-4 c-bgc-red"> <i class="c-icon c-icon-plus"></i>
+            收藏本版
+        </a>
+        <%if( moduleDetail['is_post'] == '1'){%>
+        <a href="/Bbs/Index/article_post/module/{$_GET['id']}" class="c-btn-4 c-bgc-blue"> <i class="c-icon c-icon-write"></i>
+            我要发帖
+        </a>
+        <%}%>
+    </div>
+</script>
+<script id="postList_tpl" type="text/html">
+    <% for (var i = 0; i < articleList.length; i ++) {%>
+    <div class="hot-warp-box">
+        <a href="/Bbs/Index/article_detail/id/<%=articleList[i]['id']%>">
+            <div class="box">
+                <img src="http://bt.hpingtai.com/Static/Public/Bbs/images/article_default.jpg" alt="">
+                <div class="txt"><span class="n"><%=articleList[i]['nickname']%></span>
+                 <% var date = new Date(articleList[i]['add_time'] * 1000); var addTime = date.pattern('yyyy-MM-dd HH:mm:ss')%>
+                <p><%=addTime%></p></div>
+            </div>
+            <div class="tit"><%=articleList[i]['article_name']%></div>
+            <div class="dec"><%=articleList[i]['article_content']%></div>
+            <!-- <div class="pic">
+                <img src="http://bt.hpingtai.com/Static/Public/Bbs/images/article_default.jpg" alt="">
+                <img src="http://bt.hpingtai.com/Static/Public/Bbs/images/article_default.jpg" alt="">
+                <img src="http://bt.hpingtai.com/Static/Public/Bbs/images/article_default.jpg" alt="">
+            </div> -->
+        </a>
+        <div class="ctr-box">
+            <span class="zan Jlike" data-id="<%=articleList[i]['id']%>"><em></em><%=articleList[i]['like_number']%></span>
+            <a href="/Bbs/Index/article_detail/id/<%=articleList[i]['id']%>" class="ping"><em></em> <%=articleList[i]['comment_number']%></a>
+            <a href="/Bbs/Index/article_detail/id/<%=articleList[i]['id']%>" class="liu"><em></em><%=articleList[i]['view_number']%></a>
+        </div>
+    </div>
+    <%}%>
+</script>
+<script id="reco_tpl" type="text/html">
+    <%for (var i = 0; i < articleList.length; i ++) {%>
+        <a href="/Bbs/Index/article_detail/id/<%=articleList[i]['id']%>">
+            <span class="tags c-tags hong">置顶</span>
+            <span class="title" style="font-weight: bold;color: #f8a411;"><%=articleList[i]['article_name']%></span>
+        </a>
+    <%}%>
+</script>
+<script>
+    var bt = baidu.template;
+    var cur_type = 'new';
+
+    // 模块详情
+    $.ajax({
+        url: "{:U('Index/module')}",
+        type: 'POST',
+        dataType: 'json',
+        data: {id: {$_GET['id']}}
+    })
+    .done(function(data) {
+        // console.log(data);
+        var moduleDetail = bt('moduleDetail_tpl', data['data']);
+        $('#JmoduleDetail').removeClass('Jloading');
+        document.getElementById('JmoduleDetail').innerHTML = moduleDetail;
+    });
+
+    
+    // 点赞
+    $('#JpostList').on('click', '.Jlike', function() {
+        var id = $(this).data('id')
+        var that =$(this);
+        $.ajax({
+            url: "{:U('Index/article_like')}",
+            type: 'POST',
+            dataType: 'json',
+            data: {id: id}
+        })
+        .done(function(data) {
+            if (data['status'] == 200000) {
+                automsgbox('点赞成功！');
+                var num = parseInt(that.text())+1;
+                that.html('<em></em>'+num);
+            } else {
+                automsgbox(data['message']);
+            }
+        });
+    });
+
+    // 获取文章
+    function getArticle(page, module, type, callback) {
+        $.ajax({
+            url: "{:U('Index/article_list')}",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                page: page,
+                module_id: module,
+                type: type
+            }
+        })
+        .done(function(data) {
+            var html = bt('reco_tpl', data['data']);
+            $('#J' + type).append(html);
+            if (callback) {
+                callback(data);
+            }
+        });
+    }
+
+    getArticle(0, {$_GET['id']}, 'new');
+    $("#Jnew").attr("data-load",1);
+
+    // 帖子列表
+    $.ajax({
+        url: "{:U('Index/article_list')}",
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            module_id: {$_GET['id']}
+        }
+    })
+    .done(function(data) {
+        // console.log(data);
+        var postList = bt('postList_tpl', data['data']);
+        $('#JpostList').removeClass('Jloading');
+        document.getElementById('JpostList').innerHTML = postList;
+    });
+    
+    // 收藏版块
+    $(function() {
+        isScroll(function() {
+            var page = $('#JpostList').attr('data-page');
+            var load = $('#JpostList').attr('data-load');
+            if (load == 0) {
+                $('#JpostList').attr('data-load', 1);
+                getArticle(page, {$_GET['id']}, '', function(data) {
+                    if( data["data"]["articleList"].length > 0 ){
+                        var postList = bt('postList_tpl', data['data']);
+                        $('#JpostList').append(postList);
+                        $('#JpostList').attr('data-page', ++ page);
+                        $('#JpostList').attr('data-load', 0);
+                    }else{
+                        $('#JpostList').attr('data-load', 1);
+                    }
+                });
+            }
+        });
+
+        $('#JmoduleDetail').on('click', '#JmoduleCollect', function() {
+            $.ajax({
+                url: "{:U('Index/module_collect')}",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id: {$_GET['id']}
+                }
+            })
+            .done(function(data) {
+                console.log(data);
+                if (data['status'] == 200000) {
+                    automsgbox('收藏成功！');
+                } else {
+                    automsgbox(data['message']);
+                }
+            });
+        });
+
+        $('#subject_menu_types li').click(function() {
+            var type = $(this).attr('data-type');
+            var load = $('#J' + type).attr('data-load');
+            // var page = $(this).data('page');
+            var _that = $(this);
+            if (load == 0) {
+                getArticle(0, {$_GET['id']}, type, function() {
+                    _that.addClass('active').siblings().removeClass('active');
+                    $('#J' + type).attr('data-load', 1);
+                    $('.recommendPanel').hide();
+                    $('#J' + type).show();
+                });
+            } else {
+                _that.addClass('active').siblings().removeClass('active');
+                $('.recommendPanel').hide();
+                $('#J' + type).show();
+            }
+            cur_type = type;
+        });
+
+        $('#more_subject_tops').click(function() {
+            var page = $('#J' + cur_type).attr('data-page');
+            getArticle(page, cur_type, function() {
+
+            });
+        });
+    });
+</script>
+</block>

@@ -1,0 +1,58 @@
+<ul>
+	<if condition="checkControllerAuth(array('Bbs'))">
+		<li <if condition="in_array(CONTROLLER_NAME, array('Bbs'))">{:chr(32)}class="current"</if>>
+			<a class="date-tit sys-tj" href="{:getAuthUrl(array('Bbs-BbsArticleList'))}" class="addons">帖子管理</a>
+			<ul class="Jcon-ctr">
+				<if condition="checkActionAuth('Bbs-BbsArticleList')">
+					<li class="<if condition="in_array(ACTION_NAME, array('BbsArticleList', 'BbsEditArticle'))">on</if>">
+						<a href="{:U('Bbs/BbsArticleList')}">帖子列表</a>
+					</li>
+				</if>
+
+				<if condition="checkActionAuth('Bbs-addBbsArticle')">
+					<li class="<if condition="in_array(ACTION_NAME, array('addBbsArticle'))">on</if>">
+						<a href="{:U('Bbs/addBbsArticle')}">添加帖子</a>
+					</li>
+				</if>
+
+				<if condition="checkActionAuth('Bbs-quickRespone')">
+					<li class="<if condition="in_array(ACTION_NAME, array('quickRespone'))">on</if>">
+						<a href="{:U('Bbs/quickRespone')}">快速回复</a>
+					</li>
+				</if>
+			</ul>
+		</li>
+	</if>
+
+	<if condition="checkControllerAuth(array('Bbs'))">
+		<li <if condition="in_array(CONTROLLER_NAME, array('Bbs'))">{:chr(32)}class="current"</if>>
+			<a class="date-tit sys-tj" href="{:getAuthUrl(array('Bbs-BbsModuleList', 'Bbs-addBbsModule'))}" class="addons">版块管理</a>
+			<ul class="Jcon-ctr">
+				<if condition="checkActionAuth('Bbs-BbsModuleList')">
+					<li class="<if condition="in_array(ACTION_NAME, array('BbsModuleList'))">on</if>">
+						<a href="{:U('Bbs/BbsModuleList')}">版块列表</a>
+					</li>
+				</if>
+
+				<if condition="checkActionAuth('Bbs-addBbsModule')">
+					<li class="<if condition="in_array(ACTION_NAME, array('addBbsModule'))">on</if>">
+						<a href="{:U('Bbs/addBbsModule')}">添加板块</a>
+					</li>
+				</if>
+			</ul>
+		</li>
+	</if>
+
+	<if condition="checkControllerAuth(array('Bbs'))">
+		<li <if condition="in_array(CONTROLLER_NAME, array('Bbs'))">{:chr(32)}class="current"</if>>
+			<a class="date-tit sys-tj" href="{:getAuthUrl(array('Bbs-BbsCommentList'))}" class="addons">评论管理</a>
+			<ul class="Jcon-ctr">
+				<if condition="checkActionAuth('Bbs-BbsCommentList')">
+					<li class="<if condition="in_array(ACTION_NAME, array('BbsCommentList'))">on</if>">
+						<a href="{:U('Bbs/BbsCommentList')}">评论列表</a>
+					</li>
+				</if>
+			</ul>
+		</li>
+	</if>
+</ul>

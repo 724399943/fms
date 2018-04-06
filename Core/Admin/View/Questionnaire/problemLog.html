@@ -1,0 +1,89 @@
+<extend name="Common:base" />
+
+<block name="title">用户回答列表</block>
+
+<block name="cusStyle">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/plugins/ui-frame/ui.css" type="text/css" />    
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/plugins/fontawesome/font-awesome.min.css" type="text/css" />
+</block>
+
+<block name="menu">
+    <include file="Questionnaire:menu" />
+</block>
+
+<block name="main">
+    <div class="questionnaire-info">
+        <div class="questionnaire-title">
+            <switch name="questionnaireData['type']">
+                <case value="survey">
+                    <span class="label label-danger"><i class="fa fa-tag"></i>{:getCateName('survey')}</span>
+                </case>
+                <case value="score_test">
+                    <span class="label label-warning"><i class="fa fa-tag"></i>{:getCateName('score_test')}</span>
+                </case>
+                <case value="jump_test">
+                    <span class="label label-success"><i class="fa fa-tag"></i>{:getCateName('jump_test')}</span>
+                </case>
+            </switch>
+            <h2>{$questionnaireData['title']}</h2>
+        </div>
+        <p>{$questionnaireData['description']}</p>
+    </div>
+    <div class="contentwrapper">
+        <form class="order-list" method="GET" action="{:U('Questionnaire/problemLog')}">
+            <p class="select-style1">
+                <input type="hidden" name="questionnaire_id" value="{$Think.get.questionnaire_id}">
+                <input type="text" class="input-text" style="width:150px" placeholder="用户ID" name="user_id" value="{$return['user_id']}" >
+                <input type="submit" value="搜索"></input>
+            </p>
+        </form>
+        <a class="stdbtn btn_lime" href="{:U('Questionnaire/questionList')}">返回</a>
+        <br><br>
+        <table cellpadding="0" cellspacing="0" border="0" class="stdtable stdtablequick">
+            <tr>
+                <th width="">ID</th>
+                <th width="">用户ID</th>
+                <th width="">用户昵称</th>
+                <th width="">回答时间</th>
+                <th width="20%">操作</th>
+            </tr>
+            <empty name="list">
+                <tr>
+                    <td colspan="7">目前没有数据~！</td>
+                </tr>
+            <else />
+                <volist name="list" id="vo">
+                    <tr>
+                        <td>{$vo.id}</td>
+                        <td>{$vo.user_id}</td>
+                        <td>{$vo.nickname}</td>
+                        <td>{$vo.add_time|date="Y-m-d H:i:s", ###}</td>
+                        <td>
+                            <if condition="checkActionAuth('Questionnaire-problemLogDetail')">
+                                <a class="stdbtn btn_lime" href="{:U('Questionnaire/problemLogDetail', array('id'=> $vo['id']))}">查看详情</a>
+                            <else/>
+                                无权限访问
+                            </if>
+                        </td>
+                    </tr>
+                </volist>
+                <tr>
+                    <if condition="$counting EGT 25">
+                        <td colspan="7">
+                            <div class="page-box">{$show}</div>
+                        </td>
+                    </if>
+                </tr>
+            </empty>
+        </table>
+    </div>
+</block>
+<block name="script">
+
+<script>
+    $(function () {
+
+    })
+</script>
+
+</block>

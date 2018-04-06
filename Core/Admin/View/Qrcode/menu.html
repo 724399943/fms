@@ -1,0 +1,19 @@
+<ul>
+	<if condition="checkActionAuth('Qrcode-qrcodeList')">
+		<li <if condition="checkActionAuth(array('Qrcode-qrcodeList', 'Qrcode-createQrCode'))">{:chr(32)}class="current"</if>>
+			<a class="date-tit sys-tj" href="{:getAuthUrl(array('Qrcode-qrcodeList', 'Qrcode-createQrCode'))}" class="addons">二维码管理</a>
+			<ul class="Jcon-ctr">
+				<if condition="checkActionAuth('Qrcode-qrcodeList')">
+					<li class="<if condition="in_array(ACTION_NAME, array('qrcodeList','qrcodeAnalyze'))">on</if>">
+						<a href="{:U('Qrcode/qrcodeList')}">二维码列表</a>
+					</li>
+				</if>
+				<if condition="checkActionAuth('Qrcode-createQrCode')">
+					<li class="<if condition="in_array(ACTION_NAME, array('createQrCode'))">on</if>">
+						<a href="{:U('Qrcode/createQrCode')}">生成二维码</a>
+					</li>
+				</if>
+			</ul>
+		</li>
+	</if>
+</ul>

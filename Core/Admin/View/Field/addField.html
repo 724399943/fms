@@ -1,0 +1,129 @@
+<extend name="Common:base" />
+
+<block name="title">添加字段</block>
+
+<block name="cusStyle">
+    <css href="__PUBLIC__/Admin/css/plugins/ui-frame/ui.css" />
+    <style type="text/css">
+    .line-dete em{color: #e18383}
+    </style>
+</block>
+
+<block name="menu">
+    <include file="Module/menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle">添加字段</h1>
+    </div>
+
+    <div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U('Field/addField')}" method="post" id="question-form">
+            <div class="line-dete">
+                <label>所属栏目<em>*</em></label>
+                <span class="field">
+                    <select name="tree_id">
+                        <option value="0">所有栏目</option>
+                        <volist name="categoryList" id="vo">
+                        <option value="{$vo['id']}" <if condition="$vo['id'] eq $firstCatId">selected</if>>{$vo['cat_name']}</option>
+                        </volist>
+                    </select>
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>简述文字<em>*</em></label>
+                <span class="field">
+                    <input type="text" name="type_name"  />&nbsp;&nbsp;
+                    (发布内容时显示的字段提示，请输入长度不能大于50的任意字符段)
+                </span>
+            </div>
+            
+            <div class="line-dete">
+                <label>字段类型<em>*</em></label>
+                <span class="field">
+                    <select name="input_type">
+                        <option value="">请选择</option>
+                        <option value="text">单行文本</option>
+                        <option value="textarea">多行文本</option>
+                        <option value="checkbox">多选框</option>
+                        <option value="radio">单选框</option>
+                        <option value="select">下拉框</option>
+                        <option value="img">图片附件</option>
+                        <option value="attachment">文件附件</option>
+                    </select>&nbsp;&nbsp;
+                    （注意一旦选择不能修改）
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>字段名称<em>*</em></label>
+                <span class="field">
+                    <input type="text" name="attr_name"  />&nbsp;&nbsp;(同一模型名称必须唯一)
+                    （请输入长度不能小于2和大于40的英文字符，注意一旦填写不能修改）
+                </span>
+            </div>
+            
+            <div class="line-dete">
+                <label>提示文字</label>
+                <span class="field">
+                    <input type="text" name="type_remark"  />&nbsp;&nbsp;
+                    （发布内容时显示的备注内容，请输入长度不能大于200的任意字符段）
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>默认值</label>
+                <div class="field">
+                    <textarea name="attr_value" style="width: 50%;height: 80px;overflow: auto;"></textarea><br/>
+                    （如果字段为下拉、复合选项关联输入框、单选或多选，每个默认值回车输入）
+                </div>
+            </div>
+
+            <div class="line-dete">
+                <label>字段排序<em>*</em></label>
+                <span class="field">
+                    <input type="text" name="orders" />&nbsp;&nbsp;(数字越小越靠前)
+                </span>
+            </div>
+            
+
+            <div class="line-dete">
+                <label>必填字段</label>
+                <span class="field">
+                    <input type="radio" name="is_valid" value="1" />启用
+                    <input type="radio" name="is_valid" value="0" checked   />关闭
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label>显示状态</label>
+                <span class="field">
+                    <input type="radio" name="flag" value="1" checked  />启用
+                    <input type="radio" name="flag" value="0"   />关闭
+                </span>
+            </div>
+            
+            <div class="line-dete">
+                <label></label>
+                <span class="field">
+                    <input type="hidden" name="firstCatId" value="{$firstCatId}">
+                    <input type="hidden" name="module_id" value="{$module_id}">
+                    <input type="submit" class="stdbtn" id="Ksubmit" value="保存"/>
+                   <!--  <input type="button" class="stdbtn" onclick="window.location.href='{:U('Questionnaire/problemList', array('id'=>$_GET['questionnaire_id']))}'" value="返回"/> -->
+                </span>
+            </div>
+
+            
+        </form>
+    </div>
+</block>
+<block name="script">
+<js href="__PUBLIC__/Admin/js/ajaxfileupload.js" />
+<!-- <js href="__PUBLIC__/Admin/js/plugins/questionnaire/optionManager.js" /> -->
+<script charset="utf-8" src="__PUBLIC__/Admin/js/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="__PUBLIC__/Admin/js/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+</script>
+</block>

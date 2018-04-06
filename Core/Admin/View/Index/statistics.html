@@ -1,0 +1,40 @@
+<extend name="Common:base" />
+
+<block name="title">基本统计</block>
+
+<block name="menu">
+	<include file="Index:menu" />
+</block>
+
+<block name="main">
+
+	<div id="contentwrapper" class="contentwrapper">
+		<table cellpadding="0" cellspacing="0" border="0" class="stdtable overviewtable">
+            <colgroup>
+                <col class="con0" width="50%">
+                <col class="con1" width="50%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th class="head0" class="center">昨日访问次数</th>
+                    <th class="head1" class="center">总访问次数</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="center">{$data['lastVisitNumber']}</td>
+                    <td class="center">{$data['allVisitNumber']}</td>
+                </tr>
+            </tbody>
+        </table>
+	</div>
+
+	<div id="main" style="height:400px"></div>
+
+</block>
+<block name="script">
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+<script type="text/javascript">
+  
+</script>
+</block>

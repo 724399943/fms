@@ -1,0 +1,214 @@
+<extend name="Common:base" />
+
+<block name="title">设置问卷结果</block>
+
+<block name="cusStyle">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/plugins/ui-frame/ui.css" type="text/css" />    
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/plugins/fontawesome/font-awesome.min.css" type="text/css" />   
+    <style type="text/css">
+        .option-item{ margin-bottom: 10px;}
+        .Janswer{ width: 200px; margin-right: 10px; }
+    </style> 
+</block>
+
+<block name="menu">
+    <include file="Questionnaire:menu" />
+</block>
+
+<block name="main">
+    <div class="questionnaire-info">
+        <div class="questionnaire-title">
+            <switch name="questionnaireData.type">
+                <case value="survey">
+                    <span class="label label-danger"><i class="fa fa-tag"></i>{:getCateName('survey')}</span>
+                </case>
+                <case value="score_test">
+                    <span class="label label-warning"><i class="fa fa-tag"></i>{:getCateName('score_test')}</span>
+                </case>
+                <case value="jump_test">
+                    <span class="label label-success"><i class="fa fa-tag"></i>{:getCateName('jump_test')}</span>
+                </case>
+            </switch>
+            <h2>{$questionnaireData.title}</h2>
+        </div>
+        <p>{$questionnaireData.description}</p>
+    </div>
+    <div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U('Questionnaire/resultSetting')}" method="post" id="result-form">
+            <input type="hidden" name="id" value="{$resultData['id']}">
+            <input type="hidden" name="questionnaire_id" value="{$questionnaireData['id']}">
+            <div class="line-dete">
+                <label>
+                    <a class="stdbtn" id="addOption">添加选项</a>选项：
+                </label>
+                <span class="field option-list">
+                    <switch name="questionnaireData['type']">
+                        <case value="score_test">
+                            <empty name="resultData">
+                                <div class="option-item"> 
+                                    <input type="text" name="score[]" class="Janswer" placeholder="分值"> 
+                                    <input type="text" name="answer[]" class="Janswer" placeholder="答案"> 
+                                    <textarea name="description[]" class="Janswer" placeholder="描述"></textarea>
+                                    <a class="stdbtn option-del">删除</a> 
+                                </div>    
+                            <else/>
+                                <volist name="resultData['result']" id="item">
+                                    <div class="option-item"> 
+                                        <input type="text" name="score[]" class="Janswer" placeholder="分值" value="{$item['score']}"> 
+                                        <input type="text" name="answer[]" class="Janswer" placeholder="答案" value="{$item['answer']}"> 
+                                        <textarea name="description[]" class="Janswer" placeholder="描述">{$item['description']}</textarea>
+                                        <a class="stdbtn option-del">删除</a> 
+                                    </div>
+                                </volist>
+                            </empty>
+                        </case>
+
+                        <case value="jump_test">
+                            <empty name="resultData">
+                                <div class="option-item"> 
+                                    <input type="text" name="answer[]" class="Janswer" placeholder="答案"> 
+                                    <textarea name="description[]" class="Janswer" placeholder="描述"></textarea>
+                                    <a class="stdbtn option-del">删除</a> 
+                                </div>    
+                            <else/>
+                                <volist name="resultData['result']" id="item">
+                                    <div class="option-item"> 
+                                        <input type="text" name="answer[]" class="Janswer" placeholder="答案" value="{$item['answer']}"> 
+                                        <textarea name="description[]" class="Janswer" placeholder="描述">{$item['description']}</textarea>
+                                        <a class="stdbtn option-del">删除</a> 
+                                    </div>
+                                </volist>
+                            </empty>
+                        </case>
+                    </switch>
+                </span>
+            </div>
+
+            <div class="line-dete">
+                <label></label>
+                <span class="field">
+                    <input type="hidden" name="result" id="result">
+                    <input type="hidden" name="referer" value="{$_SERVER['HTTP_REFERER']}">
+                    <input type="button" class="stdbtn" id="Ksubmit" value="保存"/>
+                    <input type="button" class="stdbtn" onclick="window.location.href='{:U('Questionnaire/questionList')}'" value="返回"/>
+                </span>
+            </div>
+        </form>
+    </div>
+</block>
+<block name="script">
+
+<script>
+    $(function () {
+        var questionnaire_type = "{$questionnaireData['type']}";
+        function validateOptions() 
+        {
+            var state = true;
+            var $optionItem = $('#result-form .option-list .option-item');
+
+            $optionItem.each(function(i){
+                $this = $(this);
+                switch ( questionnaire_type ) {
+                    case 'score_test' :
+                        if ( !$this.find("input[name='score[]']").val() ) {
+                            alert('请填写分值');
+                            state = state && false;
+                            return false;
+                        }
+                        if ( !$this.find("input[name='answer[]']").val() ) {
+                            alert('请填写答案');
+                            state = state && false;
+                            return false;
+                        }
+                        if ( !$this.find("textarea[name='description[]']").val() ) {
+                            alert('请填写描述');
+                            state = state && false;
+                            return false;
+                        }
+                        break;
+                    case 'jump_test' :
+                        if ( !$this.find("input[name='answer[]']").val() ) {
+                            alert('请填写答案');
+                            state = state && false;
+                            return false;
+                        }
+                        if ( !$this.find("textarea[name='description[]']").val() ) {
+                            alert('请填写描述');
+                            state = state && false;
+                            return false;
+                        }
+                        break;
+                }
+            });
+
+            if ( $optionItem.length <= 0 ) {
+                alert('请添加选项');
+                state = state && false;
+            }
+
+            return state;
+        }
+
+        function collectOptions() 
+        {
+            if( !validateOptions() ) //验证是否输入好选项文本
+                return false;
+
+            var result = [];
+            /* 循环选项，收集选项信息 */
+            $('#result-form .option-list .option-item').each(function(i){
+                $this = $(this);
+                switch ( questionnaire_type ) {
+                    case 'score_test' :
+                        var answer = $this.find("input[name='answer[]']").val(),
+                            score = $this.find("input[name='score[]']").val(),
+                            description = $this.find("textarea[name='description[]']").val();
+                        result[i] = {"answer":answer,"score":score,"description":description};
+                        break;
+                    case 'jump_test' :
+                        var answer = $this.find("input[name='answer[]']").val(),
+                            description = $this.find("textarea[name='description[]']").val();
+                        result[i] = {"answer":answer,"description":description};
+                        break;
+                }
+            });
+
+            //序列化选项信息，写入到隐藏域#result中
+            var resultVal = JSON.stringify(result);
+            $('#result').val( resultVal );
+
+            return true;
+        }
+
+        /* 添加选项 */
+        $(document).delegate('#addOption', 'click', function(){
+            switch ( questionnaire_type ) {
+                case 'score_test' :
+                    var options = '<div class="option-item"> <input type="text" name="score[]" class="Janswer" placeholder="分值"> <input type="text" name="answer[]" class="Janswer" placeholder="答案"> <textarea name="description[]" class="Janswer" placeholder="描述"></textarea> <a class="stdbtn option-del">删除</a> </div>';
+                    break;
+                case 'jump_test' :
+                    var options = '<div class="option-item"> <input type="text" name="answer[]" class="Janswer" placeholder="答案"> <textarea name="description[]" class="Janswer" placeholder="描述"></textarea> <a class="stdbtn option-del">删除</a> </div>';
+                    break;
+            }
+
+            $('.option-list').append( options );
+        });
+
+        /* 提交结果 */
+        $(document).delegate('#Ksubmit', 'click', function(){
+            var state1 = true;
+            state1 = collectOptions();
+            //选项收集成功则提交表单
+            if(state1) {
+                $('#result-form').submit();
+            }
+        });
+
+        /* 删除选项 */
+        $(document).delegate('.option-del', 'click', function(){
+            $(this).parents('.option-item').remove(); //删除选项
+        });
+    })
+</script>
+
+</block>

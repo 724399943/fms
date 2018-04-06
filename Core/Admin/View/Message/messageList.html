@@ -1,0 +1,166 @@
+<extend name="Common:base" />
+
+<block name="title">留言管理</block>
+
+<block name="menu">
+    <include file="Message:menu" />
+</block>
+
+<block name="main">
+    <div class="pageheader">
+        <h1 class="pagetitle">留言管理</h1>
+    </div>
+    <div class="contentwrapper">
+        <form class="order-list" method="GET" action="{:U('Message/messageList')}">
+            <p>
+                <input type="button" class="Kdelete" value="删除" />&nbsp;&nbsp;
+                留言标题&nbsp;&nbsp;<input type="text" name="title" value="{$return['title']}" />
+               <!--  <a href="{:U('Message/addMessage',array('firstCatId'=>$firstCatId))}" class="btn btn_link" style="float: right;margin-right: 10px;">
+                    <span style="font-size:14px">添加留言</span>
+                </a> -->
+                <!-- <input type="hidden" name="firstCatId" value="{$firstCatId}" /> -->
+                <input type="submit" value="搜索" />
+            </p>
+        </form>    
+            <table cellpadding="0" cellspacing="0" border="0" class="stdtable stdtablequick">
+                <tr>
+                    <th width="">选择</th>
+                    <th width="">姓名</th>
+                    <th width="">标题</th>
+                    <th width="">留言时间</th>
+                    <th width="">IP</th>
+                    <!-- <th width="">审核</th> -->
+                    <th width="">回复</th>
+                    <th width="23%">操作</th>
+                </tr>
+                <empty name="list">
+                    <tr>
+                        <td colspan="9">目前没有数据~！</td>
+                    </tr>
+                <else />
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td><input type="checkbox" class="ids" value="{$vo['id']}" /></td>
+                            <td>{$vo.username}</td>
+                            <td>{$vo['title']}</td>
+                            <td>{$vo['add_time']|time_format}</td>
+                            <td>{$vo['ip']}</td>
+                            <td>
+                                <if condition="$vo['reply_flag'] eq '0'">未回复
+                                <else />
+                                <span style="color: green;">已回复</span>
+                                <br />
+                                <span>{$vo[reply_time]|time_format}</span>
+                                </if>
+                            </td>
+
+                            <td>
+                                <if condition="checkActionAuth('Message-replyMessage')">
+                                    <a class="stdbtn btn_lime" href="{:U('Message/replyMessage', array('id'=>$vo['id']))}">回复</a>
+                                <else/>
+                                    无权限访问
+                                </if>
+                                <if condition="checkActionAuth('Message-delMessage')">
+                                    <a class="stdbtn btn_lime" href="{:U('Message/delMessage', array('ids'=>$vo['id']))}">删除</a>
+                                <else/>
+                                    无权限访问
+                                </if>
+                            </td>
+                        </tr>
+                    </volist>
+                    <tr>
+                        <if condition="$counting EGT 25">
+                            <td colspan="8">
+                                <div class="page-box">{$show}</div>
+                            </td>
+                        </if>
+                            <!-- <input type="text" class="input-text" style="width:250px" placeholder="标识" name="tags" value="{$return['tags']}" > -->
+                    </tr>
+                </empty>
+            </table>
+    </div>
+</block>
+<block name="script">
+<script type="text/javascript">
+//删除
+ $(".Kdelete").click(function () {
+
+        var objs = $('.ids');
+        var ids = '';
+        for(var j=0;j<objs.length;j++)
+        {   
+            if ($(objs[j]).is(':checked'))
+            {
+                ids += $(objs[j]).val()+',';
+            }
+        }
+        if ( !ids )  {
+            alert('请选择要删除的数据');
+            return;
+        }
+        var jumpUrl = "{:U('Message/delMessage')}?ids=" + ids;
+        window.location.href = jumpUrl;
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //选择删除
+//  $(".Kdelete").click(function () {
+
+//         var objs = $('.ids');
+//         var ids = '';
+//         for(var j=0;j<objs.length;j++)
+//         {   
+//             if ($(objs[j]).is(':checked'))
+//             {
+//                 ids += $(objs[j]).val()+',';
+//             }
+//         }
+//         if ( !ids )  {
+//             alert('请选择要删除的数据');
+//             return;
+//         }
+//         var jumpUrl = "{:U('Article/delArticle')}?ids=" + ids;
+//         window.location.href = jumpUrl;
+//     });
+
+</script>
+</block>

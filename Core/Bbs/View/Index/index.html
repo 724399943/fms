@@ -1,0 +1,293 @@
+<extend name="Public:base"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Wap/fms/css/fmsStyle.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Bbs/css/style.css" />
+    <style>
+    .nophoto {margin-right:10px}
+    .nophoto img {width: 2.133333rem; height: 1.6rem;}
+.hot-recommend .hot-rec-content .hot-rec-item .hot-rec-sub-desc {overflow: hidden; -o-text-overflow: ellipsis; text-overflow: ellipsis; white-space: nowrap; max-width: 6rem;}
+.container .hot-recommend .hot-rec-content .hot-rec-item .hot-rec-sub-title{overflow: hidden;-o-text-overflow: ellipsis;text-overflow: ellipsis;white-space: nowrap;max-width: 7rem;}
+    
+
+    </style>
+</block>
+<block name="main">
+
+    <div class="container pdb">
+        <header class="head tone">
+            <a class="ico menu Jmenu"></a>
+            <h1 class="y-confirm-order-h1"><img src="__PUBLIC__/Wap/fms/images/logo.png" class="logo"></h1>
+            <a href="/About/aboutUs" class="about"></a>
+        </header>
+        <div class="headCont JheadCont">
+            <div class="categoryList">
+              <div class="isearch">
+              <form method="post" action="/Search/search" id="serform">
+                  <em class="sea"></em>
+                  <input type="hidden" name="type" value="product" />
+                  <input type="search" name="keyword"  placeholder="搜索商品" id="Jinput" style="border: none">
+                  <em class="close" id="JclearInput"></em>
+              </form>
+              </div>
+              <!-- 商品分类 -->
+              <div class="clsfiy">
+                <goodsCategory name="firstCat" pid="0" />
+                <volist name="firstCat" id="first">
+                    <div class="Jclslist">
+                      <p class="title">{$first['category_name']}<em class="ico"></em></p>
+                      <goodsCategory name="category" pid="$first['id']" />
+                      <ul class="clsul JclsUl">
+                        <volist name="category" id="vo">
+                         <a href="{:U('Home/Goods/goods',array('catId'=>$vo['id']))}"><li>{$vo['category_name']}</li></a>
+                         <!-- <a href="{:U('Goods/goods',array('catId'=>$vo['id']))}"><li>{$vo['category_name']}</li></a> -->
+                        </volist>
+                      </ul>
+                    </div>
+                </volist>
+              </div>
+            </div>
+        </div>
+        <!--入口-->
+        <!-- <div class="entry-area">
+            <adgroup name="bbs_index_ad_group" sign="bbs_index_ad_group" />
+            <volist name="bbs_index_ad_group" id="bbs_main_cate">
+                <a class="entry-item" href="{$bbs_main_cate['url']}">
+                    <span class="entry-icon">
+                        <img src="{$bbs_main_cate['image']}" alt=""/>
+                    </span>
+                    <span>{$bbs_main_cate['ad_name']}</span>
+                </a>
+            </volist>
+        </div> -->
+        <!--论坛版块-->
+        <div class="hot-area">
+            <div class="area-title">
+                <p>论坛版块</p>
+            </div>
+            <div id="JmoduleList" class="Jloading">
+                
+            </div>
+            <!-- <div class="area-more">
+                <p>
+                    <a>查看更多版块</a>
+                </p>
+            </div> -->
+        </div>
+
+        <div class="hot-recommend">
+            <div class="area-title">
+                <p>最新消息</p>
+            </div>
+            <div class="hot-rec-content Jloading" id="JarticleList"></div>
+        </div>
+        
+        <div class="post-alertbox">
+            <div class="post-menu" id="JpostMenu">
+                <!-- <div class="pos-box">
+                    <div class="pos-menu-row"><a href="/Bbs/Index/article_post/module/2"><img src=""></a></div> 
+                    <p class="pt">综合讨论</p> 
+                </div>
+                <div class="pos-box">
+                    <div class="pos-menu-row"><a href="/Bbs/Index/article_post/module/3"><img src="__PUBLIC__/Wap/fms/images/post-icon2.png"></a></div>  
+                    <p class="pt">建议反馈</p>
+                </div>
+                <div class="pos-box">
+                    <div class="pos-menu-row"><a href="/Bbs/Index/article_post/module/4"><img src="__PUBLIC__/Wap/fms/images/post-icon2.png"></a></div>
+                    <p class="pt">活动专区</p>
+                </div>
+                <div class="pos-box">
+                    <div class="pos-menu-row"><a href="javascript:;"></a></div>
+                </div> -->
+            </div>            
+        </div>
+        <div class="fix-box post Jfixpost">
+            <img src="__PUBLIC__/Wap/fms/images/post.png">
+        </div>
+        <div class="fix-box top Jfixtop">
+            <img src="__PUBLIC__/Wap/fms/images/top.png">
+        </div>
+    </div>
+</block>
+
+<block name="script">
+<script id="articleList_tpl" type="text/html">
+<% for (var i = 0; i < articleList.length; i ++) {%>
+<div class="hot-warp-box">
+    <a href="/Bbs/Index/article_detail/id/<%=articleList[i]['id']%>">
+        <div class="box">
+            <img src="<%=articleList[i]['headimgurl']%>" alt="">
+            <div class="txt"><span class="n"><%=articleList[i]['nickname']%></span>
+             <% var date = new Date(articleList[i]['add_time'] * 1000); var addTime = date.pattern('yyyy-MM-dd HH:mm:ss')%>
+            <p><%=addTime%></p></div>
+        </div>
+        <div class="tit"><%=articleList[i]['article_name']%></div>
+        <div class="dec"><%=articleList[i]['article_content']%></div>
+        <!-- <div class="pic">
+            <img src="http://bt.hpingtai.com/Static/Public/Bbs/images/article_default.jpg" alt="">
+            <img src="http://bt.hpingtai.com/Static/Public/Bbs/images/article_default.jpg" alt="">
+            <img src="http://bt.hpingtai.com/Static/Public/Bbs/images/article_default.jpg" alt="">
+        </div> -->
+    </a>
+    <div class="ctr-box">
+        <span class="zan Jlike" data-id="<%=articleList[i]['id']%>"><em></em><%=articleList[i]['like_number']%></span>
+        <a href="/Bbs/Index/article_detail/id/<%=articleList[i]['id']%>" class="ping"><em></em><%=articleList[i]['comment_number']%></a>
+        <a href="/Bbs/Index/article_detail/id/<%=articleList[i]['id']%>" class="liu"><em></em><%=articleList[i]['view_number']%></a>
+    </div>
+</div>
+<%}%>
+</script>
+<script id="moduleList_tpl" type="text/html">
+    <% for (var i = 0; i < moduleList.length; i ++) {%>
+    <% if (i % 2 == 0) {%>
+    <div class="hot-content">
+    <%}%>                  
+        <a class="hot-content-item " href="/Bbs/Index/module/id/<%=moduleList[i]['id']%>">
+            <div class="pic">
+                <img src="<%=moduleList[i]['icon']%>">
+            </div>
+            <div class="text">
+                <p class="hot-sub-title"><%=moduleList[i]['module_name']%></p>
+                <p class="hot-sub-desc"><%=moduleList[i]['introduction']%></p>
+            </div>
+        </a>
+    <% if (i % 2 == 1) {%>
+    </div>
+    <%}%>
+    <%}%>
+</script>
+<script id="moduleAlert_tpl" type="text/html">
+    <% for (var i = 1; i < moduleList.length; i ++) {%>
+    <div class="pos-box">
+        <div class="pos-menu-row"><a href="/Bbs/Index/article_post/module/<%=moduleList[i]['id']%>"><img src="<%=moduleList[i]['icon']%>"></a></div>
+        <p class="pt"><%=moduleList[i]['module_name']%></p>
+    </div>
+    <%}%>
+    <div class="pos-box">
+        <div class="pos-menu-row"><a href="javascript:;"></a></div>
+    </div>
+</script>
+<!-- 导航代码 -->
+<script type="text/javascript">
+    var openbol = true;
+
+    // 菜单
+    $(".Jmenu").click(function(){
+        if( openbol == true ){
+          $(this).addClass("on");
+          $(".JheadCont").fadeIn(200);
+          $("body").css({"overflow":"hidden"});
+          openbol = false;          
+        }else{
+          $(this).removeClass("on");
+          resetFun();
+          openbol = true;
+        }
+    })
+
+    $("#Jinput").bind("input",function(){
+      if( $(this).val().length > 0 ){
+        $("#JclearInput").show();
+      }else{
+        $("#JclearInput").hide();
+      }
+    })
+
+    $("#JclearInput").click(function(){
+      $("#Jinput").val("");
+    })
+
+    function resetFun(){
+      $(".JheadCont").fadeOut(200);
+      $("body").css({"overflow":"auto"});
+      $("#Jinput").val("");
+      $("#JclearInput").hide();
+    }
+    
+    $('.sea').click(function(){
+      $("#serform").submit();
+    })
+</script>
+<!-- 导航代码 -->
+<script>
+    var bt = baidu.template;
+
+    $.ajax({
+        url: "{:U('Index/article_list')}",
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            page: 0,
+            type: 'new'
+        }
+    })
+    .done(function(data) {
+        // console.log(data);
+        var articlesHtml = bt('articleList_tpl', data['data']);
+        $('#JarticleList').removeClass('Jloading');
+        document.getElementById('JarticleList').innerHTML = articlesHtml;
+    });
+
+    $.ajax({
+        url: "{:U('Index/module_list')}",
+        type: 'POST',
+        dataType: 'json',
+    })
+    .done(function(data) {
+        console.log(data);
+        var moduleHtml = bt('moduleList_tpl', data['data']);
+        $('#JmoduleList').removeClass('Jloading');
+        document.getElementById('JmoduleList').innerHTML = moduleHtml;
+        var moduleMenu = bt("moduleAlert_tpl",data['data']);
+        document.getElementById('JpostMenu').innerHTML = moduleMenu;
+    });
+        // 点赞
+    $('#JarticleList').on('click', '.Jlike', function() {
+        var id = $(this).data('id')
+        var that =$(this);
+        $.ajax({
+            url: "{:U('Index/article_like')}",
+            type: 'POST',
+            dataType: 'json',
+            data: {id: id}
+        })
+        .done(function(data) {
+            if (data['status'] == 200000) {
+                automsgbox('点赞成功！');
+                var num = parseInt(that.text())+1;
+                that.html('<em></em>'+num);
+            } else {
+                automsgbox(data['message']);
+            }
+        });
+    });
+
+    $(function() {
+        // $('#Jback').hide();
+        $(window).scroll(function(){
+          var topScroll =$(window).scrollTop();
+          if(topScroll > 0){
+              $('.Jfixtop').css({"display":"flex"});
+          } else { 
+              $('.Jfixtop').hide();
+          }
+
+        }) 
+        $('.Jfixtop').click(function(){
+          $(window).scrollTop(0);
+        })
+        // 发帖
+        $(".Jfixpost").click(function(event){
+            event.stopPropagation();
+            event.preventDefault();
+            $(".post-alertbox").fadeIn(200);
+        })
+        $(document).on('click',function(){
+            $('.post-alertbox').hide();
+        });        
+    });    
+    $(".Jclslist").on("click",".title",function(){
+        $(this).toggleClass('on');
+        $(this).siblings(".JclsUl").toggle();
+    })
+</script>
+</block>

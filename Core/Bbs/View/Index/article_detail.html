@@ -1,0 +1,357 @@
+<extend name="Public:base"/>
+<block name="style">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Bbs/css/style-viewthread.css" />
+    <link href="__PUBLIC__/Bbs/css/reset.css" rel="stylesheet">
+</block>
+<block name="main">
+    <div class="viewthread-container pdb">
+        <include file="Public:header" />
+        <div class="add-comment-container">
+            <div class="add-comment">
+                <form name="respone_form" id="Jform">
+                    <div id="reply_form" class="form" style="position:relative">
+                        <span class="show-face c-icon c-icon-face Jface"></span>
+                        <span class="show-pic c-icon c-icon-pic"></span>
+                        <!-- <span class="show-demo c-icon c-icon-demo Jquick"></span> -->
+                        <textarea id="reply_input" class="reply-input" name="content" placeholder="我也来说一句吧" data-uid="0" data-allowreply=""></textarea>
+                        <input type="hidden" name="article_id" value="{$_GET['id']}">
+                        <span id="reply_btn" class="reply-btn">回复</span>
+                    </div>
+                    <div class="board upload-pics" id="JuploadImg" style="display: none;">
+                        <div class="pics-container">
+                            <div class="add-list">
+                                <div id="pic_list" class="pic-list"></div>
+                                <span class="add-btn">
+                                    <input id="upload_pics" type="file" name="Filedata">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="tips">
+                            <p class="page">
+                                <span id="pic_count">0</span>
+                                /10
+                            </p>
+                            <!-- <p>图片可以拖动排序</p> -->
+                        </div>
+                    </div>
+                </form>
+            <div class="board demo-reply" id="Jquick" style="display: none;">
+                <ul class="list" id="JquickList">
+                    <!-- <li class="item">
+                        <span class="long">前排占个座#17,万一火了呢#89</span>
+                        <span class="short">抢个前排</span>
+                    </li>
+                    <li class="item">
+                        <span class="long">楼猪说的真好#81给楼猪点赞啦#44</span>
+                        <span class="short">好文要顶</span>
+                    </li>
+                    <li class="item">
+                        <span class="long">虽然不知道楼猪在说什么#24，但是看起来好厉害的样子！</span>
+                        <span class="short">不明觉厉</span>
+                    </li>
+                    <li class="item">
+                        <span class="long">人生已经如此艰难，有些事情就不要拆穿#135</span>
+                        <span class="short">人艰不拆</span>
+                    </li>
+                    <li class="item">
+                        <span class="long">小手一抖，酱油到手，积分我有#163</span>
+                        <span class="short">小手一抖</span>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+        <div class="add-comment-mask" style="display: none;"></div>
+    </div>
+    <div class="main-scroll">
+        <div class="view-content c-card Jloading" id="JarticleDetail">
+            
+        </div>
+        <div id="thread_list" class="thread-list c-card Jloading">
+            <!--<div class="nav">
+                <a class="current">默认</a>
+                <a>最新</a>
+            </div>-->
+        </div>
+        <div class="loading-banner c-card" id="Jtips" style="display:none">
+            <div id="loading" class="loading" style="display: none;">
+                <i class="c-icon c-icon-loading"></i>
+            </div>
+            <div id="empty-tips" class="empty-tips" style="">没有数据了哦~</div>
+        </div>
+
+        <div id="refresh_btn" class="refresh-btn" style="display: none;">
+            <i class="c-icon c-icon-refresh"></i>
+        </div>
+        <include file="Public:footer" />
+    </div>
+</div>
+</block>
+<block name="script">
+<script src="__PUBLIC__/Bbs/js/jquery.qqFace.js"></script>
+<script src="__PUBLIC__/Common/js/ajaxfileupload.js"></script>
+
+<script id="articleDetail_tpl" type="text/html">
+<p class="c-simple-title">
+    <%=data['articleDetail']['article_name']%>
+</p>
+<div class="c-author-info">
+    <div class="pic">
+        <img src="<%=data['authorDetail']['headimgurl']%>"></div>
+    <div class="text">
+        <a class="author" href=""><%=data['authorDetail']['nickname']%></a>
+        <p class="time">
+            <% var date = new Date(data['articleDetail']['add_time'] * 1000); var addTime = date.pattern('yyyy-MM-dd HH:mm:ss');%>
+            <%=addTime%>
+        </p>
+    </div>
+</div>
+<div class="content">
+    <div class="photo-list">
+        <%if (data['articleDetail']['photos'].length) {%>
+            <%for (var i = 0; i < data['articleDetail']['photos'].length; i ++) {%>
+            <img src="<%=data['articleDetail']['photos'][i]['url']%>" alt="" width="100%">
+            <%}%>
+        <%}%>
+    </div>
+    <div class="inner"><%:=data['articleDetail']['article_content']%></div>
+
+    <div class="control">
+        <a id="Jshare" class="item share">
+            <i class="c-icon c-icon-share"></i>
+            分享
+        </a>
+        <a class="item collect" id="Jcollect" href="javascript:;">
+            <i class="c-icon c-icon-collect"></i>
+            收藏
+        </a>
+        <a id="Jlike" class="item like">
+            <i class="c-icon c-icon-like"></i>
+            点赞
+            <span class="count"><%=data['articleDetail']['like_number']%></span>
+        </a>
+    </div>
+</div>
+<div class="view-more" style="display:none">
+    <span class="view-btn">加载全文</span>
+</div>
+</script>
+<script id="respone_tpl" type="text/html">
+    <% for (var i = 0; i < commentList.length; i ++) {%>
+    <div id="pid50907560" class="thread-item">
+        <div class="c-author-info">
+            <div class="pic">
+                <img src="<%=commentList[i]['headimgurl']%>"></div>
+            <div class="text">
+                <p class="author"><%=commentList[i]['nickname']%></p>
+                <p class="time">
+                    <% var date = new Date(commentList[i]['add_time'] * 1000); var addTime = date.pattern('yyyy-MM-dd HH:mm:ss')%>
+                    <span><%=addTime%></span>
+                    <!-- <a class="only-author" href="forum.php?mod=viewthread&amp;tid=2977449&amp;page=1&amp;authorid=2059709">只看该作者</a> -->
+                </p>
+            </div>
+            <div class="like-comment">
+                <!-- <p class="pos">沙发</p> -->
+                <p class="num">
+                    <a class="cmt cmt-reply" data-pid="50907560" data-page="1">
+                        <i class="c-icon c-icon-cmt-s"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="item-content">
+            <div class="photo-list">
+                <%if (commentList[i]['photos'].length) {%>
+                    <%for (var j = 0; j < commentList[i]['photos'].length; j ++) {%>
+                    <img src="<%=commentList[i]['photos'][j]['url']%>" alt="" width="200">
+                    <%}%>
+                <%}%>
+            </div>
+            <div class="reply">
+                <%=commentList[i]['content']%>
+            </div>
+        </div>
+    </div>
+    <%}%>
+</script>
+<script>
+    var bt = baidu.template;
+
+    function replace_em(str){
+        // str = str.replace(/\</g,'&lt;');
+        // str = str.replace(/\>/g,'&gt;');
+        // str = str.replace(/\n/g,'<br/>');
+        str = str.replace(/\[em_([0-9]*)\]/g,'<img src="__PUBLIC__/Bbs/arclist/$1.gif" border="0" />');
+        return str;
+    }
+
+    $('.Jface').qqFace({
+        id : 'facebox', 
+        assign:'reply_input', 
+        path:'__PUBLIC__/Bbs/arclist/' //表情存放的路径
+
+    });
+    
+    /*获取文章详情*/
+    $.ajax({
+        url: "{:U('Index/article_detail')}",
+        type: 'POST',
+        dataType: 'json',
+        data: {id: {$_GET['id']}}
+    })
+    .done(function(data) {
+        console.log(data);
+        var articlesHtml = bt('articleDetail_tpl', data['data']);
+        $('#JarticleDetail').removeClass('Jloading');
+        articlesHtml = replace_em(articlesHtml);
+
+        document.getElementById('JarticleDetail').innerHTML = articlesHtml;
+        if (data['data']['data']['quickrespone'].length) {
+            var quickrespone = data['data']['data']['quickrespone'];
+            var quickStr = [];
+            for (var i in quickrespone) {
+                quickStr.push('<li class="item"> <span class="long JquickItem">' + quickrespone[i]['content'] + '</span> <span class="short">好文要顶</span> </li>');
+            }
+            $('#JquickList').html(quickStr.join(''));
+        }
+    });
+
+    /*获取评论数据*/
+    $.ajax({
+        url: "{:U('Index/article_comment')}",
+        type: 'POST',
+        dataType: 'json',
+        data: {id: {$_GET['id']}}
+    })
+    .done(function(data) {
+        console.log(data);
+        if (data['data']['commentList'].length) {
+            var commentHtml = bt('respone_tpl', data['data']);
+            $('#thread_list').removeClass('Jloading');
+            document.getElementById('thread_list').innerHTML = commentHtml;
+        } else {
+            $('#thread_list').removeClass('Jloading');
+            $('#Jtips').show();
+        }
+
+        //显示的地方替换
+        $('.reply').each(function(index, el) {
+            var str = $(this).html();
+           $(this).html(replace_em(str));
+        });
+    });
+
+    /*阅读量*/
+    $.ajax({
+        url: "{:U('Index/article_view')}",
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            id: {$_GET['id']}
+        }
+    })
+    .done(function(data) {
+        console.log(data);
+    });
+
+    $(function() {
+        // 收藏
+        $('#JarticleDetail').on('click', '#Jcollect', function() {
+            $.ajax({
+                url: "{:U('Index/article_collect')}",
+                type: 'POST',
+                dataType: 'json',
+                data: {id: {$_GET['id']}}
+            })
+            .done(function(data) {
+                if (data['status'] == 200000) {
+                    automsgbox('收藏成功！');
+                } else {
+                    automsgbox(data['message']);
+                }
+            });
+        });
+
+        // 点赞
+        $('#JarticleDetail').on('click', '#Jlike', function() {
+            $.ajax({
+                url: "{:U('Index/article_like')}",
+                type: 'POST',
+                dataType: 'json',
+                data: {id: {$_GET['id']}}
+            })
+            .done(function(data) {
+                if (data['status'] == 200000) {
+                    automsgbox('点赞成功！');
+                } else {
+                    automsgbox(data['message']);
+                }
+            });
+        });
+
+        // 快捷回复
+        $('.Jquick').click(function() {
+            $('#Jquick').toggle();
+        });
+
+        // 提交回复
+        $('#reply_btn').click(function() {
+            $.ajax({
+                url: "{:U('Index/article_response')}",
+                type: 'POST',
+                dataType: 'json',
+                data: $('#Jform').serialize()
+            })
+            .done(function(data) {
+                // console.log(data);
+                if (data['status'] == 200000) {
+                    automsgbox('评论成功！');
+                } else {
+                    automsgbox(data['message']);
+                }
+            });
+        });
+
+        $('.c-icon-pic').click(function() {
+            $('#JuploadImg').toggle();
+        });
+
+        // 上传图片
+        $(document).on('change', '#upload_pics', function() {
+            var uploadCount = parseInt($('#pic_count').text());
+            if (uploadCount >= 10) return;
+
+            $.ajaxFileUpload({
+                url: "{:U('Index/uploadImg')}",
+                secureuri: false,
+                fileElementId: 'upload_pics',
+                dataType: 'json',
+                success: function (data, status) {
+                    if(typeof(data.error) != 'undefined') {
+                        if(data.error != '') {
+                            alert(data.error);
+                        } else {
+                            $('#pic_list').append('<div class="pic-item"><img src="' + data.url + '"><span class="close"></span><input type="hidden" name="photos[]" value="' + data.url + '"></div>');
+                        }
+
+                        $('#pic_count').text(++ uploadCount);
+                    }
+                },
+                error: function (data, status, e) {
+                    alert(e);
+                }
+            });
+        });
+
+        // 删除上传图片
+        $("body").on('click', '.close', function() {
+            $(this).parent().remove();
+            var uploadCount = parseInt($('#pic_count').text());
+            $('#pic_count').text(-- uploadCount);
+        });
+
+        $("#JquickList").on('click', '.JquickItem', function() {
+            $('#reply_input').val($(this).text());
+        });
+    });
+</script>
+</block>

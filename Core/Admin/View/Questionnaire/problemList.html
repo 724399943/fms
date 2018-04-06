@@ -1,0 +1,97 @@
+<extend name="Common:base" />
+
+<block name="title">题目列表</block>
+
+<block name="cusStyle">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/plugins/ui-frame/ui.css" type="text/css" />    
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/plugins/fontawesome/font-awesome.min.css" type="text/css" />    
+</block>
+
+<block name="menu">
+    <include file="Questionnaire:menu" />
+</block>
+
+<block name="main">
+    <div class="questionnaire-info">
+        <div class="questionnaire-title">
+            <switch name="questionnaireData['type']">
+                <case value="survey">
+                    <span class="label label-danger"><i class="fa fa-tag"></i>{:getCateName('survey')}</span>
+                </case>
+                <case value="score_test">
+                    <span class="label label-warning"><i class="fa fa-tag"></i>{:getCateName('score_test')}</span>
+                </case>
+                <case value="jump_test">
+                    <span class="label label-success"><i class="fa fa-tag"></i>{:getCateName('jump_test')}</span>
+                </case>
+            </switch>
+            <h2>{$questionnaireData['title']}</h2>
+        </div>
+        <p>{$questionnaireData['description']}</p>
+    </div>
+    <div class="contentwrapper">
+        <form class="order-list" method="GET" action="{:U('Questionnaire/problemList')}">
+            <p>
+                <input type="text" class="input-text" style="width:230px" placeholder="题目标题" name="question" value="{$return['question']}" >
+                <input type="hidden" name="id" value="{$_GET['id']}" />
+                <input type="submit" value="搜索"></input>
+            </p>
+        </form>
+        <a class="stdbtn btn_lime" href="{:U('Questionnaire/addProblem', array('questionnaire_id'=>$_GET['id']))}">添加</a>
+        <a class="stdbtn btn_lime" href="{:U('Questionnaire/questionList')}">返回</a>
+        <br><br>
+
+        <table cellpadding="0" cellspacing="0" border="0" class="stdtable stdtablequick">
+            <tr>
+                <th width="">ID</th>
+                <th width="">题目标题</th>
+                <th width="">题目步骤</th>
+                <th width="">题目排序</th>
+                <th width="20%">操作</th>
+            </tr>
+            <empty name="problemList">
+                <tr>
+                    <td colspan="6">目前没有数据~！</td>
+                </tr>
+            <else />
+                <volist name="problemList" id="vo">
+                    <tr>
+                        <td>{$vo.id}</td>
+                        <td>{$vo.question}</td>
+                        <td>{$vo.step}</td>
+                        <td>{$vo.sort}</td>
+                        <td>
+                            <if condition="checkActionAuth('Questionnaire-editProblem') || checkActionAuth('Section-deleteProblem')">
+                                <if condition="checkActionAuth('Questionnaire-editProblem')">
+                                    <a class="stdbtn btn_lime" href="{:U('Questionnaire/editProblem', array('id'=>$vo['id'], 'questionnaire_id'=>$_GET['id']))}">编辑</a>&nbsp;&nbsp;
+                                </if>
+                                <if condition="checkActionAuth('Questionnaire-deleteProblem')">
+                                    <a class="stdbtn btn_lime" href="{:U('Questionnaire/deleteProblem', array('id'=>$vo['id'], 'questionnaire_id'=>$_GET['id']))}">删除</a>&nbsp;&nbsp;
+                                </if>
+                            <else/>
+                                无权限访问
+                            </if>
+
+                        </td>
+                    </tr>
+                </volist>
+                <tr>
+                    <if condition="$counting EGT 25">
+                        <td colspan="6">
+                            <div class="page-box">{$show}</div>
+                        </td>
+                    </if>
+                </tr>
+            </empty>
+        </table>
+    </div>
+</block>
+<block name="script">
+
+<script>
+    $(function () {
+        
+    })
+</script>
+
+</block>

@@ -1,0 +1,96 @@
+<extend name="Common:base" />
+
+<block name="menu">
+	<include file="Index/menu" />
+</block>
+	<block name="cusStyle">
+		<style type="text/css">
+		.module_num span{color: #f60;margin-left: 10px}
+		</style>
+	</block>
+<block name="main">
+	<div class="pageheader">
+	    <h1 class="pagetitle">系统信息</h1>
+	</div>
+
+	<div id="contentwrapper" class="contentwrapper">
+        <form class="stdform stdform2" action="{:U(System/setting)}" method="post">
+	         <ul class="hornav">
+	            <li class="current" data-index="1"><a href="javascript:;">网站基本数据</a></li>
+	         </ul>
+	        <table>
+	        	<tr class="module_num">
+	        		<td>文章模型：<span><empty name="return['articleMod']">0<else/>{$return['articleMod']}</empty></span></td>
+	        		<td>产品模型：<span><empty name="return['productMod']">0<else/>{$return['productMod']}</empty></span></td>
+	        		<td>图库模型：<span><empty name="return['photoMod']">0<else/>{$return['photoMod']}</empty></span></td>
+	        	</tr>
+				<tr class="module_num">
+	        		<td>下载模型：<span><empty name="return['downloadMod']">0<else/>{$return['downloadMod']}</empty></span></td>
+	        		<td>招聘模型：<span><empty name="return['hrMod']">0<else/>{$return['hrMod']}</empty></span></td>
+	        		<td>单页模型：<span><empty name="return['aboutMod']">0<else/>{$return['aboutMod']}</empty></span></td>
+	        	</tr>
+	        </table>
+	         <ul class="hornav">
+	            <li class="current" data-index="1"><a href="javascript:;">服务器信息</a></li>
+	        </ul>
+	        <table>
+	        	<tr>
+	        		<td>服务器IP：&nbsp;<span>{:$_SERVER['SERVER_ADDR']}</span></td>
+	        		<td>客户端IP：&nbsp;<span>{:$_SERVER['REMOTE_ADDR']}</span></td>
+	        		<td>操作系统：&nbsp;<span>{:PHP_OS}</span></td>
+	        	</tr>
+	        	<tr>
+	        		<td>web引擎：&nbsp;<span>{:$_SERVER['SERVER_SOFTWARE']}</span></td>
+	        		<td>PHP版本：&nbsp;<span>{:PHP_VERSION}</span></td>
+	        		<td>GD版本：&nbsp;<span>{$return['gd_info']}</span></td>
+	        	</tr>
+	        	<tr>
+	        		<!-- <td>curl支持：&nbsp;<span></span></td> -->
+	        		<!-- <td>iconv支持：&nbsp;<span>2</span></td> -->
+	        		<!-- <td>url fopen：&nbsp;<span>2</span></td> -->
+	        	</tr>
+	        </table>
+        </form>
+		
+
+        
+	</div>
+</block>
+
+<block name="script">
+	<script type="text/javascript" src="__PUBLIC__/Admin/js/plugins/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Admin/js/ajaxfileupload.js"></script>
+	<script type="text/javascript">
+
+		$(document).on('change', '.f-upload', function() {
+			var sign = $(this).attr('data-sign');
+			$.ajaxFileUpload({
+				url: "{:U('System/photoSave')}",
+				secureuri: false,
+				fileElementId: 'J' + sign + 'ToUpload',
+				dataType: 'json',
+				success: function (data, status) {
+					if(typeof(data.error) != 'undefined') {
+						if(data.error != '') {
+							alert(data.error);
+						} else {
+							if (sign == 'logo') {
+								$('#J' + sign + 'Pic').html('<div class="pic-wrap"><img style="width:160px; height:160px" src="' + data.src + '" /></div>');
+							} else {
+								$('#J' + sign + 'Pic').html('<div class="pic-wrap"><img style="width:auto; height:100% " src="' + data.src + '" /></div>');
+							}
+							$('#Jcover' + sign).val(data.src);
+						}
+					}
+				},
+				error: function (data, status, e) {
+					alert(e);
+				}
+			});
+		});
+
+		$('.line-dete').on('click', '.del-pic', function() {
+			$(this).parent().remove();
+		});
+	</script>
+</block>

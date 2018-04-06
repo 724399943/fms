@@ -1,0 +1,107 @@
+<extend name="Common:base" />
+
+<block name="menu">
+	<include file="Qrcode/menu" />
+</block>
+
+<block name="main">
+	<div class="pageheader">
+	    <h1 class="pagetitle">生成静态二维码</h1>
+	</div>
+
+	<div id="contentwrapper" class="contentwrapper">
+		<form class="stdform stdform2" action="{:U(Qrcode/createQrCode)}" method="post">
+            <div class="line-dete">
+				<label>文本内容</label>
+                <span class="field">
+					<input type="text" id="text" class="smallinput"/>
+                </span>
+            </div>
+            <div class="line-dete">
+				<label>标识</label>
+                <span class="field">
+					<input type="text" id="tags" class="smallinput"/>
+                </span>
+            </div>
+			<div class="line-dete">
+				<label>二维码</label>
+                <span class="field">
+	        		<div id="qrcode" style="width:256px;height:256px;border:1px solid #000;"></div>
+                </span>
+            </div>
+			<input type="button" class="big-btn stdbtn" value="生成静态码" id="bt" />
+			<input type="button" class="big-btn stdbtn" value="生成活动二维码" id="bt2" />
+		</form>
+	</div>
+</block>
+
+<block name="script">
+<script type="text/javascript" src="__PUBLIC__/Admin/js/plugins/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/js/plugins/qrcode/qrcode.js""></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/js/plugins/qrcode/jquery.qrcode.js"></script>
+<script type="text/javascript">
+	function utf16to8(str) { //转码
+		var out, i, len, c;
+		out = "";
+		len = str.length;
+		for (i = 0; i < len; i++) {
+			c = str.charCodeAt(i);
+			if ((c >= 0x0001) && (c <= 0x007F)) {
+				out += str.charAt(i);
+			} else if (c > 0x07FF) {
+				out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+				out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));
+				out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+			} else {
+				out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));
+				out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+			}
+		}
+		return out;
+	}
+
+	$(function () {
+		$("#bt").bind("click", function () {
+			text = $("#text").val();
+			if ( !text ) {
+				alert('请输入文本内容');
+				return;
+			}
+			$("#qrcode").empty().qrcode(utf16to8(text));
+		})
+
+		$('#bt2').click(function () {
+			text = $("#text").val();
+			tags = $('#tags').val();
+			if ( !text ) {
+				alert('请输入文本内容');
+				return;
+			} else if ( !tags ) {
+				alert('请输入标识');
+				return;
+			}
+			$.ajax({
+				url: '{:U("Qrcode/createQrCode")}',
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					'url' : $('#text').val(),
+					'tags' : $('#tags').val(),
+				}
+			})
+			.done(function(returnData) {
+				if (returnData['status'] == 200000) {
+					$('#qrcode').empty().qrcode({
+						render	: "canvas",//也可以替换为table
+						width   : 255,
+						height  : 255,
+						text	: returnData.data.sign
+					});
+				} else {
+					alert(returnData['message']);
+				}
+			});
+		})
+	})
+</script>
+</block>
