@@ -1,0 +1,29 @@
+[ 2018-04-04T09:50:08+08:00 ] 192.168.47.1 /
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0115s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0012s ]
+
+[ 2018-04-04T09:50:09+08:00 ] 192.168.47.1 /
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0154s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `la_seo` [ RunTime:0.0016s ]
+SQL: SELECT `tags`,`meta_description`,`meta_keyword` FROM `la_seo` WHERE `id_mark` = 'ch_index' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_goods_category` [ RunTime:0.0016s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 0 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 1 ORDER BY sort DESC  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 17 ORDER BY sort DESC  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 19 ORDER BY sort DESC  [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_goods` [ RunTime:0.0033s ]
+SQL: SELECT `id`,`category_id`,`category_path`,`goods_image`,`goods_name` FROM `la_goods` WHERE `goods_main_id` = 0 AND `is_delete` = 0 ORDER BY is_top DESC, add_time DESC  LIMIT 9   [ RunTime:0.0032s ]
+SQL: SHOW COLUMNS FROM `la_ad` [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_goods_images` [ RunTime:0.0013s ]
+SQL: SELECT `id`,`image`,`url`,`content` FROM `la_ad` WHERE `group_id` = 2 ORDER BY  add_time DESC   [ RunTime:0.0011s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `la_ad` WHERE `group_id` = 2 LIMIT 1   [ RunTime:0.0009s ]
+SQL: SELECT `content` FROM `la_ad` WHERE `group_id` = 4 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `id`,`category_id`,`category_path`,`goods_image`,`goods_name` FROM `la_goods` WHERE `goods_main_id` = 0 AND `is_delete` = 0 ORDER BY is_top DESC, add_time DESC  LIMIT 9   [ RunTime:0.0028s ]
+SQL: SHOW COLUMNS FROM `la_article` [ RunTime:0.0021s ]
+SQL: SELECT `id`,`tree_id`,`cat_id`,`image`,`summary`,`title`,`hits`,`add_time` FROM `la_article` ORDER BY is_top DESC, add_time DESC  LIMIT 6   [ RunTime:0.0013s ]
+
+[ 2018-04-04T14:07:09+08:00 ] 192.168.47.1 /
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0026s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+

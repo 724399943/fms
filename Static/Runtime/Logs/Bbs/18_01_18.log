@@ -1,0 +1,92 @@
+[ 2018-01-18T17:14:37+08:00 ] 192.168.47.1 /Bbs/Index/index.html
+SQL: SHOW COLUMNS FROM `la_ad_group` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_ad_group` WHERE `group_sign` = 'bbs_index_ad_group' LIMIT 1   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_ad_box` [ RunTime:0.0043s ]
+SQL: SELECT `width`,`height`,`id` FROM `la_ad_box` WHERE `group_id` = null  [ RunTime:0.0018s ]
+
+[ 2018-01-18T17:14:39+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1 
+							 ORDER BY `a`.`add_time` DESC
+							 [ RunTime:0.8512s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0045s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2018-01-18T17:14:39+08:00 ] 192.168.47.1 /Bbs/Index/module_list.html
+SQL: SELECT `id`, `module_name`, `introduction`, `icon` 
+							  FROM `la_bbs_module` 
+							  WHERE 1 [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0021s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0012s ]
+
+[ 2018-01-18T17:14:50+08:00 ] 192.168.47.1 /Bbs/Index/index.html
+SQL: SHOW COLUMNS FROM `la_ad_group` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_ad_group` WHERE `group_sign` = 'bbs_index_ad_group' LIMIT 1   [ RunTime:0.0023s ]
+SQL: SHOW COLUMNS FROM `la_ad_box` [ RunTime:0.0016s ]
+SQL: SELECT `width`,`height`,`id` FROM `la_ad_box` WHERE `group_id` = null  [ RunTime:0.0010s ]
+
+[ 2018-01-18T17:14:50+08:00 ] 192.168.47.1 /Bbs/Index/module_list.html
+SQL: SELECT `id`, `module_name`, `introduction`, `icon` 
+							  FROM `la_bbs_module` 
+							  WHERE 1 [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0020s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0025s ]
+
+[ 2018-01-18T17:14:52+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1 
+							 ORDER BY `a`.`add_time` DESC
+							 [ RunTime:0.6757s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0012s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0005s ]
+
+[ 2018-01-18T17:14:53+08:00 ] 192.168.47.1 /Bbs/Index/index.html
+SQL: SHOW COLUMNS FROM `la_ad_group` [ RunTime:0.0017s ]
+SQL: SELECT * FROM `la_ad_group` WHERE `group_sign` = 'bbs_index_ad_group' LIMIT 1   [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_ad_box` [ RunTime:0.0014s ]
+SQL: SELECT `width`,`height`,`id` FROM `la_ad_box` WHERE `group_id` = null  [ RunTime:0.0006s ]
+
+[ 2018-01-18T17:14:58+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1 
+							 ORDER BY `a`.`add_time` DESC
+							 [ RunTime:0.6664s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0014s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0016s ]
+
+[ 2018-01-18T17:14:58+08:00 ] 192.168.47.1 /Bbs/Index/module_list.html
+SQL: SELECT `id`, `module_name`, `introduction`, `icon` 
+							  FROM `la_bbs_module` 
+							  WHERE 1 [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0021s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-01-18T17:15:04+08:00 ] 192.168.47.1 /Bbs/Index/index.html
+SQL: SHOW COLUMNS FROM `la_ad_group` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_ad_group` WHERE `group_sign` = 'bbs_index_ad_group' LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_ad_box` [ RunTime:0.0022s ]
+SQL: SELECT `width`,`height`,`id` FROM `la_ad_box` WHERE `group_id` = null  [ RunTime:0.0010s ]
+
+[ 2018-01-18T17:15:06+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1 
+							 ORDER BY `a`.`add_time` DESC
+							 [ RunTime:0.6633s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0013s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2018-01-18T17:15:06+08:00 ] 192.168.47.1 /Bbs/Index/module_list.html
+SQL: SELECT `id`, `module_name`, `introduction`, `icon` 
+							  FROM `la_bbs_module` 
+							  WHERE 1 [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0029s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0017s ]
+

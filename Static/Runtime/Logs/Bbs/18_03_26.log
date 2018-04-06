@@ -1,0 +1,2010 @@
+[ 2018-03-26T10:00:46+08:00 ] 192.168.47.1 /Bbs/Index/index.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0013s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0033s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0024s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'index' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_goods_category` [ RunTime:0.0034s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 0 ORDER BY sort DESC  [ RunTime:0.0011s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 1 ORDER BY sort DESC  [ RunTime:0.0011s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 17 ORDER BY sort DESC  [ RunTime:0.0018s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 19 ORDER BY sort DESC  [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_ad_group` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_ad_group` WHERE `group_sign` = 'bbs_index_ad_group' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_ad_box` [ RunTime:0.0013s ]
+SQL: SELECT `width`,`height`,`id` FROM `la_ad_box` WHERE `group_id` = null  [ RunTime:0.0007s ]
+
+[ 2018-03-26T10:00:46+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0029s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0019s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0033s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0021s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1 
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0087s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0011s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0014s ]
+
+[ 2018-03-26T10:00:46+08:00 ] 192.168.47.1 /Bbs/Index/module_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0009s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0023s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0048s ]
+SQL: SELECT `id`, `module_name`, `introduction`, `icon` 
+							  FROM `la_bbs_module` 
+							  WHERE 1 [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0019s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0017s ]
+
+[ 2018-03-26T10:00:46+08:00 ] 192.168.47.1 /Bbs/Index/null
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0018s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0021s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0018s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'null' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0005s ]
+ERR: 非法操作:null
+
+[ 2018-03-26T10:00:59+08:00 ] 192.168.47.1 /Bbs/Index/module/id/2
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0015s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2018-03-26T10:00:59+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0026s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0019s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0033s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							ORDER BY `a`.`id` DESC
+							LIMIT 0 , 10 [ RunTime:0.0201s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0012s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T10:00:59+08:00 ] 192.168.47.1 /Bbs/Index/module.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0019s ]
+SQL: SHOW COLUMNS FROM `la_bbs_module` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_bbs_module` WHERE `id` = '2' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0021s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0019s ]
+
+[ 2018-03-26T10:00:59+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0009s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0017s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0059s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0008s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2018-03-26T10:01:03+08:00 ] 192.168.47.1 /Bbs/Index/index.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0016s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'index' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_goods_category` [ RunTime:0.0019s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 0 ORDER BY sort DESC  [ RunTime:0.0011s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 1 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 17 ORDER BY sort DESC  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 19 ORDER BY sort DESC  [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_ad_group` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_ad_group` WHERE `group_sign` = 'bbs_index_ad_group' LIMIT 1   [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_ad_box` [ RunTime:0.0013s ]
+SQL: SELECT `width`,`height`,`id` FROM `la_ad_box` WHERE `group_id` = null  [ RunTime:0.0006s ]
+
+[ 2018-03-26T10:01:03+08:00 ] 192.168.47.1 /Bbs/Index/module_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0018s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0035s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0033s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0064s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0020s ]
+SQL: SELECT `id`, `module_name`, `introduction`, `icon` 
+							  FROM `la_bbs_module` 
+							  WHERE 1 [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0012s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0012s ]
+
+[ 2018-03-26T10:01:03+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0013s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0014s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1 
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0077s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0019s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0020s ]
+
+[ 2018-03-26T10:01:03+08:00 ] 192.168.47.1 /Bbs/Index/null
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0030s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0029s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'null' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0016s ]
+ERR: 非法操作:null
+
+[ 2018-03-26T10:01:04+08:00 ] 192.168.47.1 /Bbs/Index/module/id/1
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2018-03-26T10:01:04+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0037s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0025s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0022s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0013s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=1
+							ORDER BY `a`.`id` DESC
+							LIMIT 0 , 10 [ RunTime:0.0166s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0014s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2018-03-26T10:01:04+08:00 ] 192.168.47.1 /Bbs/Index/module.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0018s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0031s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `la_bbs_module` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_bbs_module` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0010s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2018-03-26T10:01:04+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0008s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0016s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0026s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=1
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0054s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0012s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0012s ]
+
+[ 2018-03-26T10:01:09+08:00 ] 192.168.47.1 /Bbs/Index/index.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0016s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0021s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'index' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `la_goods_category` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 0 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 1 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 17 ORDER BY sort DESC  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 19 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_ad_group` [ RunTime:0.0018s ]
+SQL: SELECT * FROM `la_ad_group` WHERE `group_sign` = 'bbs_index_ad_group' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_ad_box` [ RunTime:0.0013s ]
+SQL: SELECT `width`,`height`,`id` FROM `la_ad_box` WHERE `group_id` = null  [ RunTime:0.0006s ]
+
+[ 2018-03-26T10:01:09+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0024s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0035s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0017s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1 
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0101s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0022s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2018-03-26T10:01:09+08:00 ] 192.168.47.1 /Bbs/Index/module_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0012s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0023s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0017s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0021s ]
+SQL: SELECT `id`, `module_name`, `introduction`, `icon` 
+							  FROM `la_bbs_module` 
+							  WHERE 1 [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0021s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0017s ]
+
+[ 2018-03-26T10:01:09+08:00 ] 192.168.47.1 /Bbs/Index/null
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0017s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0038s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'null' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0013s ]
+ERR: 非法操作:null
+
+[ 2018-03-26T10:01:10+08:00 ] 192.168.47.1 /Bbs/Index/article_detail/id/8201
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0015s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_detail' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0013s ]
+
+[ 2018-03-26T10:01:10+08:00 ] 192.168.47.1 /Bbs/Index/article_view.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0015s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0025s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_view' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article` [ RunTime:0.0016s ]
+SQL: UPDATE `la_bbs_article` SET `view_number`=view_number+1 WHERE `id` = '8201' [ RunTime:0.0804s ]
+
+[ 2018-03-26T10:01:10+08:00 ] 192.168.47.1 /Bbs/Index/article_comment.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0017s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0029s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0032s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0017s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_comment' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0022s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article_comment` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_bbs_article_comment` WHERE `article_id` = '8201' AND `status` = 1 ORDER BY add_time DESC  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `la_bbs_comment_photo` [ RunTime:0.0023s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0013s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2018-03-26T10:01:10+08:00 ] 192.168.47.1 /Bbs/Index/article_detail.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0016s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0022s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0011s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_detail' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article` [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article_photo` [ RunTime:0.0010s ]
+SQL: SELECT * FROM `la_bbs_article` WHERE `id` = '8201' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT * FROM `la_bbs_article_photo` WHERE `article_id` = '8201'  [ RunTime:0.0025s ]
+SQL: SELECT `headimgurl`,`nickname` FROM `la_user` WHERE `id` = '34' LIMIT 1   [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_bbs_quickrespone` [ RunTime:0.0029s ]
+SQL: SELECT * FROM `la_bbs_quickrespone`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0009s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0005s ]
+
+[ 2018-03-26T10:04:44+08:00 ] 192.168.47.1 /Bbs/Index/article_detail/id/8201
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0013s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0021s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0033s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_detail' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0021s ]
+
+[ 2018-03-26T10:04:45+08:00 ] 192.168.47.1 /Bbs/Index/article_comment.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0015s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0023s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0034s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_comment' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0024s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article_comment` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_bbs_article_comment` WHERE `article_id` = '8201' AND `status` = 1 ORDER BY add_time DESC  [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_bbs_comment_photo` [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0014s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0015s ]
+
+[ 2018-03-26T10:04:45+08:00 ] 192.168.47.1 /Bbs/Index/article_detail.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0012s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0029s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0019s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_detail' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0027s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article` [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article_photo` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_bbs_article` WHERE `id` = '8201' LIMIT 1   [ RunTime:0.0016s ]
+SQL: SELECT * FROM `la_bbs_article_photo` WHERE `article_id` = '8201'  [ RunTime:0.0014s ]
+SQL: SELECT `headimgurl`,`nickname` FROM `la_user` WHERE `id` = '34' LIMIT 1   [ RunTime:0.0026s ]
+SQL: SHOW COLUMNS FROM `la_bbs_quickrespone` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_bbs_quickrespone`  [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0023s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0019s ]
+
+[ 2018-03-26T10:04:45+08:00 ] 192.168.47.1 /Bbs/Index/article_view.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0011s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0037s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0029s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_view' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article` [ RunTime:0.0070s ]
+SQL: UPDATE `la_bbs_article` SET `view_number`=view_number+1 WHERE `id` = '8201' [ RunTime:0.1096s ]
+
+[ 2018-03-26T10:05:09+08:00 ] 192.168.47.1 /Bbs/Index/article_detail/id/8201
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0015s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0022s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_detail' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0014s ]
+
+[ 2018-03-26T10:05:09+08:00 ] 192.168.47.1 /Bbs/Index/article_detail.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0032s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0029s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0016s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_detail' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article` [ RunTime:0.0026s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article_photo` [ RunTime:0.0017s ]
+SQL: SELECT * FROM `la_bbs_article` WHERE `id` = '8201' LIMIT 1   [ RunTime:0.0020s ]
+SQL: SELECT * FROM `la_bbs_article_photo` WHERE `article_id` = '8201'  [ RunTime:0.0014s ]
+SQL: SELECT `headimgurl`,`nickname` FROM `la_user` WHERE `id` = '34' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_bbs_quickrespone` [ RunTime:0.0021s ]
+SQL: SELECT * FROM `la_bbs_quickrespone`  [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0015s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0038s ]
+
+[ 2018-03-26T10:05:09+08:00 ] 192.168.47.1 /Bbs/Index/article_view.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0021s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0029s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0022s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_view' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article` [ RunTime:0.0031s ]
+SQL: UPDATE `la_bbs_article` SET `view_number`=view_number+1 WHERE `id` = '8201' [ RunTime:0.1044s ]
+
+[ 2018-03-26T10:05:09+08:00 ] 192.168.47.1 /Bbs/Index/article_comment.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0011s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0011s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_comment' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article_comment` [ RunTime:0.0018s ]
+SQL: SELECT * FROM `la_bbs_article_comment` WHERE `article_id` = '8201' AND `status` = 1 ORDER BY add_time DESC  [ RunTime:0.0021s ]
+SQL: SHOW COLUMNS FROM `la_bbs_comment_photo` [ RunTime:0.0027s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0023s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0012s ]
+
+[ 2018-03-26T10:05:46+08:00 ] 192.168.47.1 /Bbs/Index/article_detail/id/8201
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0032s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0035s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_detail' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2018-03-26T10:05:47+08:00 ] 192.168.47.1 /Bbs/Index/article_detail.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0022s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0025s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0021s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_detail' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0028s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article` [ RunTime:0.0032s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article_photo` [ RunTime:0.0023s ]
+SQL: SELECT * FROM `la_bbs_article` WHERE `id` = '8201' LIMIT 1   [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_bbs_article_photo` WHERE `article_id` = '8201'  [ RunTime:0.0009s ]
+SQL: SELECT `headimgurl`,`nickname` FROM `la_user` WHERE `id` = '34' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_bbs_quickrespone` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_bbs_quickrespone`  [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0011s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2018-03-26T10:05:47+08:00 ] 192.168.47.1 /Bbs/Index/article_comment.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0010s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0021s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0011s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_comment' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article_comment` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_bbs_article_comment` WHERE `article_id` = '8201' AND `status` = 1 ORDER BY add_time DESC  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_bbs_comment_photo` [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0023s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0011s ]
+
+[ 2018-03-26T10:05:47+08:00 ] 192.168.47.1 /Bbs/Index/article_view.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0021s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0021s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0011s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_view' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article` [ RunTime:0.0051s ]
+SQL: UPDATE `la_bbs_article` SET `view_number`=view_number+1 WHERE `id` = '8201' [ RunTime:0.1137s ]
+
+[ 2018-03-26T10:06:28+08:00 ] 192.168.47.1 /Bbs/Index/index.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0017s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'index' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_goods_category` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 0 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 1 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 17 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 19 ORDER BY sort DESC  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_ad_group` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_ad_group` WHERE `group_sign` = 'bbs_index_ad_group' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_ad_box` [ RunTime:0.0013s ]
+SQL: SELECT `width`,`height`,`id` FROM `la_ad_box` WHERE `group_id` = null  [ RunTime:0.0005s ]
+
+[ 2018-03-26T10:06:28+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0029s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0029s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0017s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1 
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0091s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0023s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0022s ]
+
+[ 2018-03-26T10:06:28+08:00 ] 192.168.47.1 /Bbs/Index/module_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0019s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0079s ]
+SQL: SELECT `id`, `module_name`, `introduction`, `icon` 
+							  FROM `la_bbs_module` 
+							  WHERE 1 [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0179s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T10:06:28+08:00 ] 192.168.47.1 /Bbs/Index/null
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0009s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0021s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0018s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'null' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0007s ]
+ERR: 非法操作:null
+
+[ 2018-03-26T10:06:30+08:00 ] 192.168.47.1 /Bbs/Index/module/id/2
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0013s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2018-03-26T10:06:30+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0017s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0047s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0038s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0011s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0087s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0013s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T10:06:30+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0013s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0023s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							ORDER BY `a`.`id` DESC
+							LIMIT 0 , 10 [ RunTime:0.0150s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0012s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T10:06:30+08:00 ] 192.168.47.1 /Bbs/Index/module.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0020s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0060s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0021s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_bbs_module` [ RunTime:0.0032s ]
+SQL: SELECT * FROM `la_bbs_module` WHERE `id` = '2' LIMIT 1   [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0008s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0009s ]
+
+[ 2018-03-26T10:06:32+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0015s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0065s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0047s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0036s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0013s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`view_number` DESC
+							LIMIT 0 , 10 [ RunTime:0.0089s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0027s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T10:06:33+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0016s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0023s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0089s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0011s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0005s ]
+
+[ 2018-03-26T10:10:50+08:00 ] 192.168.47.1 /Bbs/Index/module/id/2
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0024s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0024s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0031s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2018-03-26T10:10:50+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0013s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0019s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0035s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							ORDER BY `a`.`id` DESC
+							LIMIT 0 , 10 [ RunTime:0.0203s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0015s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T10:10:50+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0018s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0027s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0077s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0023s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T10:10:50+08:00 ] 192.168.47.1 /Bbs/Index/module.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_bbs_module` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_bbs_module` WHERE `id` = '2' LIMIT 1   [ RunTime:0.0025s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0010s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2018-03-26T10:11:09+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0017s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0015s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`view_number` DESC
+							LIMIT 0 , 10 [ RunTime:0.0090s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0012s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T10:11:12+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0021s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0012s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0094s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0012s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T10:11:28+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0012s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2 AND `a`.`is_recommend`=1
+							ORDER BY `a`.`id` DESC
+							LIMIT 0 , 10 [ RunTime:0.0199s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0014s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0005s ]
+
+[ 2018-03-26T10:11:46+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0019s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0053s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0043s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0033s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0022s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0017s ]
+ERR: 1054:Unknown column 'new' in 'where clause'
+ [ SQL语句 ] : SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=new
+							ORDER BY `a`.`id` DESC
+							LIMIT 10 , 10
+ERR: 1054:Unknown column 'new' in 'where clause'
+ [ SQL语句 ] : SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=new
+							ORDER BY `a`.`id` DESC
+							LIMIT 10 , 10
+
+[ 2018-03-26T10:14:58+08:00 ] 192.168.47.1 /Bbs/Index/module/id/2
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0022s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0034s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0028s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0021s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0011s ]
+
+[ 2018-03-26T10:14:58+08:00 ] 192.168.47.1 /Bbs/Index/module.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0020s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_bbs_module` [ RunTime:0.0016s ]
+SQL: SELECT * FROM `la_bbs_module` WHERE `id` = '2' LIMIT 1   [ RunTime:0.0030s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0038s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0016s ]
+
+[ 2018-03-26T10:14:58+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0012s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0022s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0059s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0023s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							ORDER BY `a`.`id` DESC
+							LIMIT 0 , 10 [ RunTime:0.0157s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0028s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2018-03-26T10:14:58+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0011s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0021s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0018s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0018s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0078s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0014s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2018-03-26T10:15:01+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0013s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0022s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`view_number` DESC
+							LIMIT 0 , 10 [ RunTime:0.0084s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0013s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2018-03-26T10:15:20+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0021s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0086s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0011s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0005s ]
+
+[ 2018-03-26T10:20:27+08:00 ] 192.168.47.1 /Bbs/Index/module/id/2
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0017s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2018-03-26T10:20:28+08:00 ] 192.168.47.1 /Bbs/Index/module.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0013s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0028s ]
+SQL: SHOW COLUMNS FROM `la_bbs_module` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `la_bbs_module` WHERE `id` = '2' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0011s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0005s ]
+
+[ 2018-03-26T10:20:28+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0015s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0051s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0028s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0012s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0085s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0027s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0017s ]
+
+[ 2018-03-26T10:20:28+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0017s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0024s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0038s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							ORDER BY `a`.`id` DESC
+							LIMIT 0 , 10 [ RunTime:0.0145s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0014s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0019s ]
+
+[ 2018-03-26T10:20:33+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0013s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`view_number` DESC
+							LIMIT 0 , 10 [ RunTime:0.0091s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0012s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T10:20:36+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0032s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0092s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0024s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2018-03-26T10:20:45+08:00 ] 192.168.47.1 /Bbs/Index/module/id/2
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0013s ]
+
+[ 2018-03-26T10:20:45+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0011s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0024s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							ORDER BY `a`.`id` DESC
+							LIMIT 0 , 10 [ RunTime:0.0201s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0014s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2018-03-26T10:20:45+08:00 ] 192.168.47.1 /Bbs/Index/module.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0021s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0016s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_bbs_module` [ RunTime:0.0043s ]
+SQL: SELECT * FROM `la_bbs_module` WHERE `id` = '2' LIMIT 1   [ RunTime:0.0026s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0024s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0018s ]
+
+[ 2018-03-26T10:20:45+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0010s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0021s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0029s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0062s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0014s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0030s ]
+
+[ 2018-03-26T10:20:59+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0013s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`view_number` DESC
+							LIMIT 0 , 10 [ RunTime:0.0093s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0017s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T10:22:44+08:00 ] 192.168.47.1 /Bbs/Index/module/id/2
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0016s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0019s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+
+[ 2018-03-26T10:22:44+08:00 ] 192.168.47.1 /Bbs/Index/module.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0037s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0023s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0033s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_bbs_module` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_bbs_module` WHERE `id` = '2' LIMIT 1   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0032s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2018-03-26T10:22:44+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0026s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0061s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0024s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							ORDER BY `a`.`id` DESC
+							LIMIT 0 , 10 [ RunTime:0.0149s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0025s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0026s ]
+
+[ 2018-03-26T10:22:44+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0009s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0016s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0059s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0015s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T10:22:54+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0035s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0021s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`view_number` DESC
+							LIMIT 0 , 10 [ RunTime:0.0096s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0013s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T10:23:01+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0013s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0024s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2 AND `a`.`is_recommend`=1
+							ORDER BY `a`.`id` DESC
+							LIMIT 0 , 10 [ RunTime:0.0195s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0015s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2018-03-26T10:25:18+08:00 ] 192.168.47.1 /Bbs/Index/module/id/2
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0017s ]
+
+[ 2018-03-26T10:25:18+08:00 ] 192.168.47.1 /Bbs/Index/module.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0024s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0022s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0018s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_bbs_module` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_bbs_module` WHERE `id` = '2' LIMIT 1   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0013s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0011s ]
+
+[ 2018-03-26T10:25:18+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0010s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0024s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0089s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0023s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0026s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							ORDER BY `a`.`id` DESC
+							LIMIT 0 , 10 [ RunTime:0.0113s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0010s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0020s ]
+
+[ 2018-03-26T10:25:18+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0007s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0024s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0023s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0015s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0059s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0016s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0011s ]
+
+[ 2018-03-26T10:25:22+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0021s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0031s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0007s ]
+ERR: 1054:Unknown column 'new' in 'where clause'
+ [ SQL语句 ] : SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=new
+							ORDER BY `a`.`id` DESC
+							LIMIT 10 , 10
+ERR: 1054:Unknown column 'new' in 'where clause'
+ [ SQL语句 ] : SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=new
+							ORDER BY `a`.`id` DESC
+							LIMIT 10 , 10
+
+[ 2018-03-26T10:25:31+08:00 ] 192.168.47.1 /Bbs/Index/module/id/2
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0021s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0037s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0021s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2018-03-26T10:25:31+08:00 ] 192.168.47.1 /Bbs/Index/module.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0024s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0059s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0035s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_bbs_module` [ RunTime:0.0011s ]
+SQL: SELECT * FROM `la_bbs_module` WHERE `id` = '2' LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0009s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0005s ]
+
+[ 2018-03-26T10:25:31+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0015s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0037s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0019s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							ORDER BY `a`.`id` DESC
+							LIMIT 0 , 10 [ RunTime:0.0139s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0009s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0004s ]
+
+[ 2018-03-26T10:25:31+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0017s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0022s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0032s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0017s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0059s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0009s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0005s ]
+
+[ 2018-03-26T10:29:05+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0021s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`view_number` DESC
+							LIMIT 0 , 10 [ RunTime:0.0083s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0011s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0005s ]
+
+[ 2018-03-26T10:29:09+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2 AND `a`.`is_recommend`=1
+							ORDER BY `a`.`id` DESC
+							LIMIT 0 , 10 [ RunTime:0.0192s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0013s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0009s ]
+
+[ 2018-03-26T10:29:50+08:00 ] 192.168.47.1 /Bbs/Index/article_detail/id/21
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0024s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_detail' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0015s ]
+
+[ 2018-03-26T10:29:51+08:00 ] 192.168.47.1 /Bbs/Index/article_view.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_view' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0029s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article` [ RunTime:0.0027s ]
+SQL: UPDATE `la_bbs_article` SET `view_number`=view_number+1 WHERE `id` = '21' [ RunTime:0.0920s ]
+
+[ 2018-03-26T10:29:51+08:00 ] 192.168.47.1 /Bbs/Index/article_detail.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0022s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_detail' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article` [ RunTime:0.0026s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article_photo` [ RunTime:0.0031s ]
+SQL: SELECT * FROM `la_bbs_article` WHERE `id` = '21' LIMIT 1   [ RunTime:0.0018s ]
+SQL: SELECT * FROM `la_bbs_article_photo` WHERE `article_id` = '21'  [ RunTime:0.0011s ]
+SQL: SELECT `headimgurl`,`nickname` FROM `la_user` WHERE `id` = '10' LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_bbs_quickrespone` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `la_bbs_quickrespone`  [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0018s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2018-03-26T10:29:51+08:00 ] 192.168.47.1 /Bbs/Index/article_comment.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0023s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0038s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_comment' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article_comment` [ RunTime:0.0042s ]
+SQL: SELECT * FROM `la_bbs_article_comment` WHERE `article_id` = '21' AND `status` = 1 ORDER BY add_time DESC  [ RunTime:0.0048s ]
+SQL: SHOW COLUMNS FROM `la_bbs_comment_photo` [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0018s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0017s ]
+
+[ 2018-03-26T10:29:52+08:00 ] 192.168.47.1 /Bbs/Index/module/id/2
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0016s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2018-03-26T10:29:53+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0029s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0028s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0019s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							ORDER BY `a`.`id` DESC
+							LIMIT 0 , 10 [ RunTime:0.0186s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0016s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0015s ]
+
+[ 2018-03-26T10:29:53+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0011s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0031s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0033s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0011s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0084s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0013s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0034s ]
+
+[ 2018-03-26T10:29:53+08:00 ] 192.168.47.1 /Bbs/Index/module.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0009s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `la_bbs_module` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_bbs_module` WHERE `id` = '2' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0017s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0012s ]
+
+[ 2018-03-26T10:32:17+08:00 ] 192.168.47.1 /Bbs/Index/article_detail/id/40
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0033s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0023s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_detail' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0013s ]
+
+[ 2018-03-26T10:32:17+08:00 ] 192.168.47.1 /Bbs/Index/article_detail.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0013s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0032s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0027s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0016s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_detail' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0019s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article` [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article_photo` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_bbs_article` WHERE `id` = '40' LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT * FROM `la_bbs_article_photo` WHERE `article_id` = '40'  [ RunTime:0.0005s ]
+SQL: SELECT `headimgurl`,`nickname` FROM `la_user` WHERE `id` = '10' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `la_bbs_quickrespone` [ RunTime:0.0016s ]
+SQL: SELECT * FROM `la_bbs_quickrespone`  [ RunTime:0.0030s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0030s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0018s ]
+
+[ 2018-03-26T10:32:17+08:00 ] 192.168.47.1 /Bbs/Index/article_view.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0011s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0037s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0018s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_view' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article` [ RunTime:0.0061s ]
+SQL: UPDATE `la_bbs_article` SET `view_number`=view_number+1 WHERE `id` = '40' [ RunTime:0.0952s ]
+
+[ 2018-03-26T10:32:17+08:00 ] 192.168.47.1 /Bbs/Index/article_comment.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0024s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_comment' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article_comment` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_bbs_article_comment` WHERE `article_id` = '40' AND `status` = 1 ORDER BY add_time DESC  [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_bbs_comment_photo` [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0010s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2018-03-26T10:32:22+08:00 ] 192.168.47.1 /Bbs/Index/module/id/2
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0013s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2018-03-26T10:32:22+08:00 ] 192.168.47.1 /Bbs/Index/module.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0012s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0038s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0019s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_bbs_module` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_bbs_module` WHERE `id` = '2' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0013s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T10:32:22+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0037s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0047s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0017s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0025s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							ORDER BY `a`.`id` DESC
+							LIMIT 0 , 10 [ RunTime:0.0136s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0009s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2018-03-26T10:32:22+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0016s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0019s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0017s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0016s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0057s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0019s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0014s ]
+
+[ 2018-03-26T10:38:14+08:00 ] 192.168.47.1 /Bbs/Index/article_detail/id/40
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0015s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0029s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0024s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_detail' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0012s ]
+
+[ 2018-03-26T10:38:14+08:00 ] 192.168.47.1 /Bbs/Index/article_detail.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0030s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0041s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_detail' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article` [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article_photo` [ RunTime:0.0018s ]
+SQL: SELECT * FROM `la_bbs_article` WHERE `id` = '40' LIMIT 1   [ RunTime:0.0022s ]
+SQL: SELECT * FROM `la_bbs_article_photo` WHERE `article_id` = '40'  [ RunTime:0.0013s ]
+SQL: SELECT `headimgurl`,`nickname` FROM `la_user` WHERE `id` = '10' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_bbs_quickrespone` [ RunTime:0.0011s ]
+SQL: SELECT * FROM `la_bbs_quickrespone`  [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0011s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T10:38:14+08:00 ] 192.168.47.1 /Bbs/Index/article_comment.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0013s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0076s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0026s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0023s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_comment' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article_comment` [ RunTime:0.0021s ]
+SQL: SELECT * FROM `la_bbs_article_comment` WHERE `article_id` = '40' AND `status` = 1 ORDER BY add_time DESC  [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_bbs_comment_photo` [ RunTime:0.0031s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0030s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0035s ]
+
+[ 2018-03-26T10:38:14+08:00 ] 192.168.47.1 /Bbs/Index/article_view.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0009s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0021s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0017s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_view' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article` [ RunTime:0.0012s ]
+SQL: UPDATE `la_bbs_article` SET `view_number`=view_number+1 WHERE `id` = '40' [ RunTime:0.0928s ]
+
+[ 2018-03-26T10:38:23+08:00 ] 192.168.47.1 /Bbs/Index/module/id/2
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2018-03-26T10:38:23+08:00 ] 192.168.47.1 /Bbs/Index/module.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0017s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0036s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0019s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0017s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_bbs_module` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_bbs_module` WHERE `id` = '2' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0018s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T10:38:23+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0021s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0051s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0029s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0023s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0074s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0010s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0005s ]
+
+[ 2018-03-26T10:38:23+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0012s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0019s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0010s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=2
+							ORDER BY `a`.`id` DESC
+							LIMIT 0 , 10 [ RunTime:0.0128s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0007s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0004s ]
+
+[ 2018-03-26T10:38:26+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0018s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0007s ]
+ERR: 1054:Unknown column 'new' in 'where clause'
+ [ SQL语句 ] : SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=new
+							ORDER BY `a`.`id` DESC
+							LIMIT 10 , 10
+ERR: 1054:Unknown column 'new' in 'where clause'
+ [ SQL语句 ] : SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1  AND module_id=new
+							ORDER BY `a`.`id` DESC
+							LIMIT 10 , 10
+
+[ 2018-03-26T12:18:00+08:00 ] 192.168.47.1 /Bbs/Index/index.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0013s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'index' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `la_goods_category` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 0 ORDER BY sort DESC  [ RunTime:0.0008s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 1 ORDER BY sort DESC  [ RunTime:0.0008s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 17 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 19 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_ad_group` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_ad_group` WHERE `group_sign` = 'bbs_index_ad_group' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_ad_box` [ RunTime:0.0013s ]
+SQL: SELECT `width`,`height`,`id` FROM `la_ad_box` WHERE `group_id` = null  [ RunTime:0.0007s ]
+
+[ 2018-03-26T12:18:00+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0022s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0028s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0017s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1 
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0660s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0009s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0005s ]
+
+[ 2018-03-26T12:18:00+08:00 ] 192.168.47.1 /Bbs/Index/module_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0010s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0019s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0025s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0067s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0024s ]
+SQL: SELECT `id`, `module_name`, `introduction`, `icon` 
+							  FROM `la_bbs_module` 
+							  WHERE 1 [ RunTime:0.0023s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0020s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0023s ]
+
+[ 2018-03-26T12:18:00+08:00 ] 192.168.47.1 /Bbs/Index/null
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0007s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0017s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0011s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'null' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0007s ]
+ERR: 非法操作:null
+
+[ 2018-03-26T12:18:02+08:00 ] 192.168.47.1 /Bbs/Index/article_detail/id/8201
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_detail' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+
+[ 2018-03-26T12:18:03+08:00 ] 192.168.47.1 /Bbs/Index/article_view.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0015s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0029s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_view' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0019s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article` [ RunTime:0.0023s ]
+SQL: UPDATE `la_bbs_article` SET `view_number`=view_number+1 WHERE `id` = '8201' [ RunTime:0.0882s ]
+
+[ 2018-03-26T12:18:03+08:00 ] 192.168.47.1 /Bbs/Index/article_detail.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0019s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0021s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_detail' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article` [ RunTime:0.0027s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article_photo` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_bbs_article` WHERE `id` = '8201' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT * FROM `la_bbs_article_photo` WHERE `article_id` = '8201'  [ RunTime:0.0008s ]
+SQL: SELECT `headimgurl`,`nickname` FROM `la_user` WHERE `id` = '34' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_bbs_quickrespone` [ RunTime:0.0011s ]
+SQL: SELECT * FROM `la_bbs_quickrespone`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0011s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T12:18:03+08:00 ] 192.168.47.1 /Bbs/Index/article_comment.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0013s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0024s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0035s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0090s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0029s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_comment' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0027s ]
+SQL: SHOW COLUMNS FROM `la_bbs_article_comment` [ RunTime:0.0018s ]
+SQL: SELECT * FROM `la_bbs_article_comment` WHERE `article_id` = '8201' AND `status` = 1 ORDER BY add_time DESC  [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_bbs_comment_photo` [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0011s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2018-03-26T12:18:04+08:00 ] 192.168.47.1 /Bbs/Index/index.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0019s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0024s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'index' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_goods_category` [ RunTime:0.0021s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 0 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 1 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 17 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 19 ORDER BY sort DESC  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_ad_group` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_ad_group` WHERE `group_sign` = 'bbs_index_ad_group' LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `la_ad_box` [ RunTime:0.0013s ]
+SQL: SELECT `width`,`height`,`id` FROM `la_ad_box` WHERE `group_id` = null  [ RunTime:0.0005s ]
+
+[ 2018-03-26T12:18:04+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0015s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0019s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0024s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0011s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1 
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0068s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0016s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0014s ]
+
+[ 2018-03-26T12:18:04+08:00 ] 192.168.47.1 /Bbs/Index/module_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0010s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0018s ]
+SQL: SELECT `id`, `module_name`, `introduction`, `icon` 
+							  FROM `la_bbs_module` 
+							  WHERE 1 [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0020s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0012s ]
+
+[ 2018-03-26T12:18:04+08:00 ] 192.168.47.1 /Bbs/Index/null
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0009s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0016s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0232s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'null' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0038s ]
+ERR: 非法操作:null
+
+[ 2018-03-26T12:19:05+08:00 ] 192.168.47.1 /Bbs/Index/index.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0033s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0032s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'index' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_goods_category` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 0 ORDER BY sort DESC  [ RunTime:0.0007s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 1 ORDER BY sort DESC  [ RunTime:0.0008s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 17 ORDER BY sort DESC  [ RunTime:0.0007s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 19 ORDER BY sort DESC  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_ad_group` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_ad_group` WHERE `group_sign` = 'bbs_index_ad_group' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_ad_box` [ RunTime:0.0022s ]
+SQL: SELECT `width`,`height`,`id` FROM `la_ad_box` WHERE `group_id` = null  [ RunTime:0.0011s ]
+
+[ 2018-03-26T12:19:05+08:00 ] 192.168.47.1 /Bbs/Index/module_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0042s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0027s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0031s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `id`, `module_name`, `introduction`, `icon` 
+							  FROM `la_bbs_module` 
+							  WHERE 1 [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0013s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0016s ]
+
+[ 2018-03-26T12:19:05+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0010s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0037s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0025s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0029s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0210s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1 
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0074s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0032s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0068s ]
+
+[ 2018-03-26T12:19:06+08:00 ] 192.168.47.1 /Bbs/Index/null
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0023s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0029s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'null' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+ERR: 非法操作:null
+
+[ 2018-03-26T12:19:33+08:00 ] 192.168.47.1 /Bbs/Index/index.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0015s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0014s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'index' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_goods_category` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 0 ORDER BY sort DESC  [ RunTime:0.0008s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 1 ORDER BY sort DESC  [ RunTime:0.0008s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 17 ORDER BY sort DESC  [ RunTime:0.0008s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 19 ORDER BY sort DESC  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_ad_group` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_ad_group` WHERE `group_sign` = 'bbs_index_ad_group' LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `la_ad_box` [ RunTime:0.0012s ]
+SQL: SELECT `width`,`height`,`id` FROM `la_ad_box` WHERE `group_id` = null  [ RunTime:0.0005s ]
+
+[ 2018-03-26T12:19:33+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0011s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0023s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0018s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0019s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1 
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0076s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0016s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T12:19:33+08:00 ] 192.168.47.1 /Bbs/Index/module_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0008s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0016s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0012s ]
+SQL: SELECT `id`, `module_name`, `introduction`, `icon` 
+							  FROM `la_bbs_module` 
+							  WHERE 1 [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0075s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0028s ]
+
+[ 2018-03-26T12:19:33+08:00 ] 192.168.47.1 /Bbs/Index/null
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0012s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0019s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0035s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0033s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'null' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0023s ]
+ERR: 非法操作:null
+
+[ 2018-03-26T12:25:35+08:00 ] 192.168.47.1 /Bbs/Index/index.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0036s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'index' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `la_goods_category` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 0 ORDER BY sort DESC  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 1 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 17 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 19 ORDER BY sort DESC  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_ad_group` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `la_ad_group` WHERE `group_sign` = 'bbs_index_ad_group' LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `la_ad_box` [ RunTime:0.0013s ]
+SQL: SELECT `width`,`height`,`id` FROM `la_ad_box` WHERE `group_id` = null  [ RunTime:0.0008s ]
+
+[ 2018-03-26T12:25:35+08:00 ] 192.168.47.1 /Bbs/Index/module_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0030s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0037s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0026s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0021s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0022s ]
+SQL: SELECT `id`, `module_name`, `introduction`, `icon` 
+							  FROM `la_bbs_module` 
+							  WHERE 1 [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0017s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T12:25:35+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0017s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0023s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0224s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0038s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0013s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1 
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0077s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0018s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0008s ]
+
+[ 2018-03-26T12:25:35+08:00 ] 192.168.47.1 /Bbs/Index/null
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0012s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0033s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0018s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'null' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0023s ]
+ERR: 非法操作:null
+
+[ 2018-03-26T13:54:21+08:00 ] 192.168.47.1 /Bbs/Index/index.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'index' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_goods_category` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 0 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 1 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 17 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 19 ORDER BY sort DESC  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_ad_group` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_ad_group` WHERE `group_sign` = 'bbs_index_ad_group' LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_ad_box` [ RunTime:0.0013s ]
+SQL: SELECT `width`,`height`,`id` FROM `la_ad_box` WHERE `group_id` = null  [ RunTime:0.0006s ]
+
+[ 2018-03-26T13:54:21+08:00 ] 192.168.47.1 /Bbs/Index/module_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0016s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT `id`, `module_name`, `introduction`, `icon` 
+							  FROM `la_bbs_module` 
+							  WHERE 1 [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0017s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0006s ]
+
+[ 2018-03-26T13:54:21+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0028s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0252s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0019s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0083s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1 
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0072s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0021s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0023s ]
+
+[ 2018-03-26T13:54:21+08:00 ] 192.168.47.1 /Bbs/Index/null
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0016s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0035s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0021s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0021s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'null' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0012s ]
+ERR: 非法操作:null
+
+[ 2018-03-26T13:55:11+08:00 ] 192.168.47.1 /Bbs/Index/index.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0017s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'index' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `la_goods_category` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 0 ORDER BY sort DESC  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 1 ORDER BY sort DESC  [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 17 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 19 ORDER BY sort DESC  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_ad_group` [ RunTime:0.0011s ]
+SQL: SELECT * FROM `la_ad_group` WHERE `group_sign` = 'bbs_index_ad_group' LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `la_ad_box` [ RunTime:0.0012s ]
+SQL: SELECT `width`,`height`,`id` FROM `la_ad_box` WHERE `group_id` = null  [ RunTime:0.0005s ]
+
+[ 2018-03-26T13:55:12+08:00 ] 192.168.47.1 /Bbs/Index/module_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0015s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0021s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0032s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0011s ]
+SQL: SELECT `id`, `module_name`, `introduction`, `icon` 
+							  FROM `la_bbs_module` 
+							  WHERE 1 [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0013s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0007s ]
+
+[ 2018-03-26T13:55:12+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0021s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0199s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0018s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1 
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0068s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0011s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0042s ]
+
+[ 2018-03-26T13:55:12+08:00 ] 192.168.47.1 /Bbs/Index/null
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0011s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0036s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0019s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0031s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'null' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0029s ]
+ERR: 非法操作:null
+
+[ 2018-03-26T14:10:41+08:00 ] 192.168.47.1 /Bbs/Index/index.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0015s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0024s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'index' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_goods_category` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 0 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 1 ORDER BY sort DESC  [ RunTime:0.0014s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 17 ORDER BY sort DESC  [ RunTime:0.0016s ]
+SQL: SELECT * FROM `la_goods_category` WHERE `pid` = 19 ORDER BY sort DESC  [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `la_ad_group` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `la_ad_group` WHERE `group_sign` = 'bbs_index_ad_group' LIMIT 1   [ RunTime:0.0017s ]
+SQL: SHOW COLUMNS FROM `la_ad_box` [ RunTime:0.0015s ]
+SQL: SELECT `width`,`height`,`id` FROM `la_ad_box` WHERE `group_id` = null  [ RunTime:0.0007s ]
+
+[ 2018-03-26T14:10:41+08:00 ] 192.168.47.1 /Bbs/Index/article_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0011s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0032s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0020s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'article_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0009s ]
+SQL: SELECT `a`.*, `u`.`nickname`, `u`.`headimgurl` 
+							FROM la_bbs_article AS `a` 
+							LEFT JOIN la_user AS `u` ON `a`.`author`=`u`.`id` 
+							WHERE 1 
+							 ORDER BY `a`.`add_time` DESC
+							LIMIT 0 , 10 [ RunTime:0.0072s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0010s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0005s ]
+
+[ 2018-03-26T14:10:41+08:00 ] 192.168.47.1 /Bbs/Index/module_list.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0027s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0066s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0029s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'module_list' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0015s ]
+SQL: SELECT `id`, `module_name`, `introduction`, `icon` 
+							  FROM `la_bbs_module` 
+							  WHERE 1 [ RunTime:0.0024s ]
+SQL: SHOW COLUMNS FROM `la_errcode` [ RunTime:0.0052s ]
+SQL: SELECT `memo` FROM `la_errcode` WHERE `errCode` = 200000 LIMIT 1   [ RunTime:0.0010s ]
+
+[ 2018-03-26T14:10:41+08:00 ] 192.168.47.1 /Bbs/Index/null
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0032s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0015s ]
+SQL: SHOW COLUMNS FROM `la_controller_power` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `la_controller_power` WHERE `controller_name` = 'Index' AND `controller_function` = 'null' AND `controller_module` = 'Bbs' LIMIT 1   [ RunTime:0.0010s ]
+ERR: 非法操作:null
+

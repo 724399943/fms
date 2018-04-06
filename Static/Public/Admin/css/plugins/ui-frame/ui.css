@@ -1,0 +1,22 @@
+.label {display: inline; padding: .2em .6em .3em; font-size: 75%; font-weight: 700; line-height: 1; color: #fff; text-align: center; white-space: nowrap; vertical-align: baseline; border-radius: .25em; }
+.label-warning {background-color: #fea223; }
+.label-danger {background-color: #b64645; }
+.label-success {background-color: #95b75d; }
+
+.fa {display: inline-block; font-family: FontAwesome; font-style: normal; font-weight: normal; line-height: 1; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;-moz-osx-font-smoothing: grayscale;}
+.fa-tag:before {content: "\f02b";}
+
+/*options*/
+ul,li{list-style-type:none;padding:0;margin:0;}
+.select{width:102px;line-height:22px;}
+.list{width:102px;border:1px solid #dcdcdc;border-top:0;display:none;}
+.list li{line-height:24px;padding:0 5px;}
+.list li:hover{background:#F8F3F4;cursor:pointer;}
+.btn {display: inline-block; margin-bottom: 0; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; background-image: none; border: 1px solid transparent; padding: 4px 15px; line-height: 20px; font-weight: 400; border-radius: 5px; transition: all 200ms ease;}
+.btn-info {background-color: #fb9337; border-color: #fb9337; }
+.glyphicon {position: relative; top: 1px; display: inline-block; font-family: 'Glyphicons Halflings'; font-style: normal; font-weight: 400; line-height: 1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-size: 14px;}
+.glyphicon-plus:before {box-sizing: border-box; content: "\2b"; }
+.list>li>a {display: block; padding: 3px 20px; clear: both; font-weight: 400; line-height: 1.42857143; color: #333; white-space: nowrap; }
+.list>li>a {padding: 8px 15px; border-bottom: 1px solid #E9E9E9; line-height: 20px; font-family: "微软雅黑";}
+.disabled {pointer-events: none; cursor: not-allowed; filter: alpha(opacity=65); -webkit-box-shadow: none; box-shadow: none; opacity: .65; }
+

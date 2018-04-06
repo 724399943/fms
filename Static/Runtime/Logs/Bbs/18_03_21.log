@@ -1,0 +1,20 @@
+[ 2018-03-21T10:48:08+08:00 ] 192.168.47.1 /Bbs/Index/index.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0020s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0014s ]
+ERR: 1146:Table 'la.la_controller_power' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `la_controller_power`
+ERR: 1146:Table 'la.la_controller_power' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `la_controller_power`
+
+[ 2018-03-21T10:48:15+08:00 ] 192.168.47.1 /Bbs/Index/index.html
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0014s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `la_user` [ RunTime:0.0037s ]
+SQL: SELECT * FROM `la_user` WHERE `id` = 34 LIMIT 1   [ RunTime:0.0015s ]
+ERR: 1146:Table 'la.la_controller_power' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `la_controller_power`
+ERR: 1146:Table 'la.la_controller_power' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `la_controller_power`
+

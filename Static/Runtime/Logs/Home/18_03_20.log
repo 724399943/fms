@@ -1,0 +1,8 @@
+[ 2018-03-20T13:36:30+08:00 ] 192.168.47.1 /
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0019s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0007s ]
+
+[ 2018-03-20T14:04:54+08:00 ] 192.168.47.1 /
+SQL: SHOW COLUMNS FROM `la_config` [ RunTime:0.0031s ]
+SQL: SELECT `config_sign`,`config_value` FROM `la_config`  [ RunTime:0.0016s ]
+
